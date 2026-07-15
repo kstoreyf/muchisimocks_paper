@@ -1,18 +1,25 @@
-\documentclass{article}
+% mnras LaTeX class v3.2 (2023/07/20)
+\documentclass[fleqn,usenatbib]{mnras}
 
-\usepackage{hyperref}
+% MNRAS is set in Times font
+\usepackage{newtxtext,newtxmath}
+\usepackage[T1]{fontenc}
+
+% Allow "van" names to sort correctly in the bibliography
+\DeclareRobustCommand{\VAN}[3]{#2}
+\let\VANthebibliography\thebibliography
+\def\thebibliography{\DeclareRobustCommand{\VAN}[3]{##3}\VANthebibliography}
+
+%%%%% AUTHORS - PACKAGES %%%%%
+\usepackage{graphicx}
+\usepackage{amsmath}
 \usepackage{bm}
 \usepackage{bbold}
 \usepackage{xcolor}
 \usepackage{xspace}
-\usepackage{natbib}
 \usepackage{booktabs}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
 
-
-
-%%% symbols
+%%%%% AUTHORS - COMMANDS %%%%%
 % cosmological parameters
 \newcommand{\om}{\Omega_\mathrm{m}}
 \newcommand{\sig}{\sigma_8}
@@ -46,24 +53,35 @@
 % misc
 \newcommand{\qq}{\bm{q}}
 
-%%% names
+% names
 \newcommand{\mtm}{\texttt{map2map}\xspace}
 \newcommand{\mmocks}{\texttt{much\'isimocks}\xspace}
 \newcommand{\bacco}{BACCO\xspace}
 
-%%% comments
+% comments
 \newcommand{\ksf}[1]{{\color{teal}{ksf: #1}}}
 
+%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+\title[\mmocks: emulated simulations for SBI]{\mmocks: An emulated cosmological simulation suite for simulation-based inference}
 
-\title{\mmocks: An emulated cosmological simulation suite for simulation-based inference}
+\author[K. Storey-Fisher et al.]{
+Kate Storey-Fisher,$^{1}$\thanks{E-mail: kate.storey-fisher@dipc.org}
+Marcos Pellejero-Iba\~nez,$^{1}$
+Ra\'ul Angulo,$^{1}$
+and others \ksf{order? affiliations?}
+\\
+$^{1}$Donostia International Physics Center, Paseo Manuel de Lardizabal 4, 20018 Donostia-San Sebastian, Spain
+}
 
-\author{Kate Storey-Fisher, Marcos Pellejero-Ibanez, Ra\'ul Angulo, \& friends \ksf{order?}}
+\date{Accepted XXX. Received YYY; in original form ZZZ}
+\pubyear{2026}
 
 \begin{document}
-
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
 \maketitle
 
-
+\begin{abstract}
 Galaxy clustering contains rich cosmological information down to non-linear scales; however, methods to extract this information are currently limited by the high cost of cosmological $N$-body simulations, as well as by the fidelity of galaxy bias modeling.
 We present a new approach to generating approximate but robust galaxy mocks: we employ the \mtm full-field emulator to generate high-fidelity displacement fields, and apply hybrid Lagrangian bias expansion approach to flexibly model biased tracers.
 With this approach, we construct a suite of mock 3D galaxy density fields each of size (1 $\Gpch$)$^3$ at $z=0$ spanning 10,000 different cosmologies, called \mmocks.
@@ -74,7 +92,13 @@ With this large suite, we are able to test convergence with the number of simula
 We also show that we recover unbiased cosmological constraints from an out-of-distribution model, an independent high-resolution $N$-body simulation populated with galaxies using extended SubHalo Abundance Matching, demonstrating the generalizability of the approach.
 This paves the way for exploring full-field inference from galaxy clustering, as well as a range of other potential applications.
 The \mmocks suite and the code used in this paper are available at \url{this url}.
+\end{abstract}
 
+\begin{keywords}
+methods: numerical -- methods: statistical -- galaxies: statistics -- cosmology: large-scale structure of Universe -- cosmological parameters
+\end{keywords}
+
+%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
 
@@ -223,7 +247,7 @@ For the noise coefficients $\{A^\mathrm{noise}\}$ we choose wide uniform priors 
 
 \begin{table}
 \centering
-\caption{Uniform prior ranges for the cosmological, bias, and noise parameters. The cosmological parameters are based on a $\sim$10 range around the \cite{Planck Collaboration et al. 2014a)} best-fit values, and the bias and noise parameters are loosely based on the hypervolume found by \cite{Zennaro} for a wide range of realistic galaxy populations.}
+\caption{Uniform prior ranges for the cosmological, bias, and noise parameters. The cosmological parameters are based on a $\sim$10 range around the \citet{Planck2014} best-fit values, and the bias and noise parameters are loosely based on the hypervolume found by \citet{zennaro} for a wide range of realistic galaxy populations.}
 \label{tab:priors}
 \begin{tabular}{lcc}
 \toprule
@@ -308,7 +332,7 @@ We use the \texttt{PolyBin3D} code \citep{philcox} to compute $\bispec$ for our 
 
 \subsection{Implementation and training}
 
-Before training, we reparameterize the cosmology and bias parameters to combinations that are better constrained by the summary statistics, and thus should result in improved training convergence \cite{XXX (ask bea)}.
+Before training, we reparameterize the cosmology and bias parameters to combinations that are better constrained by the summary statistics, and thus should result in improved training convergence \citep{XXX}. \ksf{ask Bea for citation}
 We multiply the bias and noise parameters by the relevant power of $\sig$, obtaining $\sig \bo$, $\sig^2 \bt$, $\sig^2 \bs$, $\sig \bl$, $\sig \Ao$, $\sig^2 \At$, $\sig^2 \As$, and $\sig \Al$.
 When sampling from the posterior, we can divide out the appropriate power of the recovered $sig$ to obtain estimates of the original bias and noise parameters.
 We also do not include the cosmological parameters $\h$, $\ob$, and $n_\mathrm{s}$ in the SBI training, as we do not expect to constrain these parameters (and confirmed in tests); these are still varied in the training set and implicitly marginalized over.
@@ -450,6 +474,24 @@ The smallest scales we can include are limited by... \ksf{when limited by map2ma
 
 The authors would like to thank Jed (LMU), Beatriz Tucci, Matt Ho; Matteo Zennaro, Daniel L\'opez-Cano, Francisco Maion and the rest of the \bacco group; and Risa Wechsler and the KIPAC Galaxy Formation and Cosmology group for helpful discussions.
 
+\section*{Data Availability}
 
+The \mmocks suite and the code used in this paper will be made publicly available at \url{this url}.
 
+%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{mnras}
+\bibliography{references}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% APPENDICES %%%%%%%%%%%%%%%%%%%%%
+
+% \appendix
+% \section{Some extra material}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bsp
+\label{lastpage}
 \end{document}
