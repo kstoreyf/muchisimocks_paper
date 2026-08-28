@@ -3,6 +3,14 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: mnras.bst
 Database file #1: references.bib
+Warning--I didn't find a database entry for "sdss"
+Warning--I didn't find a database entry for "desi"
+Warning--I didn't find a database entry for "roman"
+Warning--I didn't find a database entry for "sdss_pk"
+Warning--I didn't find a database entry for "desi_pk"
+Warning--I didn't find a database entry for "simbig"
+Warning--I didn't find a database entry for "quijote"
+Warning--I didn't find a database entry for "HOD"
 Warning--I didn't find a database entry for "Jamieson"
 Warning--I didn't find a database entry for "Paco"
 Warning--I didn't find a database entry for "Karras2020"
@@ -15,20 +23,27 @@ Warning--I didn't find a database entry for "kokron2021"
 Warning--I didn't find a database entry for "rubira_schmidt_2025"
 Warning--I didn't find a database entry for "zennaro"
 Warning--I didn't find a database entry for "shame"
-Warning--I didn't find a database entry for "SimBIG"
 Warning--I didn't find a database entry for "XX"
 Warning--I didn't find a database entry for "philcox"
 Warning--I didn't find a database entry for "XXX"
 Warning--I didn't find a database entry for "sbi"
+Warning--I didn't find a database entry for "greenberg2019"
+Warning--I didn't find a database entry for "tejero2020"
+Warning--I didn't find a database entry for "Durkan2019"
+Warning--I didn't find a database entry for "Durkan2020"
 Warning--I didn't find a database entry for "Contreras"
 Warning--I didn't find a database entry for "Raul"
 Warning--I didn't find a database entry for "angulo"
 Warning--I didn't find a database entry for "stucker"
+Warning--I didn't find a database entry for "Jamieson2021"
+Warning--I didn't find a database entry for "PellejeroIbanez2023"
+Warning--I didn't find a database entry for "Hadzhiyska2021"
+Warning--I didn't find a database entry for "PellejeroIbanez2026"
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 You've used 0 entries,
             2881 wiz_defined-function locations,
-            748 strings with 6092 characters,
+            769 strings with 6317 characters,
 and the built_in function-call counts, 39 in all, are:
 = -- 0
 > -- 0
@@ -67,4 +82,4 @@ warning$ -- 0
 while$ -- 0
 width$ -- 0
 write$ -- 12
-(There were 21 warnings)
+(There were 36 warnings)
