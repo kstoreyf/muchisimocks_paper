@@ -17,5 +17,125 @@
   {mn@eprint@\@tempb}{\@tempb:\@tempc}{\expandafter \expandafter \csname
   mn@eprint@\@tempb\endcsname \expandafter{\@tempc}}}
 
+\bibitem[\protect\citeauthoryear{Doeser, Jamieson, Stopyra, Lavaux, Leclercq
+  \& Jasche}{Doeser et~al.}{2024}]{doeser_bayesian_2024}
+Doeser L.,  Jamieson D.,  Stopyra S.,  Lavaux G.,  Leclercq F.,   Jasche J.,
+  2024, \mn@doi [Monthly Notices of the Royal Astronomical Society]
+  {10.1093/mnras/stae2429}, 535, 1258
+
+\bibitem[\protect\citeauthoryear{Hadzhiyska, {Garc{\'i}a-Garc{\'i}a}, Alonso,
+  Nicola  \& Slosar}{Hadzhiyska et~al.}{2021}]{hadzhiyska_hefty_2021}
+Hadzhiyska B.,  {Garc{\'i}a-Garc{\'i}a} C.,  Alonso D.,  Nicola A.,   Slosar
+  A.,  2021, \mn@doi [Journal of Cosmology and Astroparticle Physics]
+  {10.1088/1475-7516/2021/09/020}, 2021, 020
+
+\bibitem[\protect\citeauthoryear{Hahn, Beutler, Sinha, Berlind, Ho  \&
+  Hogg}{Hahn et~al.}{2018}]{hahn_likelihood_2018}
+Hahn C.,  Beutler F.,  Sinha M.,  Berlind A.,  Ho S.,   Hogg D.~W.,  2018,
+  Likelihood {{Non-Gaussianity}} in {{Large-Scale Structure Analyses}},
+  https://arxiv.org/abs/1803.06348v1, \mn@doi{10.1093/mnras/stz558}
+
+\bibitem[\protect\citeauthoryear{Hahn et~al.,}{Hahn
+  et~al.}{2022}]{hahn_rm_2022-1}
+Hahn C.,  et~al., 2022, \$\textbraceleft\textbackslash rm
+  {{S}}\textbraceleft\textbackslash scriptsize
+  {{IM}}\textbraceright{{BIG}}\textbraceright\$: {{A Forward Modeling Approach
+  To Analyzing Galaxy Clustering}} (\mn@eprint {arXiv} {2211.00723}),
+  \mn@doi{10.48550/arXiv.2211.00723}
+
+\bibitem[\protect\citeauthoryear{Hahn et~al.,}{Hahn
+  et~al.}{2023a}]{hahn_rm_2023-1}
+Hahn C.,  et~al., 2023a, \$\textbraceleft\textbackslash rm
+  {{S}}\textbraceleft\textbackslash scriptsize
+  {{IM}}\textbraceright{{BIG}}\textbraceright\$: {{The First Cosmological
+  Constraints}} from the {{Non-Linear Galaxy Bispectrum}} (\mn@eprint {arXiv}
+  {2310.15243}), \mn@doi{10.48550/arXiv.2310.15243}
+
+\bibitem[\protect\citeauthoryear{Hahn et~al.,}{Hahn
+  et~al.}{2023b}]{hahn_rm_2023}
+Hahn C.,  et~al., 2023b, \$\textbraceleft\textbackslash rm
+  {{S}}\textbraceleft\textbackslash scriptsize
+  {{IM}}\textbraceright{{BIG}}\textbraceright\$: {{The First Cosmological
+  Constraints}} from {{Non-Gaussian}} and {{Non-Linear Galaxy Clustering}}
+  (\mn@eprint {arXiv} {2310.15246}), \mn@doi{10.48550/arXiv.2310.15246}
+
+\bibitem[\protect\citeauthoryear{Hahn et~al.,}{Hahn
+  et~al.}{2023c}]{hahn_rm_2023-2}
+Hahn C.,  et~al., 2023c, \mn@doi [Journal of Cosmology and Astroparticle
+  Physics] {10.1088/1475-7516/2023/04/010}, 2023, 010
+
+\bibitem[\protect\citeauthoryear{Jamieson, Li, de Oliveira,
+  {Villaescusa-Navarro}, Ho  \& Spergel}{Jamieson
+  et~al.}{2023}]{jamieson_field_2023}
+Jamieson D.,  Li Y.,  de Oliveira R.~A.,  {Villaescusa-Navarro} F.,  Ho S.,
+  Spergel D.~N.,  2023, \mn@doi [The Astrophysical Journal]
+  {10.3847/1538-4357/acdb6c}, 952, 145
+
+\bibitem[\protect\citeauthoryear{Jamieson, Li, {Villaescusa-Navarro}, Ho  \&
+  Spergel}{Jamieson et~al.}{2024}]{jamieson_field-level_2024}
+Jamieson D.,  Li Y.,  {Villaescusa-Navarro} F.,  Ho S.,   Spergel D.~N.,  2024,
+  Field-Level {{Emulation}} of {{Cosmic Structure Formation}} with
+  {{Cosmology}} and {{Redshift Dependence}} (\mn@eprint {arXiv} {2408.07699}),
+  \mn@doi{10.48550/arXiv.2408.07699}
+
+\bibitem[\protect\citeauthoryear{Lemos et~al.,}{Lemos
+  et~al.}{2023}]{lemos_simbig_2023-1}
+Lemos P.,  et~al., 2023, {{SimBIG}}: {{Field-level Simulation-Based Inference}}
+  of {{Galaxy Clustering}} (\mn@eprint {arXiv} {2310.15256}),
+  \mn@doi{10.48550/arXiv.2310.15256}
+
+\bibitem[\protect\citeauthoryear{Massara et~al.,}{Massara
+  et~al.}{2024}]{massara_sc_2024}
+Massara E.,  et~al., 2024, \textbraceleft\textbackslash sc
+  {{SimBIG}}\textbraceright : {{Cosmological Constraints}} Using
+  {{Simulation-Based Inference}} of {{Galaxy Clustering}} with {{Marked Power
+  Spectra}} (\mn@eprint {arXiv} {2404.04228}),
+  \mn@doi{10.48550/arXiv.2404.04228}
+
+\bibitem[\protect\citeauthoryear{Nguyen, Schmidt, Tucci, Reinecke  \&
+  Kosti{\'c}}{Nguyen et~al.}{2024}]{nguyen_how_2024-1}
+Nguyen N.-M.,  Schmidt F.,  Tucci B.,  Reinecke M.,   Kosti{\'c} A.,  2024,
+  \mn@doi [Physical Review Letters] {10.1103/PhysRevLett.133.221006}, 133,
+  221006
+
+\bibitem[\protect\citeauthoryear{{Pellejero-Ibanez}, Stuecker, Angulo, Zennaro,
+  Contreras  \& Arico}{{Pellejero-Ibanez}
+  et~al.}{2022}]{pellejero-ibanez_modelling_2022}
+{Pellejero-Ibanez} M.,  Stuecker J.,  Angulo R.~E.,  Zennaro M.,  Contreras S.,
+    Arico G.,  2022, \mn@doi [Monthly Notices of the Royal Astronomical
+  Society] {10.1093/mnras/stac1602}, 514, 3993
+
+\bibitem[\protect\citeauthoryear{Pellejero~Ibanez, Angulo, Jamieson  \&
+  Li}{Pellejero~Ibanez et~al.}{2023}]{pellejero_ibanez_hybrid-bias_2023}
+Pellejero~Ibanez M.,  Angulo R.~E.,  Jamieson D.,   Li Y.,  2023, Hybrid-Bias
+  and Displacement Emulators for Field-Level Modelling of Galaxy Clustering in
+  Real and Redshift Space (\mn@eprint {arXiv} {2307.09134})
+
+\bibitem[\protect\citeauthoryear{Qian}{Qian}{2009}]{qian_nested_2009}
+Qian P. Z.~G.,  2009, \mn@doi [Biometrika] {10.1093/biomet/asp045}, 96, 957
+
+\bibitem[\protect\citeauthoryear{Rubira \& Schmidt}{Rubira \&
+  Schmidt}{2025}]{rubira_non-gaussian_2025}
+Rubira H.,  Schmidt F.,  2025, Non-{{Gaussian Galaxy Stochasticity}} and the
+  {{Noise-Field Formulation}} (\mn@eprint {arXiv} {2511.05484}),
+  \mn@doi{10.48550/arXiv.2511.05484}
+
+\bibitem[\protect\citeauthoryear{Tucci \& Schmidt}{Tucci \&
+  Schmidt}{2024}]{tucci_eftoflss_2024}
+Tucci B.,  Schmidt F.,  2024, \mn@doi [Journal of Cosmology and Astroparticle
+  Physics] {10.1088/1475-7516/2024/05/063}, 2024, 063
+
+\bibitem[\protect\citeauthoryear{Zennaro, Angulo, Contreras,
+  {Pellejero-Ib{\'a}{\~n}ez}  \& Maion}{Zennaro
+  et~al.}{2022}]{zennaro_priors_2022}
+Zennaro M.,  Angulo R.~E.,  Contreras S.,  {Pellejero-Ib{\'a}{\~n}ez} M.,
+  Maion F.,  2022, \mn@doi [Monthly Notices of the Royal Astronomical Society]
+  {10.1093/mnras/stac1673}, 514, 5443
+
+\bibitem[\protect\citeauthoryear{de Santi et~al.,}{de~Santi
+  et~al.}{2023}]{santi_robust_2023}
+de Santi N. S.~M.,  et~al., 2023, \mn@doi [The Astrophysical Journal]
+  {10.3847/1538-4357/acd1e2}, 952, 69
+
 \makeatother
 \end{thebibliography}
