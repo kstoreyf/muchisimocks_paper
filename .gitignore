@@ -4,9 +4,10 @@ old/
 *.out
 *.synctex.gz
 *.pdf
+!figures/*.pdf
+!figures/**/*.pdf
 *.fdb_latexmk
 *.fls
-!main.pdf
 .vscode/
 *.sh
 figure1/
