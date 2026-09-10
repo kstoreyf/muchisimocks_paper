@@ -3,89 +3,50 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: mnras.bst
 Database file #1: references.bib
-Warning--I didn't find a database entry for "sdss"
-Warning--I didn't find a database entry for "desi"
-Warning--I didn't find a database entry for "euclid"
-Warning--I didn't find a database entry for "roman"
-Warning--I didn't find a database entry for "sdss_pk"
-Warning--I didn't find a database entry for "desi_pk"
-Warning--I didn't find a database entry for "quijote"
-Warning--I didn't find a database entry for "HOD"
-Warning--I didn't find a database entry for "boss"
-Warning--I didn't find a database entry for "camels"
-Warning--I didn't find a database entry for "scoggins2502.13242"
-Warning--I didn't find a database entry for "saadeh2406.03374"
-Warning--I didn't find a database entry for "kang2603.18165"
-Warning--I didn't find a database entry for "ullmo2403.02171"
-Warning--I didn't find a database entry for "jacobson2607.27320"
-Warning--I didn't find a database entry for "contreras2407.18912"
-Warning--I didn't find a database entry for "wang2026"
-Warning--I didn't find a database entry for "sham"
-Warning--I didn't find a database entry for "shame"
-Warning--I didn't find a database entry for "sams"
-Warning--I didn't find a database entry for "hydro"
-Warning--I didn't find a database entry for "eft"
-Warning--I didn't find a database entry for "Modi2020"
+Reallocated str_pool (elt_size=1) to 130000 items from 65000.
+Database file #2: references_extra.bib
 Warning--I didn't find a database entry for "zennaro2021"
-Warning--I didn't find a database entry for "kokron2021"
-Warning--I didn't find a database entry for "Paco"
-Warning--I didn't find a database entry for "Karras2020"
-Warning--I didn't find a database entry for "Planck2014"
-Warning--I didn't find a database entry for "Angulo2021"
-Warning--I didn't find a database entry for "heft"
-Warning--I didn't find a database entry for "philcox"
-Warning--I didn't find a database entry for "XXX"
-Warning--I didn't find a database entry for "sbi"
-Warning--I didn't find a database entry for "greenberg2019"
-Warning--I didn't find a database entry for "tejero2020"
-Warning--I didn't find a database entry for "Durkan2019"
-Warning--I didn't find a database entry for "Durkan2020"
-Warning--I didn't find a database entry for "Contreras2020"
-Warning--I didn't find a database entry for "Planck2014a"
-Warning--I didn't find a database entry for "Springel2001"
-Warning--I didn't find a database entry for "stucker"
-Warning--I didn't find a database entry for "PellejeroIbanez2026"
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 19 entries,
+You've used 72 entries,
             2881 wiz_defined-function locations,
-            903 strings with 12502 characters,
-and the built_in function-call counts, 8375 in all, are:
-= -- 602
-> -- 667
-< -- 30
-+ -- 283
-- -- 106
-* -- 1056
-:= -- 1346
+            1207 strings with 67690 characters,
+and the built_in function-call counts, 33062 in all, are:
+= -- 2498
+> -- 2589
+< -- 122
++ -- 1131
+- -- 404
+* -- 4096
+:= -- 5264
 add.period$ -- 0
-call.type$ -- 19
-change.case$ -- 38
-chr.to.int$ -- 17
-cite$ -- 19
-duplicate$ -- 430
-empty$ -- 436
-format.name$ -- 166
-if$ -- 1405
-int.to.chr$ -- 3
+call.type$ -- 72
+change.case$ -- 144
+chr.to.int$ -- 68
+cite$ -- 72
+duplicate$ -- 1664
+empty$ -- 1684
+format.name$ -- 630
+if$ -- 5634
+int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 10
-newline$ -- 70
-num.names$ -- 122
-pop$ -- 101
+missing$ -- 50
+newline$ -- 229
+num.names$ -- 480
+pop$ -- 382
 preamble$ -- 1
-purify$ -- 76
+purify$ -- 288
 quote$ -- 0
-skip$ -- 237
+skip$ -- 947
 stack$ -- 0
-substring$ -- 370
-swap$ -- 188
-text.length$ -- 76
+substring$ -- 1648
+swap$ -- 784
+text.length$ -- 290
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 171
+type$ -- 648
 warning$ -- 0
-while$ -- 120
+while$ -- 488
 width$ -- 0
-write$ -- 210
-(There were 42 warnings)
+write$ -- 750
+(There was 1 warning)

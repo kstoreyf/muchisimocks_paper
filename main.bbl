@@ -17,11 +17,88 @@
   {mn@eprint@\@tempb}{\@tempb:\@tempc}{\expandafter \expandafter \csname
   mn@eprint@\@tempb\endcsname \expandafter{\@tempc}}}
 
+\bibitem[\protect\citeauthoryear{Adame et~al.,}{Adame
+  et~al.}{2025}]{adame_desi_2025}
+Adame A.~G.,  et~al., 2025, \mn@doi [Journal of Cosmology and Astroparticle
+  Physics] {10.1088/1475-7516/2025/09/008}, 2025, 008
+
+\bibitem[\protect\citeauthoryear{Alam et~al.,}{Alam et~al.}{2017}]{Alam2017}
+Alam S.,  et~al., 2017, \mn@doi [Monthly Notices of the Royal Astronomical
+  Society] {10.1093/mnras/stx721}, 470, 2617
+
+\bibitem[\protect\citeauthoryear{Angulo, Zennaro, Contreras, Aric{\`o},
+  {Pellejero-Iba{\~n}ez}  \& St{\"u}cker}{Angulo et~al.}{2021}]{Angulo2021}
+Angulo R.~E.,  Zennaro M.,  Contreras S.,  Aric{\`o} G.,
+  {Pellejero-Iba{\~n}ez} M.,   St{\"u}cker J.,  2021, \mn@doi [Monthly Notices
+  of the Royal Astronomical Society] {10.1093/mnras/stab2018}, 507, 5869
+
+\bibitem[\protect\citeauthoryear{Bernardeau, Colombi, Gaztanaga  \&
+  Scoccimarro}{Bernardeau et~al.}{2002}]{bernardeau_large-scale_2002-1}
+Bernardeau F.,  Colombi S.,  Gaztanaga E.,   Scoccimarro R.,  2002, \mn@doi
+  [Physics Reports] {10.1016/S0370-1573(02)00135-7}, 367, 1
+
+\bibitem[\protect\citeauthoryear{Collaboration et~al.,}{Collaboration
+  et~al.}{2014}]{collaboration_planck_2014}
+Collaboration P.,  et~al., 2014, \mn@doi [Astronomy \& Astrophysics]
+  {10.1051/0004-6361/201321591}, 571, A16
+
+\bibitem[\protect\citeauthoryear{Collaboration et~al.,}{Collaboration
+  et~al.}{2025}]{collaboration_euclid_2025}
+Collaboration E.,  et~al., 2025, \mn@doi [Astronomy \& Astrophysics]
+  {10.1051/0004-6361/202450810}, 697, A1
+
+\bibitem[\protect\citeauthoryear{Conroy, Wechsler  \& Kravtsov}{Conroy
+  et~al.}{2006}]{conroy_modeling_2006-1}
+Conroy C.,  Wechsler R.~H.,   Kravtsov A.~V.,  2006, \mn@doi [The Astrophysical
+  Journal] {10.1086/503602}, 647, 201
+
+\bibitem[\protect\citeauthoryear{Contreras, Angulo  \& Zennaro}{Contreras
+  et~al.}{2021}]{contreras_flexible_2021}
+Contreras S.,  Angulo R.,   Zennaro M.,  2021, \mn@doi [Monthly Notices of the
+  Royal Astronomical Society] {10.1093/mnras/stab2560}, 508, 175
+
+\bibitem[\protect\citeauthoryear{Contreras, Angulo, {Chaves-Montero}, Kugel,
+  Schaller  \& Schaye}{Contreras et~al.}{2024}]{contreras_validating_2024}
+Contreras S.,  Angulo R.~E.,  {Chaves-Montero} J.,  Kugel R.,  Schaller M.,
+  Schaye J.,  2024, \mn@doi [Astronomy \& Astrophysics]
+  {10.1051/0004-6361/202451671}, 690, A311
+
+\bibitem[\protect\citeauthoryear{{DESI Collaboration} et~al.,}{{DESI
+  Collaboration} et~al.}{2023}]{desi_collaboration_validation_2023}
+{DESI Collaboration} et~al., 2023, Validation of the {{Scientific Program}} for
+  the {{Dark Energy Spectroscopic Instrument}},
+  \mn@doi{10.48550/arXiv.2306.06307}
+
+\bibitem[\protect\citeauthoryear{Dawson et~al.,}{Dawson
+  et~al.}{2016}]{Dawson2015}
+Dawson K.~S.,  et~al., 2016, \mn@doi [The Astronomical Journal]
+  {10.3847/0004-6256/151/2/44}, 151, 44
+
+\bibitem[\protect\citeauthoryear{Desjacques, Jeong  \& Schmidt}{Desjacques
+  et~al.}{2017}]{desjacques_large-scale_2017}
+Desjacques V.,  Jeong D.,   Schmidt F.,  2017, Large-{{Scale Galaxy Bias}}
+  (\mn@eprint {arXiv} {1611.09787v3})
+
 \bibitem[\protect\citeauthoryear{Doeser, Jamieson, Stopyra, Lavaux, Leclercq
   \& Jasche}{Doeser et~al.}{2024}]{doeser_bayesian_2024}
 Doeser L.,  Jamieson D.,  Stopyra S.,  Lavaux G.,  Leclercq F.,   Jasche J.,
   2024, \mn@doi [Monthly Notices of the Royal Astronomical Society]
   {10.1093/mnras/stae2429}, 535, 1258
+
+\bibitem[\protect\citeauthoryear{Durkan, Bekasov, Murray  \&
+  Papamakarios}{Durkan et~al.}{2019}]{durkan_neural_2019}
+Durkan C.,  Bekasov A.,  Murray I.,   Papamakarios G.,  2019, Neural {{Spline
+  Flows}} (\mn@eprint {arXiv} {1906.04032}), \mn@doi{10.48550/arXiv.1906.04032}
+
+\bibitem[\protect\citeauthoryear{Durkan, Murray  \& Papamakarios}{Durkan
+  et~al.}{2020}]{durkan_contrastive_2020}
+Durkan C.,  Murray I.,   Papamakarios G.,  2020, in Proceedings of the 37th
+  {{International Conference}} on {{Machine Learning}}. PMLR, pp 2771--2781
+
+\bibitem[\protect\citeauthoryear{Greenberg, Nonnenmacher  \& Macke}{Greenberg
+  et~al.}{2019}]{greenberg_automatic_2019}
+Greenberg D.,  Nonnenmacher M.,   Macke J.,  2019, in Proceedings of the 36th
+  {{International Conference}} on {{Machine Learning}}. PMLR, pp 2404--2414
 
 \bibitem[\protect\citeauthoryear{Hadzhiyska, {Garc{\'i}a-Garc{\'i}a}, Alonso,
   Nicola  \& Slosar}{Hadzhiyska et~al.}{2021}]{hadzhiyska_hefty_2021}
@@ -64,6 +141,24 @@ Hahn C.,  et~al., 2023b, \$\textbraceleft\textbackslash rm
 Hahn C.,  et~al., 2023c, \mn@doi [Journal of Cosmology and Astroparticle
   Physics] {10.1088/1475-7516/2023/04/010}, 2023, 010
 
+\bibitem[\protect\citeauthoryear{Henriques, White, Thomas, Angulo, Guo, Lemson,
+  Springel  \& Overzier}{Henriques et~al.}{2015}]{henriques_galaxy_2015-1}
+Henriques B. M.~B.,  White S. D.~M.,  Thomas P.~A.,  Angulo R.,  Guo Q.,
+  Lemson G.,  Springel V.,   Overzier R.,  2015, \mn@doi [Monthly Notices of
+  the Royal Astronomical Society] {10.1093/mnras/stv705}, 451, 2663
+
+\bibitem[\protect\citeauthoryear{Ib{\'a}{\~n}ez et~al.,}{Ib{\'a}{\~n}ez
+  et~al.}{2026}]{ibanez_validation_2026}
+Ib{\'a}{\~n}ez M.~P.,  et~al., 2026, Validation of the {{Hybrid Bias
+  Expansion}} Model for the Galaxy Bispectrum (\mn@eprint {arXiv}
+  {2606.19452}), \mn@doi{10.48550/arXiv.2606.19452}
+
+\bibitem[\protect\citeauthoryear{Jacobus, Tucci  \& Philcox}{Jacobus
+  et~al.}{2026}]{jacobus_emulating_2026}
+Jacobus C.,  Tucci B.,   Philcox O.,  2026, Emulating {{Cosmic Structure
+  Formation}} with a {{Lagrangian Neural Cellular Automaton}},
+  https://arxiv.org/abs/2607.27320v1
+
 \bibitem[\protect\citeauthoryear{Jamieson, Li, de Oliveira,
   {Villaescusa-Navarro}, Ho  \& Spergel}{Jamieson
   et~al.}{2023}]{jamieson_field_2023}
@@ -77,6 +172,24 @@ Jamieson D.,  Li Y.,  {Villaescusa-Navarro} F.,  Ho S.,   Spergel D.~N.,  2024,
   Field-Level {{Emulation}} of {{Cosmic Structure Formation}} with
   {{Cosmology}} and {{Redshift Dependence}} (\mn@eprint {arXiv} {2408.07699}),
   \mn@doi{10.48550/arXiv.2408.07699}
+
+\bibitem[\protect\citeauthoryear{Kang, Bin, Li  \& Hamann}{Kang
+  et~al.}{2026}]{kang_tunes_2026}
+Kang Y.,  Bin H.,  Li D.,   Hamann J.,  2026, {{TUNeS}}: {{Neural Emulation}}
+  of {{Large-Scale Structure Across Redshifts}} (\mn@eprint {arXiv}
+  {2603.18165}), \mn@doi{10.48550/arXiv.2603.18165}
+
+\bibitem[\protect\citeauthoryear{Karras, Laine, Aittala, Hellsten, Lehtinen  \&
+  Aila}{Karras et~al.}{2020}]{karras_analyzing_2020}
+Karras T.,  Laine S.,  Aittala M.,  Hellsten J.,  Lehtinen J.,   Aila T.,
+  2020, Analyzing and {{Improving}} the {{Image Quality}} of {{StyleGAN}}
+  (\mn@eprint {arXiv} {1912.04958}), \mn@doi{10.48550/arXiv.1912.04958}
+
+\bibitem[\protect\citeauthoryear{Kokron, DeRose, Chen, White  \&
+  Wechsler}{Kokron et~al.}{2021}]{kokron_cosmology_2021}
+Kokron N.,  DeRose J.,  Chen S.-F.,  White M.,   Wechsler R.~H.,  2021, \mn@doi
+  [Monthly Notices of the Royal Astronomical Society] {10.1093/mnras/stab1358},
+  505, 1422
 
 \bibitem[\protect\citeauthoryear{Lemos et~al.,}{Lemos
   et~al.}{2023}]{lemos_simbig_2023-1}
@@ -92,11 +205,32 @@ Massara E.,  et~al., 2024, \textbraceleft\textbackslash sc
   Spectra}} (\mn@eprint {arXiv} {2404.04228}),
   \mn@doi{10.48550/arXiv.2404.04228}
 
+\bibitem[\protect\citeauthoryear{Modi, Chen  \& White}{Modi
+  et~al.}{2020}]{modi_simulations_2020}
+Modi C.,  Chen S.-F.,   White M.,  2020, \mn@doi [Monthly Notices of the Royal
+  Astronomical Society] {10.1093/mnras/staa251}, 492, 5754
+
 \bibitem[\protect\citeauthoryear{Nguyen, Schmidt, Tucci, Reinecke  \&
   Kosti{\'c}}{Nguyen et~al.}{2024}]{nguyen_how_2024-1}
 Nguyen N.-M.,  Schmidt F.,  Tucci B.,  Reinecke M.,   Kosti{\'c} A.,  2024,
   \mn@doi [Physical Review Letters] {10.1103/PhysRevLett.133.221006}, 133,
   221006
+
+\bibitem[\protect\citeauthoryear{{Novell-Masot} et~al.,}{{Novell-Masot}
+  et~al.}{2025}]{novell-masot_full-shape_2025}
+{Novell-Masot} S.,  et~al., 2025, Full-{{Shape}} Analysis of the Power Spectrum
+  and Bispectrum of {{DESI DR1 LRG}} and {{QSO}} Samples (\mn@eprint {arXiv}
+  {2503.09714}), \mn@doi{10.48550/arXiv.2503.09714}
+
+\bibitem[\protect\citeauthoryear{Papamakarios \& Murray}{Papamakarios \&
+  Murray}{2016}]{papamakarios_fast_2016}
+Papamakarios G.,  Murray I.,  2016, in Advances in {{Neural Information
+  Processing Systems}}. Curran Associates, Inc.
+
+\bibitem[\protect\citeauthoryear{Peacock \& Smith}{Peacock \&
+  Smith}{2000}]{peacock_halo_2000-1}
+Peacock J.~A.,  Smith R.~E.,  2000, \mn@doi [Monthly Notices of the Royal
+  Astronomical Society] {10.1046/j.1365-8711.2000.03779.x}, 318, 1144
 
 \bibitem[\protect\citeauthoryear{{Pellejero-Ibanez}, Stuecker, Angulo, Zennaro,
   Contreras  \& Arico}{{Pellejero-Ibanez}
@@ -106,10 +240,28 @@ Nguyen N.-M.,  Schmidt F.,  Tucci B.,  Reinecke M.,   Kosti{\'c} A.,  2024,
   Society] {10.1093/mnras/stac1602}, 514, 3993
 
 \bibitem[\protect\citeauthoryear{Pellejero~Ibanez, Angulo, Jamieson  \&
-  Li}{Pellejero~Ibanez et~al.}{2023}]{pellejero_ibanez_hybrid-bias_2023}
-Pellejero~Ibanez M.,  Angulo R.~E.,  Jamieson D.,   Li Y.,  2023, Hybrid-Bias
+  Li}{Pellejero~Ibanez et~al.}{2023a}]{pellejero_ibanez_hybrid-bias_2023}
+Pellejero~Ibanez M.,  Angulo R.~E.,  Jamieson D.,   Li Y.,  2023a, Hybrid-Bias
   and Displacement Emulators for Field-Level Modelling of Galaxy Clustering in
   Real and Redshift Space (\mn@eprint {arXiv} {2307.09134})
+
+\bibitem[\protect\citeauthoryear{{Pellejero-Ibanez}, Angulo, Zennaro, Stuecker,
+  Contreras, Arico  \& Maion}{{Pellejero-Ibanez}
+  et~al.}{2023b}]{pellejero-ibanez_bacco_2023}
+{Pellejero-Ibanez} M.,  Angulo R.~E.,  Zennaro M.,  Stuecker J.,  Contreras S.,
+   Arico G.,   Maion F.,  2023b, \mn@doi [Monthly Notices of the Royal
+  Astronomical Society] {10.1093/mnras/stad368}, 520, 3725
+
+\bibitem[\protect\citeauthoryear{Philcox \& Fl{\"o}ss}{Philcox \&
+  Fl{\"o}ss}{2024}]{philcox_polybin3d_2024}
+Philcox O. H.~E.,  Fl{\"o}ss T.,  2024, {{PolyBin3D}}: {{A Suite}} of
+  {{Optimal}} and {{Efficient Power Spectrum}} and {{Bispectrum Estimators}}
+  for {{Large-Scale Structure}}, https://arxiv.org/abs/2404.07249v3
+
+\bibitem[\protect\citeauthoryear{Philcox \& Ivanov}{Philcox \&
+  Ivanov}{2022}]{philcox_boss_2022}
+Philcox O. H.~E.,  Ivanov M.~M.,  2022, \mn@doi [Physical Review D]
+  {10.1103/PhysRevD.105.043517}, 105, 043517
 
 \bibitem[\protect\citeauthoryear{Qian}{Qian}{2009}]{qian_nested_2009}
 Qian P. Z.~G.,  2009, \mn@doi [Biometrika] {10.1093/biomet/asp045}, 96, 957
@@ -120,10 +272,140 @@ Rubira H.,  Schmidt F.,  2025, Non-{{Gaussian Galaxy Stochasticity}} and the
   {{Noise-Field Formulation}} (\mn@eprint {arXiv} {2511.05484}),
   \mn@doi{10.48550/arXiv.2511.05484}
 
+\bibitem[\protect\citeauthoryear{Saadeh, Koyama  \& {Morice-Atkinson}}{Saadeh
+  et~al.}{2025}]{saadeh_field-level_2025}
+Saadeh D.,  Koyama K.,   {Morice-Atkinson} X.,  2025, \mn@doi [Monthly Notices
+  of the Royal Astronomical Society] {10.1093/mnras/stae2807}, 537, 448
+
+\bibitem[\protect\citeauthoryear{Schaye et~al.,}{Schaye
+  et~al.}{2015}]{schaye_eagle_2015}
+Schaye J.,  et~al., 2015, \mn@doi [Monthly Notices of the Royal Astronomical
+  Society] {10.1093/mnras/stu2058}, 446, 521
+
+\bibitem[\protect\citeauthoryear{Scoggins, Ho, {Villaescusa-Navarro}, Jamieson,
+  Doeser  \& Bryan}{Scoggins et~al.}{2025}]{scoggins_learning_2025}
+Scoggins M.~T.,  Ho M.,  {Villaescusa-Navarro} F.,  Jamieson D.,  Doeser L.,
+  Bryan G.~L.,  2025, Learning the {{Universe}}: \$3\textbackslash{}
+  H\textasciicircum\textbraceleft -1\textbraceright\textbraceleft\textbackslash
+  rm {{Gpc}}\textbraceright\$ {{Tests}} of a {{Field Level}} \${{N}}\$-Body
+  {{Simulation Emulator}} (\mn@eprint {arXiv} {2502.13242}),
+  \mn@doi{10.48550/arXiv.2502.13242}
+
+\bibitem[\protect\citeauthoryear{Seljak}{Seljak}{2000}]{Seljak2000}
+Seljak U.,  2000, \mn@doi [Monthly Notices of the Royal Astronomical Society]
+  {10.1046/j.1365-8711.2000.03715.x}, 318, 203
+
+\bibitem[\protect\citeauthoryear{Shankar, Lapi, Salucci, Zotti  \&
+  Danese}{Shankar et~al.}{2006}]{shankar_new_2006}
+Shankar F.,  Lapi A.,  Salucci P.,  Zotti G.~D.,   Danese L.,  2006, \mn@doi
+  [The Astrophysical Journal] {10.1086/502794}, 643, 14
+
+\bibitem[\protect\citeauthoryear{Somerville \& Dav{\'e}}{Somerville \&
+  Dav{\'e}}{2015}]{somerville_physical_2015}
+Somerville R.~S.,  Dav{\'e} R.,  2015, \mn@doi [Annual Review of Astronomy and
+  Astrophysics] {10.1146/annurev-astro-082812-140951}, 53, 51
+
+\bibitem[\protect\citeauthoryear{Somerville, Hopkins, Cox, Robertson  \&
+  Hernquist}{Somerville et~al.}{2008}]{somerville_semi-analytic_2008}
+Somerville R.~S.,  Hopkins P.~F.,  Cox T.~J.,  Robertson B.~E.,   Hernquist L.,
+   2008, \mn@doi [Monthly Notices of the Royal Astronomical Society]
+  {10.1111/j.1365-2966.2008.13805.x}, 391, 481
+
+\bibitem[\protect\citeauthoryear{Spergel et~al.,}{Spergel
+  et~al.}{2015}]{spergel_wide-field_2015}
+Spergel D.,  et~al., 2015, Wide-{{Field InfrarRed Survey Telescope-Astrophysics
+  Focused Telescope Assets WFIRST-AFTA}} 2015 {{Report}} (\mn@eprint {arXiv}
+  {1503.03757}), \mn@doi{10.48550/arXiv.1503.03757}
+
+\bibitem[\protect\citeauthoryear{Springel, White, Tormen  \&
+  Kauffmann}{Springel et~al.}{2001}]{springel_populating_2001}
+Springel V.,  White S. D.~M.,  Tormen G.,   Kauffmann G.,  2001, \mn@doi
+  [Monthly Notices of the Royal Astronomical Society]
+  {10.1046/j.1365-8711.2001.04912.x}, 328, 726
+
+\bibitem[\protect\citeauthoryear{Springel, Matteo  \& Hernquist}{Springel
+  et~al.}{2005}]{springel_modeling_2005}
+Springel V.,  Matteo T.~D.,   Hernquist L.,  2005, \mn@doi [Monthly Notices of
+  the Royal Astronomical Society] {10.1111/j.1365-2966.2005.09238.x}, 361, 776
+
+\bibitem[\protect\citeauthoryear{Stevens, Croton  \& Mutch}{Stevens
+  et~al.}{2016}]{stevens_building_2016}
+Stevens A. R.~H.,  Croton D.~J.,   Mutch S.~J.,  2016, \mn@doi [Monthly Notices
+  of the Royal Astronomical Society] {10.1093/mnras/stw1332}, 461, 859
+
+\bibitem[\protect\citeauthoryear{St{\"u}cker, {Pellejero-Ib{\'a}{\~n}ez},
+  Voivodic  \& Angulo}{St{\"u}cker et~al.}{2025a}]{stucker_gaussian_2025}
+St{\"u}cker J.,  {Pellejero-Ib{\'a}{\~n}ez} M.,  Voivodic R.,   Angulo R.~E.,
+  2025a, \mn@doi [Astronomy \& Astrophysics] {10.1051/0004-6361/202451178},
+  694, A29
+
+\bibitem[\protect\citeauthoryear{St{\"u}cker, {Pellejero-Ib{\'a}{\~n}ez},
+  Angulo, Maion  \& Voivodic}{St{\"u}cker
+  et~al.}{2025b}]{stucker_probabilistic_2025}
+St{\"u}cker J.,  {Pellejero-Ib{\'a}{\~n}ez} M.,  Angulo R.~E.,  Maion F.,
+  Voivodic R.,  2025b, \mn@doi [Astronomy \& Astrophysics]
+  {10.1051/0004-6361/202451176}, 699, A197
+
+\bibitem[\protect\citeauthoryear{{Tejero-Cantero}, Boelts, Deistler, Lueckmann,
+  Durkan, Gon{\c c}alves, Greenberg  \& Macke}{{Tejero-Cantero}
+  et~al.}{2020}]{tejero-cantero_sbi_2020}
+{Tejero-Cantero} A.,  Boelts J.,  Deistler M.,  Lueckmann J.-M.,  Durkan C.,
+  Gon{\c c}alves P.~J.,  Greenberg D.~S.,   Macke J.~H.,  2020, {{SBI}} --
+  {{A}} Toolkit for Simulation-Based Inference (\mn@eprint {arXiv}
+  {2007.09114}), \mn@doi{10.48550/arXiv.2007.09114}
+
 \bibitem[\protect\citeauthoryear{Tucci \& Schmidt}{Tucci \&
   Schmidt}{2024}]{tucci_eftoflss_2024}
 Tucci B.,  Schmidt F.,  2024, \mn@doi [Journal of Cosmology and Astroparticle
   Physics] {10.1088/1475-7516/2024/05/063}, 2024, 063
+
+\bibitem[\protect\citeauthoryear{Ullmo, Aghanim, Decelle  \&
+  {Aragon-Calvo}}{Ullmo et~al.}{2026}]{ullmo_predicting_2026}
+Ullmo M.,  Aghanim N.,  Decelle A.,   {Aragon-Calvo} M.,  2026, \mn@doi
+  [Astronomy \& Astrophysics] {10.1051/0004-6361/202449845}, 706, A124
+
+\bibitem[\protect\citeauthoryear{Vale \& Ostriker}{Vale \&
+  Ostriker}{2004}]{vale_linking_2004}
+Vale A.,  Ostriker J.~P.,  2004, \mn@doi [Monthly Notices of the Royal
+  Astronomical Society] {10.1111/j.1365-2966.2004.08059.x}, 353, 189
+
+\bibitem[\protect\citeauthoryear{{Villaescusa-Navarro}
+  et~al.,}{{Villaescusa-Navarro}
+  et~al.}{2020}]{villaescusa-navarro_quijote_2020}
+{Villaescusa-Navarro} F.,  et~al., 2020, \mn@doi [The Astrophysical Journal
+  Supplement Series] {10.3847/1538-4365/ab9d82}, 250, 2
+
+\bibitem[\protect\citeauthoryear{{Villaescusa-Navarro}
+  et~al.,}{{Villaescusa-Navarro}
+  et~al.}{2021}]{villaescusa-navarro_camels_2021}
+{Villaescusa-Navarro} F.,  et~al., 2021, \mn@doi [The Astrophysical Journal]
+  {10.3847/1538-4357/abf7ba}, 915, 71
+
+\bibitem[\protect\citeauthoryear{Vogelsberger et~al.,}{Vogelsberger
+  et~al.}{2014}]{vogelsberger_introducing_2014}
+Vogelsberger M.,  et~al., 2014, \mn@doi [Monthly Notices of the Royal
+  Astronomical Society] {10.1093/mnras/stu1536}, 444, 1518
+
+\bibitem[\protect\citeauthoryear{Wang et~al.,}{Wang
+  et~al.}{2022}]{wang_high_2022}
+Wang Y.,  et~al., 2022, \mn@doi [The Astrophysical Journal]
+  {10.3847/1538-4357/ac4973}, 928, 1
+
+\bibitem[\protect\citeauthoryear{Wang, Alvarez, Cooray, Hearin, Mansfield,
+  Storey-Fisher  \& Wechsler}{Wang et~al.}{2026}]{wang2026}
+Wang H.,  Alvarez M.,  Cooray S.,  Hearin A.,  Mansfield P.,  Storey-Fisher K.,
+    Wechsler R.~H.,  2026, Stress-Testing Cosmological Inference on Small
+  Scales with {{SHAM}} and {{HOD}} Galaxy--Halo Connection Models, in
+  preparation
+
+\bibitem[\protect\citeauthoryear{Wechsler \& Tinker}{Wechsler \&
+  Tinker}{2018}]{wechsler_connection_2018}
+Wechsler R.~H.,  Tinker J.~L.,  2018, Annual Review of Astronomy and
+  Astrophysics, 56, 1
+
+\bibitem[\protect\citeauthoryear{York et~al.,}{York et~al.}{2000}]{York2000}
+York D.~G.,  et~al., 2000, \mn@doi [The Astronomical Journal] {10.1086/301513},
+  120, 1579
 
 \bibitem[\protect\citeauthoryear{Zennaro, Angulo, Contreras,
   {Pellejero-Ib{\'a}{\~n}ez}  \& Maion}{Zennaro
@@ -131,6 +413,17 @@ Tucci B.,  Schmidt F.,  2024, \mn@doi [Journal of Cosmology and Astroparticle
 Zennaro M.,  Angulo R.~E.,  Contreras S.,  {Pellejero-Ib{\'a}{\~n}ez} M.,
   Maion F.,  2022, \mn@doi [Monthly Notices of the Royal Astronomical Society]
   {10.1093/mnras/stac1673}, 514, 5443
+
+\bibitem[\protect\citeauthoryear{Zennaro, Angulo, {Pellejero-Ib{\'a}{\~n}ez},
+  St{\"u}cker, Contreras  \& Aric{\`o}}{Zennaro
+  et~al.}{2023}]{zennaro_bacco_2023}
+Zennaro M.,  Angulo R.~E.,  {Pellejero-Ib{\'a}{\~n}ez} M.,  St{\"u}cker J.,
+  Contreras S.,   Aric{\`o} G.,  2023, \mn@doi [Monthly Notices of the Royal
+  Astronomical Society] {10.1093/mnras/stad2008}, 524, 2407
+
+\bibitem[\protect\citeauthoryear{Zheng et~al.,}{Zheng et~al.}{2005}]{Zheng2005}
+Zheng Z.,  et~al., 2005, \mn@doi [The Astrophysical Journal] {10.1086/466510},
+  633, 791
 
 \bibitem[\protect\citeauthoryear{de Santi et~al.,}{de~Santi
   et~al.}{2023}]{santi_robust_2023}
