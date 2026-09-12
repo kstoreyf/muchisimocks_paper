@@ -709,6 +709,8 @@ Optimal summary statistics that capture the information content of the full fiel
 As we also forward model the velocity fields, this suite could be useful for exploring velocity reconstruction approaches.
 One could also investigate the effect of more restrictive priors on the Lagrangian bias parameters, encoding our knowledge specific galaxy samples.
 
+ksf{extend to beyond lcm}
+
 The SBI approach with the \mmocks model that we have demonstrated could be applied to more realistic data, and eventually to real data to perform a cosmological analysis.
 This analysis has been entirely in real-space, and a redshift-space analysis is forthcoming.
 Survey realism, including systematics, could be applied to the fields to understand the information content in more realistic settings. 
@@ -718,7 +720,29 @@ Finally, an analysis on survey data such as BOSS or DESI has the potential to pr
 \section{Summary and Conclusions}
 \label{sec:conclusions}
 
-\ksf{coming soon!}
+In this work, we have presented a forward model for galaxy tracer fields that balances robustness and speed, and is useful for simulation-based inference approaches to cosmological inference.
+The model uses the hybrid Lagrangian bias expansion to second order, based on emulated particle and velocity displacement fields from the \mtm emulator trained on the Quijote mocks, to generate sets of bias fields that can be weighted and summed to produce tracer fields.
+We also include a full-field noise model based on a Gaussian field coupled to the bias fields, which we find to be critical for unbiased inference.
+With this forward model, a $(1 \Gpch)^3$ mock can be generated at any cosmology in around 8 minutes. 
+We publicly release a suite of these bias fields,  called \mmocks, at $z=0$ in both real- and redshift-space.
+Our main mock set consists of a Latin hypercube of 10,000 different cosmologies; we also release an independent 1,000-cosmology Latin hypercube ``coverage'' test set, and a 1,000-realizations ``cosmic variance'' set at fixed cosmology with varying seeds.
+
+We perform simulation-based inference using use neural posterior estimation.
+We generate training data from our forward model, recombining each bias field set at a given cosmology with up to 32 bias and noise parameter sets, for a total of 320,000 traning mocks.
+The summary statistics considered are the galaxy--galaxy power spectrum $\pk$, the galaxy--matter cross-spectrum $\pgm$, and the galaxy bispectrum $\bispec$.
+In addition to the in-distribution tests sets described above, we apply our model to a realistic out-of-distribution mock built with the extended Subhalo Abundance Matching (SHAMe) model on a high-resolution \bacco simulation.
+With this approach, our findings are the following:
+\begin{itemize}
+    \item Inference with $\pk$ alone suffers from strong projection effects, resulting in biased $\sig$ even for the in-distribution test sets; this holds even when additionally including $\bispec$. Including $\pgm$, which is related to the  galaxy--galaxy lensing observable, results in unbiased inference of $\om$, $\sig$, and $\bo$, as it breaks parameter degeneries and ameliorates projection effects (see Figs. \ref{fig:cosmic_variance_contours} and \ref{fig:coverage_binned_diff}).
+    \item We recover unbiased cosmological parameters on the out-of-distribution SHAMe mock, validating the robustness of our model. This holds down to scales of $\kmax=0.35$ for the galaxy--galaxy power spectrum, and $\kmax=0.25$ for the galaxy--matter cross spectrum and the galaxy bispectrum (see Figs. \ref{fig:shame_contours} and \ref{fig:scale_dependence_fob3_nbars}).
+    \item Increasing the number of bias parameter sets applied to each cosmology achieves a similar precision and accuracy as increasing the number of cosmologies, for the same total number of points, beyond a minimum of around 2,000 cosmologies (see Fig. \ref{fig:convergence_all_combos}). This could be a very helpful result, as augmenting with more galaxy bias combinations is far faster than generating mocks at new cosmologies.
+    \item For $\pk$ alone, around 20,000 training mocks are required for inference to converge and information content to saturate; for the full statistics combination $\stats$, the precision continues to increase even with 320,000 training points, indicating that additional mocks (or improved SBI procedures) are needed to saturate the information in those statistics (see Fig. \ref{fig:convergence_pgg_b_pgm}).
+\end{itemize}
+
+The \mmocks suite will be publicly available, and is useful for various analyses exploring the information content in galaxy clustering.
+With its large number of mocks and robust method for modeling the galaxy--dark matter connection, it is ideal for testing approaches to simulation-based inference.
+The approach could be extended to generate mocks exploring a range of science questions and targeted for specific tracer populations and surveys, paving the way for robust and flexible inference from galaxy clustering.
+
 
 \section*{Acknowledgements}
 
