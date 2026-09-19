@@ -79,6 +79,9 @@
 \newcommand{\bacco}{BACCO\xspace}
 \newcommand{\simbig}{\texttt{SimBIG}\xspace}
 
+% Auto-generated numerical quantities (see paper_quantities.dat header)
+\input{paper_quantities.dat}
+
 % comments
 \DeclareRobustCommand{\ksf}[1]{{\color{teal}{ksf: #1}}}
 
@@ -112,8 +115,8 @@ With this forward model, we create a suite of mock 3D galaxy density fields each
 We train a simulation-based inference (SBI) model on summary statistics of the density fields---the galaxy--galaxy power spectrum, the galaxy--matter power spectrum, and the galaxy bispectrum---and infer the cosmological parameters, marginalizing over the bias and noise coefficients.
 We validate the pipeline on in-distribution test mocks and find our inferred posteriors to be well-calibrated across the prior range.
 With this large suite, we are able to test convergence with the number of simulations: we find that while 20,000 training points are sufficient for the power spectrum, when including the additional statistics precision continues to improve beyond 320,000, and that increasing the number of bias parameter sets per cosmology yields similar constraints as increasing the number of cosmologies.
-We also show that we recover unbiased cosmological constraints from an out-of-distribution model, an independent high-resolution $N$-body simulation populated with galaxies using extended SubHalo Abundance Matching, demonstrating the generalizability of the approach.
-We find that the galaxy--matter power spectrum is critical for breaking parameter degeneracies, and additionally including the bispectrum signficantly improves precision, on $\sig$ by XXX and $\bo$ by XXX.
+We also show that we recover unbiased cosmological constraints from an out-of-distribution model, an independent high-resolution $N$-body simulation populated with LRG-like galaxies using extended SubHalo Abundance Matching, demonstrating the generalizability of the approach.
+We find that the galaxy--matter power spectrum is critical for breaking parameter degeneracies, and additionally including the bispectrum improves precision, for our LRG-like mock on $\om$ by $\PrecPctShameOodFidPkPgmBVsPkPgmOmegaC\%$, $\sig$ by $\PrecPctShameOodFidPkPgmBVsPkPgmSigmaEight\%$ and $\bo$ by $\PrecPctShameOodFidPkPgmBVsPkPgmBo\%$. \ksf{note: if we use only top model instead of ensemble, it jumps to 39\% for sigma8, which is significantly different. let's discuss using the top-3 ensemble vs just top model}
 These results are useful for guiding the design of future SBI approaches for galaxy clustering, and demonstrate a promising approach for full-field inference as well as a range of other potential applications.
 The \mmocks suite and the code used in this paper are available at \url{this url}.
 \end{abstract}
@@ -172,7 +175,7 @@ The hybrid Lagrangian bias expansion (or hybrid effective field theory) offers a
 It combines the Lagrangian bias expansion, which models the galaxy field as a summation of operators of the dark matter field, with particle displacement and velocity fields from $N$-body simulations to advect them to Eulerian space.
 This approach has been shown to be effective down to $k\sim0.6$, and has been used to construct accurate emulators of the power spectrum \citep{pellejero-ibanez_modelling_2022,pellejero-ibanez_bacco_2023}.
 \cite{pellejero_ibanez_hybrid-bias_2023} showed that emulated $N$-body displacements with \mtm can be used as inputs to the hybrid bias expansion to provide an accurate model of galaxy abundance.
-They found 1-2\% precision on the power spectrum $k\sim0.6$; while there were some biases at intermediate scales, these were absorbed by  nuisance parameters descrbing stochasticity.
+They found 1-2\% precision on the power spectrum $k\sim0.6$; while there were some biases at intermediate scales, these were absorbed by  nuisance parameters describing stochasticity.
 Notably, they found that the robustness held with variations in the cosmological parameters, demonstrating promise for using this approach for cosmological inference.
 
 In this paper, we construct a suite of 3-dimensional mock galaxy fields using our forward model based on the hybrid Lagrangian bias expansion with emulated displacements from the full-field \mtm emulator.
@@ -206,12 +209,12 @@ We thus turn to a field-level emulator of the matter distribution, \mtm \citep{j
 
 The density field can be approximated at linear order by the Zel'dovich approximation (ZA, also known as first-order Lagrangian perturbation theory, 1LPT), based on a realization of an initial conditions field.
 The \mtm emulator learns a mapping from the ZA field at $z=0$ to the non-linear $N$-body displacement field at that redshift, effectively learning the correction from linear to non-linear displacements. 
-The emulator is trained on 2000 simulations of the Quijote simulation suite that span a latin hypercube (LH) of five cosmological parameters: $\Omega_\mathrm{c}$, $\sig$, $\h$, $\ob$, and $n_\mathrm{s}$  \citep{villaescusa-navarro_quijote_2020}.
+The emulator is trained on 2000 simulations of the Quijote simulation suite that span a Latin hypercube (LH) of five cosmological parameters: $\Omega_\mathrm{c}$, $\sig$, $\h$, $\ob$, and $n_\mathrm{s}$  \citep{villaescusa-navarro_quijote_2020}.
 Each has a volume of (1 $\hinv$Gpc)$^3$ with $512^3$ particles, giving particle mass resolutions in the range $2 \times 10^{11} - 1 \times 10^{12} \hinv M_\odot$.
 \mtm also trains a separate network to predict the nonlinear velocity field from the ZA velocities.
+For this work, we use a modified version of this velocity prediction: following the $\bacco$ model, we assign Lagrangian particles that end up in halos as all having the same velocity, that of the center-of-mass velocity of the parent halo (see \cite{pellejero_ibanez_hybrid-bias_2023} for details). \ksf{please check this sentence!}
 Once trained, \mtm can generate the displacement and velocity fields for any input ZA field, taking a few minutes on a GPU for a (1 $\hinv$Gpc)$^3$ volume.
 While we do not utilize the velocity fields in this work, as we limit to real-space analysis, these will be important for future analyses including redshift-space distortions as well as other applications involving the velocity distribution; we release them as part of the \mmocks suite.
-\ksf{explain special velocity field weights used, for zspace}
 
 In more detail, \mtm consists of two convolutional neural networks (CNNs), one to predict the matter density field and the other to predict the velocity field.
 The particle displacements are structured on a 3D grid as they are functions of their initial Lagrangian space position, so the CNN processes the inputs and outputs as 3-channel images.
@@ -221,7 +224,7 @@ The model uses a V-net-like architecture, with 3 layers of downsampling and upsa
 For its loss function, it combines the log mean squared error of the Lagrangian particle displacements and Eulerian density field.
 We note that there is a newer version of \mtm that includes redshift dependence, and predicts the velocity field as a derivative of the position field \citep{jamieson_field-level_2024}; however, as we focus on $z=0$ and also require a modification of the velocity field as described above, we use the original \mtm implementation.
 
-For our mock suite, we define a latin hypercube of 10,000 sets of cosmological parameters: $\Omega_\mathrm{c}$, $\sig$, $\h$, $\ob$, and $n_\mathrm{s}$.
+For our mock suite, we define a Latin hypercube of 10,000 sets of cosmological parameters: $\Omega_\mathrm{c}$, $\sig$, $\h$, $\ob$, and $n_\mathrm{s}$.
 We use uniform priors for each parameter that span $\sim$10 around the \cite{collaboration_planck_2014} values of the cosmological parameters, following \cite{Angulo2021} (with a range for $\sig$ extended to slightly lower values); these are shown in Table~\ref{tab:priors}.
 For each of these, we generate a ZA field based on a different random seed, and pass that field through map2map to obtain the nonlinear particle displacements.
 The \mtm-emulated particle displacements are a key ingredient in modeling the galaxy bias fields, as discussed in the next section.
@@ -237,7 +240,10 @@ The displacement term $\Psi(\qq)$ can be computed with Lagrangian perturbation t
 
 The galaxy overdensity field in Lagrangian space can be described to second order as 
 \begin{equation}
-\delta_g(\qq) = 1 + \bo \delta_L(\qq) + \bt \left[ \delta_L^2 (\qq) - \langle \delta_L^2 \rangle \right] + \bs \left[s^2(\qq) - \langle s^2 \rangle \right] + \bl \nabla^2 \delta_L(\qq)
+\begin{split}
+\delta_g(\qq) = 1 + \bo \delta_L(\qq) + \bt \left[ \delta_L^2 (\qq) - \langle \delta_L^2 \rangle \right] \\
++ \bs \left[s^2(\qq) - \langle s^2 \rangle \right] + \bl \nabla^2 \delta_L(\qq)
+\end{split}
 \label{eq:hbe}
 \end{equation}
 where $\delta_L(\qq)$ is the linear matter density in Lagrangian space, and $s^2(\qq)$ is the shear field, defined by the traceless part of the tidal field, given by $s^2(\qq) = s_{ij}(\qq) s^{ij}(\qq) = \delta_i \delta_j \phi(\qq) - \frac{1}{3}\delta^K_{ij} \delta_L(\qq)$, where $\phi(\qq)$ is the linear gravitational potential in Lagrangian space $\nabla^2 \phi(\qq)=4 \pi G \bar{\rho} \delta_L(\qq)$, and $\delta^K$ is the Kronecker delta.
@@ -251,13 +257,13 @@ We then perform the advection to Eulerian space: The tracers are deposited onto 
 This gives five bias fields in Eulerian space, $\mathcal{O}_i$: weighting the Lagrangian density field by the constant 1 gives the homogeneous field; by $\delta_L(\qq)$, the linear density field; by $\delta_L^2 (\qq) - \langle \delta^2 \rangle$, the quadratic density field; by $s^2(\qq) - \langle s^2 \rangle$, the tidal field; and by $\Delta^2 \delta(\qq)$, the Laplacian.
 These fields can be weighted by the bias coefficients and summed to produce an overall tracer field $\delta_g$.
 
-We perform two postprocessing steps on these fields. \ksf{fill in}
+We perform two postprocessing steps on these fields.
 To reduce storage space, we reduce the size of these fields by cutting the high-$k$ modes: we remove modes beyond $k_\mathrm{Nyquist} = \pi N_\mathrm{grid,cut} / L \approx 0.4$, where $N_\mathrm{grid,cut}=128$, our reduced grid size.
 We do this by Fourier transforming each bias field, nulling the modes higher than $k_\mathrm{Nyquist}$, and inverse Fourier transforming back to real space.
-At $k$ scales higher than this our hybrid bias model loses accuracy anyway and we don't consider them in our inference, so we do not give up accuracy with this $k$-cut.
+At scales higher than this our hybrid bias model loses accuracy anyway and we don't consider them in our inference, so we do not give up accuracy with this $k$-cut.
 We perform the same reduction on the velocity fields, cutting each component of the velocity vectors in $k$-space.
 We finally perform a deconvolution of the bias fields, using a linear interpolation kernel at the original grid size $N_\mathrm{grid}$ to correct for the smoothing by the CIC kernel.
-(Technically the deconvolution should be performed before the $k$-cut, but the results are effectively equivalent and this ordering is much faster.)
+(Technically the deconvolution should be performed before the $k$-cut, but we confirm the results are effectively equivalent and this ordering is much faster.)
 This deconvolution could be done at the summary statistics level, but we choose to deconvolve the fields for ease of use.
 
 The final main suite, designed as a training set, contains 10,000 sets of tracer position fields (5 Lagrangian bias fields advected to Eulerian space) and velocity fields, each at a different cosmology; each is of size $(1 \Gpch)^3$ and resolution $128^3$.
@@ -268,7 +274,7 @@ We call these suites \mmocks (a portmanteau of the words ``much\'isimos'', Spani
 \subsection{Modeling noise at the field level}
 \label{sec:noise}
 
-\ksf{technically this is a postprocessing step only needed for the SBI part, where should it go?}
+\ksf{technically this is a postprocessing step only needed for the SBI part, is it fine here?}
 
 We require a model for stochastic noise in order to model realistic discrete galaxy populations.
 This can be modeled at the level of each summary statistic, but our goal is to make this suite usable for a wide range of statistics as well as field-level analyses; we thus desire a field-level noise model.
@@ -387,17 +393,21 @@ At a given cosmology, we then have multiple tracer fields generated with distinc
 Though this means the final tracer fields are not fully independent of each other, this has been shown (e.g. in \cite{hahn_rm_2023-2}) to improve inference by significantly augmenting the training data size and allowing the model to disentangle cosmology and bias parameters.
 Note that the summing of bias fields with the chosen bias coefficients is essentially instantaneous and can be done in postprocessing just before computing summary statistics, and thus requires no additional compute time or storage.
 
-As we later want to test convergence of the inference with the number of bias parameter sets, we use a nested latin hypercube to generate the bias parameters.
+As we later want to test convergence of the inference with the number of bias parameter sets, we use a \emph{nested Latin hypercube} to generate the bias parameters.
 The top-level LH contains 320,000 points, resulting in 32 independent bias parameter sets for each of the 10,000 cosmologies.
 Nested subsets of this LH are also LHs, with 16, 8, 4, 2, and 1 bias parameter sets per cosmology.
-This was achieved with the \cite{qian_nested_2009} algorithm for nested latin hypercubes, which works by \dots \ksf{TODO}.
-A python implementation of this algorithm along with validation tests are available in the \texttt{gethypercube}\footnote{http://github.com/kstoreyf/gethypercube} package.
-\ksf{should i include an appendix detailing the nested-LH package? or just link to the github as im doing? or does it deserve it's own little software paper?}
-This is shown to achieve LHs at each level that have properties much closer to a true LH than either taking random subsets of a top-level LH, or stacking bottom-level LHs. 
-The use of LH-distributed parameters has been shown to be important for accurate and robust training, so we expect that this nested strategy leads to robustness in our convergence tests, which are a key result of this work.
 We generate one nested LH for the noiseless case with the 4-parameter set of bias parameters; and a separate nested LH for the noisy case with 4 bias parameters and 5 noise parameters, for a total of 9 independently varied parameters.
 
-To generate our final tracer fields, we multiply the \mmocks bias fields and noise field by the selected set of corresponding bias and noise parameters as in Equation~(\ref{eq:noise}), and sum these weighted fields.
+This was achieved with the \cite{qian_nested_2009} algorithm for nested Latin hypercubes, which works by starting with a two-layer structure, with coarse cells and fine cells on a multidimensional grid. 
+It constructs a standard LH on the coarse cells, and then fills in the finer grid, also ensuring it creates a valid LH.
+It then performs random permutations of rows and cells that still preserve the LH structure but remove any deterministic structure from the filling procedure, resulting in a random realization of two nested LHs. 
+This is then repeated for subsequent layers by adding finer and finer grids.
+A python implementation of this algorithm along with validation tests are available in the \texttt{gethypercube}\footnote{http://github.com/kstoreyf/gethypercube} package.
+\ksf{i may include an appendix detailing my nested-LH package! thoughts?}
+Though the LHs at all levels are exact, they are not guaranteed to have optimal space-filling properties compared to an optimized single-level LH; however, this nested design is shown to achieve LHs at each level that have properties much closer to a true LH than either taking random subsets of a top-level LH, or stacking bottom-level LHs.
+The use of LH-distributed parameters has been shown to be important for accurate and robust training, so we expect that this nested strategy leads to robustness in our convergence tests, which are a key result of this work.
+
+To generate our final tracer fields, we weight the \mmocks bias fields and noise field by the selected set of corresponding bias and noise parameters as in Equation~(\ref{eq:noise}), and sum these weighted fields.
 We normalize these fields by the original \mtm grid size ($512^3$) before computing their summary statistics.
 
 
@@ -436,7 +446,7 @@ The summary statistics computed on the \mmocks training set are shown in Fig.~\r
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth]{figures/fig2_statistics_ranges.png}
+\includegraphics[width=\textwidth]{figures/fig2_statistics_ranges.pdf}
 \caption{The summary statistics computed on the \mmocks training set: the galaxy--galaxy power spectrum $\pk$, the galaxy--mater power spectrum $\pgm$, and the galaxy bispectrum $\bispec$. The median, 16th-84th percentiles, and 5th-95th percentiles of the training set. The out-of-distribution test mock catalog constructed with extended subhalo abundance matching (SHAMe) on a \bacco simulation is also shown (black dashed). In our fiducial inference model, scales below $\kmax=0.25$ for $\pgm$ and triangles with sides smaller than $\kmax=0.25$ for $\bispec$ are excluded.}
 % \ksf{double check shame; maybe if have b2 thats very large? pgm: avg b1*p11 matches shame. for pk, avg b1**2 * p11 doesnt match. or, addl operators that appear in pgg and not pgm; aka p22. usually its smaller, but for v broad prior (aka b2 goes up to 2), then part of param space where p22. so could be because of prior. test: do same plot but restrict b2 from -1 to 0.}
 \label{fig:statistics_ranges}
@@ -453,14 +463,16 @@ We use the publicly available \texttt{sbi} \cite{tejero-cantero_sbi_2020} packag
 Our data vector is comprised of the binned statistics discussed in \S\ref{sec:stats}, concanenated when using multiple statics. 
 The statistics combinations we show are: $\pk$, $\pk+\bispec$, $\pk+\pgm$, $\pk+\bispec+\pgm$ (we exclude $\bispec$ and $\pgm$ alone, as these do not contain much constraining power on their own and in practice are almost always considered in combination with $\pk$). 
 We use a 90\%/10\% training/validation split of our training set.
-We use the \textsc{Adam} optimizer, and stop training when the loss over the validation loss does not improve for 20 epochs; we save the network weights at the best validation loss.
-We perform a sweep over several hyperparameters, using 30 random samples from the following sets: the learning rate $\{10^{-2},\,3\times10^{-3},\,10^{-3},\,3\times10^{-4},\,10^{-4},\,3\times10^{-5},\,10^{-5}\}$, hidden features $\{32,\,64,\,128,\,256\}$, training batch size $\{32,\,64,\,128,\,256\}$, and number of transforms $\{4,\,6,\,8,\,10\}$. 
-The sweeps are performed separately for each statistic or combination of statistics, and for each choice of noiseless (bias parameters only) and noisy (bias and noise parameters); we always use the maximum size training set of 320,000 data vectors, and for the statistics use $k_{\mathrm{max}}^{P_{gg}}=0.4$, $k_{\mathrm{max}}^{P_{gm}}=0.25$, and $k_{\mathrm{max}}^{B}=0.25$. 
-The model which achieves the minimum best validation loss is selected; we use this best set of hyperparameters to train variations of the model, such as when varying the number of training points and the $\kmax$ values.
-The best hyperparameters for the fiducial $\pk+\pgm+\bispec$ noisy case are: learning rate $10^{-4}$, hidden feature vector of size 256, batch size 256, and 6 transforms.
-The set of best hyperparmeters vary across the statistics, with the noisy case (which varies more parameters) generally preferring larger hidden feature vectors and batch sizes, and most learning rates around $10^{-4}$. 
+We use the \textsc{Adam} optimizer, and stop training when the mean loss over the validation set does not improve for 20 epochs; we save the network weights at the best validation loss.
 
-Training on the maximum size training set of 320,000 data vectors takes a few hours on a single CPU for the fiducial model described abve.
+We perform a sweep over several hyperparameters, using 30 random samples from the following sets: the learning rate $\{10^{-2},\,3\times10^{-3},\,10^{-3},\,3\times10^{-4},\,10^{-4},\,3\times10^{-5},\,10^{-5}\}$, hidden features $\{32,\,64,\,128,\,256\}$, training batch size $\{32,\,64,\,128,\,256\}$, and number of transforms $\{4,\,6,\,8,\,10\}$. 
+The sweeps are performed separately for each statistic or combination of statistics, and for each choice of noiseless (bias parameters only) and noisy (bias and noise parameters) training data; we use the maximum size training set of 320,000 data vectors, and for the statistics use $k_{\mathrm{max}}^{P_{gg}}=0.37$, $k_{\mathrm{max}}^{P_{gm}}=0.25$, and $k_{\mathrm{max}}^{B}=0.25$.
+We look at the ordered mean validation losses of the 30 trained models for each statistics combination, and observe a signficant drop for the top three models (this number will vary depending on the number models explored in the sweep and is generally chosen empirically).
+We thus choose to use an equally weighted ensemble of the top three MAFs when performing inference, which has been shown to lead to more stable results (e.g. \citealt{alvey_simulation-based_2026}); explicitly, we sample the MAFs as $q_\phi(\theta \mid x) = \frac{1}{3}\sum_{j=1}^{3} q_\phi^{j}(\theta \mid x)$.
+We use the sets of hyperparameters from the three top MAFs to train variations of the model for the given statistics combination, such as when varying the number of training points and the $\kmax$ values, rather than running dedicated sweeps which would be computationally very expensive.
+The set of best identified hyperparameters vary across the statistics, with the noisy case (which varies more parameters) generally preferring larger hidden feature vectors and batch sizes, though most learning rates are around $10^{-4}$.
+
+Training one MAF on the maximum size training set of 320,000 data vectors takes a few hours on a single CPU for the fiducial model described abve.
 To display the posteriors and compute covariances and other statistics from them, we draw 10,000 samples from the posterior; we confirm that the posteriors are generally converged with this number of samples.
 
 
@@ -517,7 +529,7 @@ The posteriors are shown in Figure~\ref{fig:cosmic_variance_contours} for three 
 
 \begin{figure}
 \centering
-\includegraphics[width=\columnwidth]{figures/fig3_cosmic_variance_contours.png}
+\includegraphics[width=\columnwidth]{figures/fig3_cosmic_variance_contours.pdf}
 \caption{Posteriors for the key parameters $\om$, $\sig$, and $\bo$ inferred from the mean of the statistics over our cosmic variance test set, for each of the statistics combinations considered. The inclusion of $\pgm$ breaks the $\sig-\bo$ degeneracy, providing tight and unbiased constraints on the parameters; adding $\bispec$ tightens the constraints. The other bias parameters and the noise parameters are inferred and marginalized over; the full posterior plot is shown in Fig.~\ref{fig:cosmic_variance_full_posteriors}.}
 \label{fig:cosmic_variance_contours}
 \end{figure}
@@ -530,7 +542,7 @@ Including $\bispec$ interestingly only slightly increases the precision on $\om$
 Notably, it does signficantly increase the precision on the higher-order biases parameters $\bt$ and $\bs$. 
 We see that using the statistics combination $\pk+\pgm$ produces unbiased constraints on $\sig$ and $\bo$; this makes sense as $\pgm$ is able to break this degeneracy (as $\pgm = \bo\sig^2 \hat{P}(k)$).
 This corroborates our hypothesis that the bias observed in $\sig$ for $\pk$ and $\bispec$ is likely a result of projection effects caused by a lack of constraining power.
-The full statistics combination $\pk$ + $\pgm$ + $\bispec$ preserves the unbiased constraints, and the bispectrum adds an additional improvement of constraining power compared to $\pk+\pgm$: it improves $\om$ by XX, $\sig$ by XX, and $\bo$ by XX, and notably the bias parameters $\bt$ by XX, $\bs$ by XX, and $\bl$ by XX. \ksf{TODO figure out which data to use to quantify this}
+The full statistics combination $\pk$ + $\pgm$ + $\bispec$ preserves the unbiased constraints, and the bispectrum adds an additional improvement of constraining power compared to $\pk+\pgm$: it improves $\om$ by $\PrecPctCVMeanPkPgmBVsPkPgmOmegaC\%$, $\sig$ by $\PrecPctCVMeanPkPgmBVsPkPgmSigmaEight\%$, and $\bo$ by $\PrecFactorCVMeanPkPgmBVsPkPgmBo\times$, and notably the bias parameters $\bt$ by $\PrecFactorCVMeanPkPgmBVsPkPgmBt\times$, $\bs$ by $\PrecFactorCVMeanPkPgmBVsPkPgmBsTwo\times$, and $\bl$ by $\PrecFactorCVMeanPkPgmBVsPkPgmBL\times$.
 
 We note that these results are for real space, and we would expect differences in the relative information content in the statistics in redshift-space, where there is additional cosmological information contained in redshift-space distortions.
 
@@ -542,7 +554,7 @@ Note that the prior has a wide range of values of the noise parameters, so these
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth]{figures/fig4_coverage_binned_diff.png}
+\includegraphics[width=\textwidth]{figures/fig4_coverage_binned_diff.pdf}
 \caption{The difference between the predicted (mean of the posterior) and true parameter values for the key parameters for each of the 1000 coverage test set mocks, as a function of the true value. The median and 16th-84th percentile ranges in bins of the true value are shown for each of the stastistics combinations considered. Using the full statistics combination gives largely unbiased recovery across the prior range, with a small biases at the high ends of $\om$ and $\sig$; using fewer statistics results in stronger parameter-dependent biases that tend towards the mean. Including more statistics also results in tighter parameter constraints, most notably with $\pgm$ significantly improving the precision and bias on all key parameters.}
 \label{fig:coverage_binned_diff}
 \end{figure*}
@@ -559,7 +571,7 @@ There are still slight biases for $\stats$ particularly at high $\om$ and $\sig$
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth]{figures/fig5_coverage_pp_center500.png}
+\includegraphics[width=\textwidth]{figures/fig5_coverage_pp_center500.pdf}
 \caption{Coverage (probability--probability) plots for the key parameters for the 500 mocks of the coverage test set closest to the center of the prior. The empirical coverage is the fraction of test set points with predicted uncertainties at the given credibility level that encompass the true value. The closeness to the 1:1 line indicates well-calibrated uncertainties; dotted lines show the expected deviations if posterior widths were off by the given factor of $\sigma$, assuming Gaussians centered on the truth. The posteriors are largely well-calibrated, with the full statistics combination $\stats$ giving the best calibration across parameters.}
 \label{fig:coverage_pp_center500}
 \end{figure*}
@@ -581,7 +593,7 @@ These results show that our inference pipeline can accurately recover the cosmol
 
 \begin{figure}
 \centering
-\includegraphics[width=\columnwidth]{figures/fig6_shame_contours.png}
+\includegraphics[width=\columnwidth]{figures/fig6_shame_contours.pdf}
 \caption{Posteriors for the key parameters $\om$, $\sig$, and $\bo$ for our out-of-distribution SHAMe mock test, for each of the statistics combinations considered. The recovered parameters with the full statistics combination are unbiased within $1\sigma$, and the statistics show similar constraining power as in the in-distribution test. The full posterior plot is shown in Fig.~\ref{fig:shame_full_posteriors}.}
 \label{fig:shame_contours}
 \end{figure}
@@ -589,42 +601,46 @@ These results show that our inference pipeline can accurately recover the cosmol
 The results of our SBI pipeline on our SHAMe out-of-distribution test mock with fiducial number density $\nbarfid$ are shown in Figure~\ref{fig:shame_contours} for the key parameters (the full contours are shown in Figure~\ref{fig:shame_full_posteriors}).
 We obtain generally unbiased constraints on the cosmological and bias parameters when using the full statistics combination, with $\om$, $\sig$, and $\bo$ all within $1\sigma$ from the true values.
 The trends for the statistics generally follow those seen in the cosmic variance test set (\S\ref{sec:res_indist} and Figure~\ref{fig:cosmic_variance_contours}), with $\pgm$ breaking the degeneracy between $\sig$ and $\bo$, and $\bispec$ improving constraints significantly for the bias parameters and moderately for the cosmological parameters.
-For the SHAMe data, we obtain a XXX\% improvement in precision on $\om$ and XXX\% on $\sig$ when including $\pgm$ compared to $\pk$ alone; additionally including $\bispec$ results in XXX\% and XXX\% improvements on $\om$ and $\sig$ respectively compared to $\pk+\pgm$.
+For the SHAMe data, we obtain a $\PrecPctShameOodFidPkPgmVsPkOmegaC\%$ improvement in precision on $\om$ and a $\PrecFactorShameOodFidPkPgmVsPkSigmaEight\times$ improvement on $\sig$ when including $\pgm$ compared to $\pk$ alone; additionally including $\bispec$ results in $\PrecPctShameOodFidPkPgmBVsPkPgmOmegaC\%$ and $\PrecPctShameOodFidPkPgmBVsPkPgmSigmaEight\%$ improvements on $\om$ and $\sig$ respectively compared to $\pk+\pgm$.
 
-We do see slight biases in the values of $\bo$ and $\bt$ when using the full statistics combination, at the XXX$\sigma$ and XXX$\sigma$ levels, while these were on average accurately constrainted in the cosmic variance test set.
+We do see moderate biases in the values of $\bt$ and $\bs$ when using the full statistics combination, at the \FoBSigmaShameOodFidPkPgmBBt$\sigma$ and \FoBSigmaShameOodFidPkPgmBBs$\sigma$ levels, while these were on average accurately constrainted in the cosmic variance test set.
 This is likely a result of the bias parameters absorbing some model mismatch, which could be an issue for approaches such as imposing tighter priors on bias parameters; however, for our inference the cosmological parameters remain unbiased.
 
-We show the results for the full parameter combination on the SHAMe samples with a range of number densities in Figure~\ref{fig:noise_impact_contours_nbars}.
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/fig7_noise_impact_contours_nbars.pdf}
+    \caption{Posteriors for $\pk+\bispec+\pgm$ for the key parameters, for varying number density and noise models. The filled contours show the results for the SHAMe OOD mock data with different number densities. The dotted contours show inference on the mean of the cosmic variance test set, which was matched to the fiducial $\nbarfid$ SHAMe mock; the dashed contour shows that same set but generated without any noise, and inferred assuming noiseless data.}
+    \label{fig:noise_impact_contours_nbars}
+    \end{figure}
+
+We show the results for the full statistics combination $\stats$ on the SHAMe samples with a range of number densities in Figure~\ref{fig:noise_impact_contours_nbars}.
 We find that the constraints on the cosmological parameters are robust to the noise level across this range.
 The constraints on the bias parameter $\bo$ do lose precision at lower number densities; this could be related to degeneracies with the noise parameters.
 We note that the noise parameters themselves are poorly constrained, as seen in the full contour plot (Figure~\ref{fig:shame_full_posteriors}).
 However, we check that the noise model is necessary for properly inferring the parameters; assuming noiseless training data results in strong biases in the inference.
 
-This test on out-of-distribution data demonstrates the robustness of our forward model to modeling realistic galaxy populations constructed with completely different models.
+We also show the results for inference on the mean data vectors of the cosmic variance sample, which was generated with bias and noise parameters matched to the $\nbarfid$ SHAMe sample.
+The precision of the predicted parameters is similar to that of the actual SHAMe sample, with somewhat tighter constraints for the in-distribution mock.
+The bias in $\sig$ for the SHAMe mock disappears, indicating that the cause is model misspecification.
+We additionally perform a test generating a cosmic variance test set with the SHAMe bias parameters but no noise, and then train the SBI model on noiseless training data. \ksf{check that this is properly described in the test set section}
+We find that the constraints are consistent with the noisy case for $\om$, but improve signficantly for $\sig$ and $\bo$, demonstrating the constraining power lost to noise, even with perfect knowledge of the noise model.
 
+These tests on out-of-distribution data demonstrates the generalizability of our forward model to realistic galaxy populations constructed with completely different underlying models.
 
-
-\begin{figure}
-\centering
-\includegraphics[width=\columnwidth]{figures/fig7_noise_impact_contours_nbars.png}
-\caption{Impact of noise on the inferred posteriors, for the mean of $\pk+\bispec+\pgm$ over the cosmic variance test set. The brown contours show inference trained on statistics computed on noiseless realizations, and inferred with a model with no noise; the pink contours show inference computed on realizations injected with the \citet{rubira_non-gaussian_2025} noise model, and inferred with the same noise model. Even with perfect knowledge of the noise model, the constraints on $\sig$ and $\bo$ degrade significantly.}
-% \ksf{could be interesting to show what happens w denser model. complement shame at diff number densities - add that plot! did lrg-like same, but may make sense to have a much denser sample - more to gain.} \ksf{esp bc limited by noise model for pgm}
-\label{fig:noise_impact_contours_nbars}
-\end{figure}
 
 
 \subsection{Scale dependence}
 
 \begin{figure}
 \centering
-\includegraphics[width=\columnwidth]{figures/fig8_scale_dependence_fob3_nbars.png}
-\caption{Scale dependence of the figure of bias (FoB) for the three key parameters combined for the SHAMe out-of-distribution mock. The top panel shows the FoB as a function of $\kmax$ for the bispectrum, fixing to our fiducial $\kmax=0.25$ for $\pgm$; the bottom panel shows it as a  function of $\kmax$ for $\pgm$, fixing to our fiducial $\kmax=0.25$ for the bispectrum. In both cases, the FoB for the full statistics combination remains around or below $1\sigma$ until $\kmax=0.25$, after which the inference becomes biased.}
+\includegraphics[width=\columnwidth]{figures/fig8_scale_dependence_fob3_nbars.pdf}
+\caption{Scale dependence of the figure of bias (FoB) for the three key parameters combined for the SHAMe out-of-distribution mock, with varying number density. The top panel shows the FoB as a function of $\kmax$ for the bispectrum, fixing to our fiducial $\kmax=0.25$ for $\pgm$; the bottom panel shows it as a  function of $\kmax$ for $\pgm$, fixing to our fiducial $\kmax=0.25$ for the bispectrum. In both cases, the FoB for the full statistics combination remains around or below $1\sigma$ until $\kmax=0.25$, after which the inference becomes biased.}
 % \ksf{slight bias for pgg+b coming from projection effects? could make this plot for cosmic variance set... maybe just mention that these are vol effects. or look at the params individually. incl b1 times sig8. could add a param orthogonal to that product; sigma8/b1.} \ksf{lowest 2 pink points on top plot confusing that they go above green points. look at contour plots} \ksf{maybe because noise model not affecting pgm!} \ksf{marcos: at low kmax end, looks like noise when still dominated by priors. noise parameters are close to edges?} \ksf{consistent with marcos's paper - with just pgg+bgg, no clear break. only when include matter.}
 \label{fig:scale_dependence_fob3_nbars}
 \end{figure}
 
 We investigate the dependence of our results on the maximum $k$ scale included in our inference, for each of the statistics.
-We keep the maximum scale for $\pk$ fixed to $\kmax=0.4\,\hMpc$, the Nyquist frequency of the box.
+We keep the maximum scale for $\pk$ fixed to $\kmax=0.37\,\hMpc$, a bit below the Nyquist frequency of the box.
 At this scale, the \mtm emulator of $N$-body displacements is shown to achieve significantly sub-percent accuracy ($\sim$0.2\%) on the power spectrum \citep{jamieson_field_2023}, and \cite{pellejero_ibanez_hybrid-bias_2023} showed that \mtm combined with the hybrid Lagrangian bias expansion to second order achieves 1-2\% precision to $\kmax=0.6\,\hMpc$.
 (Previous works using the hybrid bias expansion with a power spectrum emulator find accuracy down to $\kmax=0.6\,\hMpc$ \citep{hadzhiyska_hefty_2021,zennaro_bacco_2023}.)
 For the bispectrum, \cite{ibanez_validation_2026} recently validated the hybrid bias expansion down to $\kmax=0.25\,\hMpc$.
@@ -633,11 +649,26 @@ For the bispectrum, \cite{ibanez_validation_2026} recently validated the hybrid 
 In Figure~\ref{fig:scale_dependence_fob3_nbars}, we show the figure of bias for the SHAMe out-of-distribution mock for the three key parameters $\om$, $\sig$, and $\bo$ combined, as a function of the $\kmax$ of $\bispec$ and $\pgm$; when varying $\kmax^\mathrm{\bispecsh}$, we fix $\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$, and when varying $\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$ we fix $\kmax^\mathrm{\bispecsh}=0.25\,\hMpc$.
 We see that using only $\pk+\bispec$ results in a bias moderately above $1\sigma$ for all number density samples, regardless of $\kmax$; this is likely largely a result of projection effects.
 When including the cross spectrum, $\stats$, the inference is accurate to $1\sigma$ up until $\kmax^\mathrm{\bispecsh}=0.25\,\hMpc$, aligning with the result validating the hybrid bias expansion on the bispectrum and indicating that the limiting factor is the expansion rather than the emulated displacements.
-The statistics combination $\pk+\pgm$ results in accurate inference for all number densities through $\kmax^\mathrm{\pgmsh}=0.4\,\hMpc$.
+The statistics combination $\pk+\pgm$ results in accurate inference for all number densities through $\kmax^\mathrm{\pgmsh}=0.37\,\hMpc$.
 However, when additionally adding $\bispec$, the inference becomes biased pushing below $\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$.
 We also check the full grid of combinations, and find $\kmax^\mathrm{\bispecsh}=0.25\,\hMpc$, $\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$ to be the optimal combination of limiting scales; pushing either or both to smaller scales results in further bias.
 It is initially odd that pushing $\pgm$ to smaller scales results in a bias only when including the $\bispec$; we speculate that this could be because our noise model does not account for noise in $\pgm$, though further investigation is merited.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/fig9_scale_dependence_fom_nbars.pdf}
+    \caption{Scale dependence of the figure of merit (FoM) for the three key parameters for the SHAMe out-of-distribution mock, with varying number density. The $\kmax$ is for all three statistics for $k<0.25$; for $k>0.25$, we fix $\kmax^\mathrm{\pgmsh}=\kmax^\mathrm{\bispecsh}=0.25$ and only include higher $k$ for $\pgg$. Precision increases with scale, particularly for $\sig$ for $\stats$. \ksf{make legends, axis labels bigger}}
+    \label{fig:scale_dependence_fom_nbars}
+    \end{figure}
+
+We explore the dependence of the figure of merit on the maximum scale included in the inference in Figure~\ref{fig:scale_dependence_fom_nbars}.
+We show the FoM for the three key parameters for the SHAMe mocks at each of the three number densities tested, for all statistics combinations.
+For $k<0.25$, we apply the same $\kmax$ for all three statistics; for $k>0.25$, we fix $\kmax^\mathrm{\pgmsh} = \kmax^\mathrm{\bispecsh}=0.25$ (the fiducial values chosen based on the FoB analysis above) and only include higher $k$ for $\pgg$.
+We find that for nearly all the statistics combinations, parameters, and number densities, there is a significant increase in precision from $k=0.1$ to $k=0.25$.
+The exception is $\pk$ alone for $\sig$; the information content is already saturated at larger scales.
+Interestingly, there is not signficant information gain for most statistics combinations or parameters beyond $\kmax=0.25$, nor is there a clear trend with number density.
+We find that the strongest increases in the FoM from $\kmax^\mathrm{all}=0.2$ to $\kmax^\mathrm{\pggsh}=0.37$ is for $\sig$ with $\pk+\pgm$ and $\stats$, increasing by $\FoMIncrPctShameOodFidPkPgmSigmaEightKmaxMaxVsKmaxEFT\%$ and $\FoMIncrPctShameOodFidPkPgmBSigmaEightKmaxMaxVsKmaxEFT\%$ for $\nbarfid$.
+These are quite significant gains; this demonstrates the value of using the hybrid bias expansion approach in comparison to EFT approaches, which are limited to $k=\sim$$0.1-0.2$.
 
 
 \subsection{Dependence on number of cosmologies and bias parameter sets}
@@ -649,18 +680,34 @@ For each of these combinations of the number of cosmology and bias parameters, w
 
 \begin{figure}
 \centering
-\includegraphics[width=\columnwidth]{figures/fig9_convergence_pgg_b_pgm.png}
-\caption{Convergence of the inference with training set size, for $\pk+\bispec+\pgm$ on the coverage test set for the three key parameters $\om$, $\sig$, and $\bo$ combined. The top panel shows the figure of merit (FoM), and the bottom panel shows the figure of bias (FoB), normalized by the 68th percentile of the $\chi^2$ distribution for three dimensions (corresponding to the three parameters); the median values over the coverage set are shown. The opacity indicates the number of training cosmologies. Increasing the number of training points increases the precision signficantly until $N_\text{train}=\,\sim$20,000 and then more marginally, with the number of cosmologies and bias parameter sets contributing similar precision; the bias also plateaus around $N_\text{train}=\,\sim$20,000, with the number of cosmologies mattering more than the number of bias parameters for smaller $N_\text{train}$. \ksf{make higher res}}
+\includegraphics[width=\columnwidth]{figures/fig10_convergence_pgg_b_pgm.png}
+\caption{Convergence of the inference with training set size, for $\pk+\bispec+\pgm$ on the coverage test set for the three key parameters $\om$, $\sig$, and $\bo$ combined. The top panel shows the figure of merit (FoM), and the bottom panel shows the figure of bias (FoB), normalized by the 68th percentile of the $\chi^2$ distribution for three dimensions (corresponding to the three parameters); the median values over the coverage set are shown. The opacity indicates the number of training cosmologies. Increasing the number of training points increases the precision signficantly until $N_\text{train}=\,\sim$20,000 and then more marginally, with the number of cosmologies and bias parameter sets contributing similar precision; the bias also plateaus around $N_\text{train}=\,\sim$20,000, with the number of cosmologies mattering more than the number of bias parameters for smaller $N_\text{train}$. \ksf{make legends, axis labels bigger} \ksf{note: this plot is with an older base model, with kmax=0.4 and no ensembling; running the new version right now}}
 \label{fig:convergence_pgg_b_pgm}
 \end{figure}
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth]{figures/fig10_convergence_all_combos.png}
-\caption{Convergence of the inference with training set size, for all the statistics combinations on the coverage test set for the three key parameters $\om$, $\sig$, and $\bo$ individually. The top row shows the figure of merit (FoM) and the bottom row shows the figure of bias (FoB); the median values over the coverage set are shown. The opacity indicates the number of training cosmologies, and the dashed line indicates the expectation for an unbiased Gaussian distribution. The FoM increases with training set size for most statistics and parameters, with the exception of $\sig$ with $\pk$ and $\pk+\bispec$ which do not show improvement; all have an FoB around or below $1\sigma$.}
+\includegraphics[width=\textwidth]{figures/fig11_convergence_all_combos.png}
+\caption{Convergence of the inference with training set size, for all the statistics combinations on the coverage test set for the three key parameters $\om$, $\sig$, and $\bo$ individually. The top row shows the figure of merit (FoM) and the bottom row shows the figure of bias (FoB); the median values over the coverage set are shown. The opacity indicates the number of training cosmologies, and the dashed line indicates the expectation for an unbiased Gaussian distribution. The FoM increases with training set size for most statistics and parameters, with the exception of $\sig$ with $\pk$ and $\pk+\bispec$ which do not show improvement; all have an FoB around or below $1\sigma$. \ksf{note: this plot is with an older base model, with kmax=0.4 and no ensembling; running the new version right now}}
 %  \ksf{not reaching 0.8 because network not good enough? non-gaussian?} \ksf{try with cosmic variance set?} \ksf{reach theory floor bc have addl source of noise; network + data vector, projection effects} \ksf{om probs comes mostly for geometric aspects of power spec (??)} \ksf{takeaway is that many are still not  converged. ref how many sims paper - but diff research question, number for emulator vs sbi?}
 \label{fig:convergence_all_combos}
 \end{figure*}
+
+To assess the accuracy of our results, we use the figure of bias, defined as
+\begin{equation}
+    \mathrm{FoB} = \frac{1}{\chi^2_\mathrm{lim}} \sqrt{(\bm{\hat{\theta}} - \bm{\theta}_\mathrm{true})^T \mathcal{C}^{-1} (\bm{\hat{\theta}} - \bm{\theta}_\mathrm{true})} ~,
+\end{equation}
+where $\bm{\hat{\theta}}$ are the predicted values of the parameters, $\bm{\theta}_\mathrm{true}$ are the true values, and $\mathcal{C}$ is the covariance matrix, which is estimated from the posterior samples.
+The quantity $\chi^2_\mathrm{lim}$ scales the FoB by the expected $\chi^2$ for the relevant number of dimensions and $\sigma$ value.
+The $1\sigma$ expectation for three dimensions is $\chi^2_{\nu=3}(0.68)\approx1.88$, which we use for the parameter subspace $(\om, \sig, \bo)$; in this case we also compute $\mathcal{C}$ only across this subspace.
+For one dimension this becomes $\chi^2_{\nu=1}(0.68)=1$, which reduces to the absolute error in terms of the standard deviation, $\mathrm{FoB}_\mathrm{1D} = |\hat{\theta} - \theta_\mathrm{true}|/\sigma_\theta$.
+
+To assess the precision, we use the figure of merit (FoM), defined as
+\begin{equation}
+    \mathrm{FoM} = \frac{1}{\sqrt{\mathrm{det}\mathcal{C}}} ~,
+\end{equation}
+which is the inverse of the volume of the allowed region, meaning that a higher FoM indicates tighter constraints. 
+Again we compute $\mathcal{C}$ only across the subspace considered; in one dimension, this reduces to $\mathrm{FoM}_\mathrm{1D} = 1/\sigma_\theta$.
 
 Figure~\ref{fig:convergence_pgg_b_pgm} shows the figure of merit and figure of bias for the three key parameters combined, averaged over the coverage set, for the full statistics combination as a function of the total number of training points $N_\mathrm{cosmo} \times N_\mathrm{bias}$, shown as separate lines for each choice of $N_\mathrm{cosmo}$.
 We see that the FoM increases with increasing number of training points, steeply until $N_\mathrm{train}=10,000$ and then more moderately. 
@@ -670,7 +717,7 @@ The FoB similarly reduces sharply until $N_\mathrm{train}=10,000$ where it cross
 We also find that there is not a strong trend with the number of training cosmologies, as shown by the lines for the different cosmologies largely overlapping.
 With a smaller number of training data points (below $N_\mathrm{train}=20,000$), it is more important to have more cosmologies rather than more bias parameter sets, shown by the spread in the FoB around that value; however, beyond $N_\mathrm{cosmo}=2000$, it is sufficient to add more bias parameter sets per cosmology.
 This somewhat surprising finding is encouraging given that generating training data at varying cosmologies is more expensive than populating each cosmology with varying bias parameter sets.
-Previous SBI analyses already use around this number of training cosmologies with full $N$-body codes (without the need for emulators, e.g. the Quijote latin hypercube); our result shows that this may be sufficient in terms of cosmologies, but that additional constraining power and robustness could be gained by populating these with many more galaxy formation parameter sets per cosmology.
+Previous SBI analyses already use around this number of training cosmologies with full $N$-body codes (without the need for emulators, e.g. the Quijote Latin hypercube); our result shows that this may be sufficient in terms of cosmologies, but that additional constraining power and robustness could be gained by populating these with many more galaxy formation parameter sets per cosmology.
 
 In Figure~\ref{fig:convergence_all_combos}, we show the FoM and FoB for all the statistics combinations, for each key parameter individually.
 Note that for a Gaussian sample, we would expect $FoB\approx0.8$; our FoB stays slightly higher than this for all the parameters, bottoming out at 0.85-1.0, possibly as a result of non-Gaussian behavior.
@@ -684,32 +731,36 @@ We also again find that for all parameters, increasing the number of bias parame
 \section{Discussion}
 \label{sec:discussion}
 
-The results of this analysis outline the successes and challenges for SBI with the hybrid Lagrangian bias expansion and emulated $N$-body displacements.
+The results of this analysis outline the successes and challenges of SBI with the hybrid Lagrangian bias expansion and emulated $N$-body displacements.
 While we showed that our model is able to provide robust inference on cosmology, model extensions and adjacent analyses will add to our understanding of the information content in galaxy clustering and optimal approaches to extract it.
 
-We have used Lagrangian bias expansion to second order; some works have shown that a partial third order expansion is important \citep{XXX} ... \ksf{expand}
-We have chosen a specific noise model, of a Gaussian field coupled to the bias fields following \cite{rubira_non-gaussian_2025}, to first order in the noise field.
-This does not capture the noise in $\pgm$; extending this model to higher order (at the expense of adding additional parameters) or testing other noise models may be important for ensuring the most robust inference.
+We have used Lagrangian bias expansion to second order; it is possible that extending into the third order may be necessary for more accurate modeling in the small-scale regime \ksf{citation for this / more to say?}.
+For the stochastic noise, we have used a noise model based on a Gaussian field coupled to the bias fields following \cite{rubira_non-gaussian_2025}, to first order in the noise field. 
+This is a more sophisticated model than a standard Gaussian field, or parametric noise models specific to each statistic; however, this still does not capture the noise in $\pgm$ and may not be suffient for other high-order statistics. 
+Extending this noise model to higher order (at the expense of adding additional parameters) or testing other noise models may be important for ensuring the most robust inference.
 
-The smallest scales we can include are currently limited by... \ksf{expand on this}
+While the \mtm emulator is shown to be accurate for the galaxy--galaxy power spectrum down to small-$k$, there are remaining issues for using it for csomological inference.
+\cite{pellejero_ibanez_hybrid-bias_2023} found that when employing it for the hybrid bias expansion, there were biases at intermediate scales; while these were absorbed by noise nuisance parameters, inference could be sensitive to this depending on other modeling choices.
+The emulator also has not been robustly validated for the whole range of higher order statistics or the full tracer field.
+Improving the displacement emulator or further validating it will be key for future analyses.
 
 \cite{bairagi_how_2025} explored the question of the required number of simulations for cosmological inference, using a large suite of 32,768 $N$-body simulations called the Big Sobol Sequence. 
 Using neural posterior estimation on the nonlinear dark matter power spectrum down to $\kmax=0.8$, they found that around 4,000 simulations were required to saturate the information content, signifcantly more than the 2,000-simulation Quijote suite.
-This stands somewhat in contrast to our finding that even 320,000 total training data points does not seem to saturate in precision, and that 2,000 cosmologies provide comparable results to 10,000 given an equal total number of simulations including multiple galaxy bias parameter sets.
-However, our convergence findings are not directly comparable, as this work analyzes a the matter field statistic compared to our galaxy field statistics, and goes to higher $k$.
+This stands somewhat in contrast to our finding, that on the one hand 2,000 cosmologies provide comparable results to 10,000 given an equal total number of simulations (including multiple galaxy bias parameter sets), and on the other even 320,000 total training data points does not seem to saturate in precision.
+However, our convergence findings are not directly comparable, as their work analyzes a matter field statistic and does not sample galaxy bias parameters, so we would expect that fewer simulations are needed.
+\cite{tucci_eftoflss_2024} also analyze the convergence of their EFT-based SBI approach with the number of simulations, finding that at fixed cosmology $10^5$ simulations are required to converge in the inference of the bias parameters.
+In the free-cosmology case with one cosmological parameter, the inference is slower to converge, and is not clearly fully converged at their maximum $5\times10^5$ simulations; this is in line with our results that upwards of $10^5$ simulations are required for convergence.
 Further work with large simulation suites in various regimes and different modeling choices is necessary to provide a complete picture of the convergence with the number of simulations.
-\ksf{TODO: also discuss tucci and schmidt paper which explores convergence}
 
 The \mmocks approach has the potential to be expanded to answer further questions about the information content in galaxy clustering and the requirements for SBI.
 With the $N$-body emulator costing only minutes and the summation of the bias fields with a choice of bias parameters being nearly instantaneous, even more mocks could be generated to understand where the information in various statistics saturates, as we found that some continue to rise with our full 320,000-mock suite.
 We could also straightforwardly generate larger volumes with this approach, as current survey volumes are easily outpacing our ability to model these volumes with traditional simulations.
+With modifications to the forward model, beyond-$\Lambda$CDM cosmologies could be explored to understand the sensitivity of various statistics to alternative cosmological models.
 
 A key potential extension is to explore other statistics of the tracer fields to understand their information content.
 Optimal summary statistics that capture the information content of the full field could be learned, to explore the maximal information in cosmological fields.
 As we also forward model the velocity fields, this suite could be useful for exploring velocity reconstruction approaches.
 One could also investigate the effect of more restrictive priors on the Lagrangian bias parameters, encoding our knowledge specific galaxy samples.
-
-ksf{extend to beyond lcm}
 
 The SBI approach with the \mmocks model that we have demonstrated could be applied to more realistic data, and eventually to real data to perform a cosmological analysis.
 This analysis has been entirely in real-space, and a redshift-space analysis is forthcoming.
@@ -721,8 +772,8 @@ Finally, an analysis on survey data such as BOSS or DESI has the potential to pr
 \label{sec:conclusions}
 
 In this work, we have presented a forward model for galaxy tracer fields that balances robustness and speed, and is useful for simulation-based inference approaches to cosmological inference.
-The model uses the hybrid Lagrangian bias expansion to second order, based on emulated particle and velocity displacement fields from the \mtm emulator trained on the Quijote mocks, to generate sets of bias fields that can be weighted and summed to produce tracer fields.
-We also include a full-field noise model based on a Gaussian field coupled to the bias fields, which we find to be critical for unbiased inference.
+The model uses the hybrid Lagrangian bias expansion to second order, based on emulated particle and velocity displacement fields from the \mtm emulator of \cite{jamieson_field_2023} trained on the Quijote mocks, to generate sets of bias fields that can be weighted and summed to produce tracer fields.
+We also include a full-field noise model of \cite{rubira_non-gaussian_2025} based on a Gaussian field coupled to the bias fields, which we find to be critical for unbiased inference.
 With this forward model, a $(1 \Gpch)^3$ mock can be generated at any cosmology in around 8 minutes. 
 We publicly release a suite of these bias fields,  called \mmocks, at $z=0$ in both real- and redshift-space.
 Our main mock set consists of a Latin hypercube of 10,000 different cosmologies; we also release an independent 1,000-cosmology Latin hypercube ``coverage'' test set, and a 1,000-realizations ``cosmic variance'' set at fixed cosmology with varying seeds.
@@ -771,64 +822,69 @@ The \mmocks suite and the code used in this paper will be made publicly availabl
 
 \appendix
 
-\section{Impact of variance and number density}
+\section{Validation of inference on mean data vector}
 \label{sec:meandemo}
 
 \begin{figure}
 \centering
-\includegraphics[width=\columnwidth]{figures/figA_mean_vs_indiv_means_contours.png}
-\caption{Validation of inference on the mean of the statistics for the cosmic variance test set, for the full $\pk+\bispec+\pgm$ combination. The grey contours show 10 posteriors of inference on statistics randomly selected realizations from the test set, and the pink contours show inference on the mean of 1000 statistics over all the realizations. The shape and width of the posteriors are consistent, with the mean falling in the middle of the individual posteriors. \ksf{bc network is focusing on low dim representation} \ksf{in each projection, get peak of dist (or mean); and plot 2d hist of the grey means. and the 1ds, will be a hist of grey vs the contours} \ksf{dont need to focus on uncertainties} \ksf{importance sampling of the posteriors of individuals - interpolate to get posterior value for each point in param space. then could combine. can share data with marcos} \ksf{test with fewer than 1000 to see if an issue with number of points}}
+\includegraphics[width=\columnwidth]{figures/figA_mean_vs_indiv_means_contours.pdf}
+\caption{Validation of inference on the mean of the data vectors for the cosmic variance test set, for the full $\pk+\bispec+\pgm$ combination. The grey contours show posteriors from inference performed on statistics of 5 randomly selected realizations from the test set; the brown contours are pooled samples from each of the 1000 realizations, 500 of each recentered to the mean of the means; the magenta contours show inference performed on the mean of 1000 data vectors. The mean of the inference-on-the-mean (magenta vertical line and X marker) nearly exactly agrees with the mean of the 1000 individual posterior means (brown vertical line and dot marker). The shape and width of the posteriors are also broadly consistent.}
+%\ksf{bc network is focusing on low dim representation} \ksf{in each projection, get peak of dist (or mean); and plot 2d hist of the grey means. and the 1ds, will be a hist of grey vs the contours} \ksf{dont need to focus on uncertainties} \ksf{importance sampling of the posteriors of individuals - interpolate to get posterior value for each point in param space. then could combine. can share data with marcos} \ksf{test with fewer than 1000 to see if an issue with number of points}
 \label{fig:mean_vs_indiv_means_contours}
 \end{figure}
 
-We investigate the behavior of the posteriors of the cosmic variance test set, which contains 1000 realizations run with different seeds at the same cosmology, bias, and noise parameters. 
-Our goal is to be able to quantify and visualize the accuracy and precision of the inference on this test set.
+In this analysis, we have shown results of the SBI pipeline with the \mmocks forward model on the ``cosmic variance'' test set, which contains 1000 realizations run with different seeds at the same cosmology, bias, and noise parameters.
+Specifically, we took the mean of the 1000 data vectors computed on each of these mocks individually, and used that mean data vector as the input to the SBI model.
+In this section, we investigate this analysis choice and its implications.
 
-We first compute the statistics on all 1000 realizations, and perform the inference on each individually with our SBI pipeline.
+% To understand the result of this inference on the mean data vector (``inference-on-the-mean''), we also perform the inference on each of the 1000 mock realizations individually and obtain posteriors for each.
+
+We first compute the statistics on all 1000 mock realizations, and perform the inference on each individually with our SBI pipeline.
 We obtain a posterior for each of the 1000 realizations.
-We then look at the distribution of the means of these posteriors.
-To visualize the error regions, we compute the mean-of-the-means of the posteriors, and shift each posterior such that it is centered on that value; we then pool the posteriors, drawing 500 samples from each.
-This shows the typical size and shape of the error region, centered on the mean.
+To visualize the ``typical'' posterior, we compute the mean-of-the-means of the 10000 posteriors, and shift each posterior such that it is centered on that value; we then pool the posteriors, drawing 500 samples from each.
 
-We also compute the mean of the statistics of the 1000 mocks, and perform the inference on that mean data vector.
+We then compute the mean of the statistics of the 1000 mocks, and perform the inference on that mean data vector.
 This mean data vector has the benefit of reducing the effect of cosmic variance on the statistic, but brings the complication of having a different covariance than the data the SBI model was trained on (namely, much lower variance).
 In standard MCMC approaches, this would be handled by appropriately scaling the covariance matrix, but in the context of SBI, the covariance is learned by the model from the training data and is not given explicitly.
 Thus it is important to understand the behavior of the model when we use the mean data vector for inference.
 
-Figure~\ref{fig:mean_vs_indiv_means_contours} shows the result of these three quantities on the cosmic variance test set, all for the combined statistic $\stats$.
-The black contour shows the distribution of the means of the 1000 posteriors; the grey contour shows the recentered, pooled posteriors; and the magenta contour shows the inference performed on the mean of the 1000 data vectors.
-We see that the mean-of-the-means inference lies nearly exactly on top of the recentered, pooled inferences.
-This indicates that despite the lower variance of the mean data vector, the SBI pipeline produces a posterior that has the typical width of a posterior estimated with the noisier data vector, as that was the noise level of data it was trained on. 
+Figure~\ref{fig:mean_vs_indiv_means_contours} shows the result of these ways of analyzing the cosmic variance test set, all for the combined statistic $\stats$.
+The grey contours show posteriors of 10 randomly selected individual mocks; the brown contour shows the recentered-pooled posteriors (over all 1000 mocks); and the magenta contour shows the inference performed on the mean of the 1000 data vectors.
+The brown dot and vertical lines show the mean of the means of the 1000 individual posteriors.
+
+We see that the inference on the mean produces a posterior very close to that of the recentered-pooled posterior.
+The means, as well as the MAPs, for these two results are within $\sim$1\% for all parameters; both are within $0.5\sigma$ (2\%) from the true values.
+The predicted uncertainty regions are also very similar: the symmetrized inner 68\% width agrees to $\FracDiffPctErrCVRecenteredVsCVMeanPkPgmBOmegaC\%$ for $\om$, $\FracDiffPctErrCVRecenteredVsCVMeanPkPgmBSigmaEight\%$ for $\sig$, and $\FracDiffPctErrCVRecenteredVsCVMeanPkPgmBBo\%$ for $\bo$.
+We check that the recentered-pooled posterior width agrees with the mean of the widths of the 1000 individual posteriors, to better than 0.5\%.
+The inference-on-the-mean does generally produce slightly tighter constraints than the average of the individual posteriors, interpreted as mild overconfidence.
+However, the mean data vector should be less affected by prior effects than individual realizations with summary statistics towards the edges of the distribution.
+\ksf{i think we still don't know exactly how to interpret this; so i am not sure how to tie these last couple sentences together.}
+
+This analysis indicates that despite the lower variance of the mean data vector, the SBI pipeline produces a posterior that has the typical width of a posterior estimated with the noisier data vector, as that was closer to the noise levels of data it was trained on.
 We thus use the inference on the mean data vector throughout the paper to be able to show the typical result of the inference, with the effect of cosmic variance (which would cause a bias in any given individual sample) removed.
-
-We also see that the distribution of the means of the individual realizations is signficantly tighter than the width of a typical individual posterior, especially for $\bo$.
-This indicates that our inference is underconfident, predicting generally broader posteriors than would a perfectly calibrated model.
-This should be taken into account when interpreting the results of this analysis.
-However, the mean of distribution of means agrees with the true values of the parameters, as well as with the inference on the mean, indicating that our results are unbiased.
+We emphasize that there is not a clear statistical interpretation of this inference-on-the-mean for simulation-based inference, and the stability of the comparison to the individual posteriors varies somewhat across models.
+However, the results empirically demonstrate that this is a useful way to validate an SBI pipeline with a much lower computational burden compared to sampling many individual posteriors.
 
 
 
-\ksf{i am not quite sure how to square the results of these two plots. when we perform inference on the mean of 1000, we get the same posterior size as any individual. but when we use the higher number density shame model, we do get a smaller posterior size compared to the lower number density one. (i think the noiseless one makes a bit more sense, as that's actually a different model where we also train on noiseless data. but the different noise levels of shame are all using the same model with the same training data.)}
+%%%%%%
 
-% \begin{figure*}
-% \centering
-% \includegraphics[width=\textwidth]{figures/figA2_posterior_means_and_widths_vs_meanstat.png}
-% \caption{Validation of inference on the mean of the statistics for the cosmic variance test set. The top row shows the differences from the truth for each of the key parameters; the pink line shows the value for inference on the mean of the 1000 statistics, the grey histogram shows the values for each of the 1000 mocks, and the dashed vertical line shows the mean of those 1000 values. The bottom row shows the uncertainty on each parameter. In all cases, the inference on the mean is consistent with the mean of inference on the individual realizations.}
-% \label{fig:meanstat_hist}
-% \end{figure*}
+%\ksf{i am not quite sure how to square the results of the number density plot with the mean-on-inf comparison. when we perform inference on the mean of 1000, we get the same posterior size as any individual. but when we use the higher number density shame model, we do get a smaller posterior size compared to the lower number density one. (i think the noiseless one makes a bit more sense, as that's actually a different model where we also train on noiseless data. but the different noise levels of shame are all using the same model with the same training data.)}
+
+
 
 \section{Full posterior contours}
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth]{figures/figB1_cosmic_variance_full_posteriors.png}
+\includegraphics[width=\textwidth]{figures/figB1_cosmic_variance_full_posteriors.pdf}
 \caption{Full posterior contours for the cosmic variance test set.}
 \label{fig:cosmic_variance_full_posteriors}
 \end{figure*}
 
 \begin{figure*}
 \centering
-\includegraphics[width=\textwidth]{figures/figB2_shame_full_posteriors.png}
+\includegraphics[width=\textwidth]{figures/figB2_shame_full_posteriors.pdf}
 \caption{Full posterior contours for the SHAMe test set.}
 \label{fig:shame_full_posteriors}
 \end{figure*}

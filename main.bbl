@@ -32,6 +32,11 @@ Angulo R.~E.,  Zennaro M.,  Contreras S.,  Aric{\`o} G.,
   {Pellejero-Iba{\~n}ez} M.,   St{\"u}cker J.,  2021, \mn@doi [Monthly Notices
   of the Royal Astronomical Society] {10.1093/mnras/stab2018}, 507, 5869
 
+\bibitem[\protect\citeauthoryear{Bairagi, Wandelt  \&
+  {Villaescusa-Navarro}}{Bairagi et~al.}{2025}]{bairagi_how_2025}
+Bairagi A.,  Wandelt B.,   {Villaescusa-Navarro} F.,  2025, \mn@doi [Astronomy
+  \& Astrophysics] {10.1051/0004-6361/202554602}, 703, A301
+
 \bibitem[\protect\citeauthoryear{Bernardeau, Colombi, Gaztanaga  \&
   Scoccimarro}{Bernardeau et~al.}{2002}]{bernardeau_large-scale_2002-1}
 Bernardeau F.,  Colombi S.,  Gaztanaga E.,   Scoccimarro R.,  2002, \mn@doi
@@ -76,8 +81,9 @@ Dawson K.~S.,  et~al., 2016, \mn@doi [The Astronomical Journal]
 
 \bibitem[\protect\citeauthoryear{Desjacques, Jeong  \& Schmidt}{Desjacques
   et~al.}{2017}]{desjacques_large-scale_2017}
-Desjacques V.,  Jeong D.,   Schmidt F.,  2017, Large-{{Scale Galaxy Bias}}
-  (\mn@eprint {arXiv} {1611.09787v3})
+Desjacques V.,  Jeong D.,   Schmidt F.,  2017, Technical report, Large-{{Scale
+  Galaxy Bias}}.
+ (\mn@eprint {arXiv} {1611.09787v3})
 
 \bibitem[\protect\citeauthoryear{Doeser, Jamieson, Stopyra, Lavaux, Leclercq
   \& Jasche}{Doeser et~al.}{2024}]{doeser_bayesian_2024}
