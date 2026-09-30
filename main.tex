@@ -61,8 +61,8 @@
 \newcommand{\kmax}{k_\mathrm{max}}
 % units
 \newcommand{\hinv}{h^{-1}}
-\newcommand{\Gpch}{\hinv\,\mathrm{Gpc}}
-\newcommand{\Mpch}{\hinv\,\mathrm{Mpc}}
+\newcommand{\Gpch}{\hinv \mathrm{Gpc}}
+\newcommand{\Mpch}{\hinv \mathrm{Mpc}}
 \newcommand{\hMpc}{h \mathrm{Mpc}^{-1}}
 % probability
 \newcommand{\post}{p(\theta|x)}
@@ -113,7 +113,7 @@ $^{5}$Max-Planck-Institut f\"ur Astrophysik, Karl-Schwarzschild-Stra{\ss}e 1, 85
 \begin{abstract}
 \ksf{NOTE TO COAUTHORS: please define a macro with your initials and favorite color and comment in tex, do not use overleaf comment feature!}
 
-Galaxy clustering contains rich cosmological information down to non-linear scales; however, methods to extract this information are currently limited the high cost of cosmological $N$-body simulations and by the fidelity of galaxy bias modeling.
+Galaxy clustering contains rich cosmological information down to nonlinear scales; however, methods to extract this information are currently limited the high cost of cosmological $N$-body simulations and by the fidelity of galaxy bias modeling.
 We develop a new approach to generating approximate yet robust galaxy mocks: we employ the \mtm full-field emulator to generate particle displacement fields, and the hybrid Lagrangian bias expansion approach to flexibly model biased tracers.
 We create a suite of (1 $\Gpch$)$^3$ second-order bias fields at $z=0$ spanning 10,000 different cosmologies, and weight these with multiple bias and noise parameter sets, resulting in 320,000 mock 3D density fields.
 We train a simulation-based inference (SBI) model on the galaxy--galaxy power spectrum $\pk$, the galaxy--matter power spectrum $\pgm$, and the galaxy bispectrum $\bispec$.
@@ -134,56 +134,56 @@ methods: numerical -- methods: statistical -- galaxies: statistics -- cosmology:
 
 \section{Introduction}
 
-The clustering of galaxies encodes information about the cosmological model describing the universe.
-Surveys such as the Sloan Digital Sky Survey \citep{York2000} and most recently the Dark Energy Spectroscopic Instrument \citep{desi_collaboration_validation_2023} have spectroscopically observed millions of galaxies, producing detailed maps of a large volume of the observable universe.
-Current and upcoming surveys such as Euclid \citep{collaboration_euclid_2025} and the Roman Observatory \citep{spergel_wide-field_2015,wang_high_2022} will deliver more and more high quality galaxy clustering data sets.
+The clustering of galaxies encodes information about the cosmological model describing the fundamental components of the universe.
+Surveys such as the Sloan Digital Sky Survey \citep{York2000} and most recently the Dark Energy Spectroscopic Instrument (DESI, \citealt{desi_collaboration_validation_2023}) have spectroscopically observed millions of galaxies, producing detailed maps of a large volume of the observable universe.
+Current and upcoming surveys such as Euclid \citep{collaboration_euclid_2025} and the Roman Observatory \citep{spergel_wide-field_2015,wang_high_2022} will continue to deliver competitive and complementary galaxy clustering data sets.
 
-Standard approaches to analyzing this spectroscopic survey data rely on analytic techniques to model summary statistics of the galaxy field , and Monte Carlo techniques to sample the parameters of interest (e.g. \citealt{Alam2017, philcox_boss_2022}).
+Standard approaches to analyzing this spectroscopic survey data rely on analytic techniques to model summary statistics of the galaxy field, and Monte Carlo methods to sample the parameters of interest (e.g. \citealt{Alam2017, philcox_boss_2022}).
 Analyses are thus largely restricted to two-point statistics on quasi-linear scales, which contain robust cosmological information but do not fully capture the information content in the data.
 For instance, the DESI analyses use a perturbation theory approach, and their analysis is limited to $\kmax=0.2$ for the power spectrum and $\kmax=0.12$ for the bispectrum \citep{adame_desi_2025, novell-masot_full-shape_2025}. 
 Further, as surveys become more sensitive and statistical uncertainties improve, systematic errors will become increasingly relevant, and the effect of various systematics on clustering statistics---both two-point and higher-order statistics---is difficult to model.
 
-A new approach known as simulation-based inference (SBI), or likelihood-free inference, has shown promise for cosmological inference from galaxy clustering, as it obviates these limitations.
+A new approach known as simulation-based inference (SBI) has shown promise for cosmological inference from galaxy clustering, as it obviates these limitations.
 In the SBI approach, only a forward model of the data is required, and the posterior of the input parameters is approximated conditioned on the observed data.
 In the case of galaxy clustering, one can thus forward model the full galaxy field and directly measure any statistic, without the need for analytic modeling.
-Similarly, one can directly forward model the effects of systematics on the galaxy field, and the statistics simply measured without the need for additional modeling specific to each statistic.
+Similarly, one can directly forward model the effects of systematics on the galaxy field, and the statistics can be simply measured without the need for additional modeling specific to each statistic.
 Finally, Monte Carlo methods typically assume a Gaussian form for the likelihood (and must estimate a nontrivial covariance matrix), even though higher-order statistics in particular are known to have non-Gaussian properties \citep{hahn_likelihood_2018}; SBI makes no assumptions about the form of the likelihood.
-Further, in the case of galaxy clustering one can learn optimized statistics of the galaxy field for the parameters of interest, effectively using the information in the full galaxy field.
+Further, in the case of galaxy clustering one can learn optimized statistics of the galaxy field for the parameters of interest, effectively using the full information in the galaxy field.
 
 While promising, SBI faces challenges for galaxy clustering analyses.
 One key issue is that SBI typically requires many simulations, but cosmological simulations are very computationally expensive.
 An $N$-body simulation with the volume and resolution to accurately describe galaxy clustering into the nonlinear regime costs at least hundreds (and up to millions) of CPU hours, and thousands to hundreds of thousands of simulations are generally needed for SBI.
-Another challenge is modeling how galaxies populate the dark matter distribution; models must be relatively fast, flexible enough to model various galaxy populations, and accurate down to small scales.
+Another challenge is modeling how galaxies are connected to the underlying dark matter distribution, which involves complex and not yet well-understood galaxy formation physics; to be useful for SBI, then, models must be relatively fast, flexible enough to model various galaxy populations, and accurate to as small scales as possible.
 
 There has been significant recent work that has demonstrated SBI as a promising path forward for the field.
-The \simbig collaboration employs a forward model based on the 2,000 $(1 \Gpch)^3$ simulations of the Quijote Latin hypercube \citep{villaescusa-navarro_quijote_2020}; they use the HOD model to populate the simulations with galaxies, choosing 10 HODs per cosmology for a total of 20,000 simulations \citep{hahn_rm_2023-2}.
-Using the power spectrum and applying to SDSS BOSS data \citep{Dawson2015}, they achieved constraints on $\sig$ 27\% more precise than the standard analysis thanks to the information in small scales \citep{hahn_rm_2022-1}; subsequent analyses have applied \simbig to the bispectrum \citep{hahn_rm_2023-1}, the marked power spectrum \citep{massara_sc_2024}, and the full galaxy field \citep{lemos_simbig_2023-1, hahn_rm_2023}.
-\cite{tucci_eftoflss_2024} generate $10^5$ simulations  based on the effective field theory of large-scale structure (EFTofLSS), and employ neural posterior estimation using the power spectrum and bispectrum out to $\kmax=0.2$; as this model is fully perturbative, they are able to use a Euclid-size volume of 63 $(\Gpch)^3$.
+The \simbig collaboration employs a forward model based on the 2,000 $(1 \Gpch)^3$ simulations of the Quijote Latin hypercube \citep{villaescusa-navarro_quijote_2020}; they use the halo occupation distribution (HOD) model to populate the simulations with galaxies, choosing 10 HODs per cosmology for a total of 20,000 simulations \citep{hahn_rm_2023-2}.
+Using the power spectrum and applying to SDSS BOSS data \citep{Dawson2015}, they achieved constraints on $\sig$ that are 27\% more precise than the standard analysis thanks to the information in small scales \citep{hahn_rm_2022-1}; subsequent analyses have applied \simbig to the bispectrum \citep{hahn_rm_2023-1}, the marked power spectrum \citep{massara_sc_2024}, and the full galaxy field \citep{lemos_simbig_2023-1, hahn_rm_2023}.
+\cite{tucci_eftoflss_2024} take the effective field theory of large-scale structure (EFTofLSS) approach, generating $10^5$ simulations and employing neural posterior estimation using the power spectrum and bispectrum out to $\kmax=0.2$; as this model is fully perturbative, they are able to consider a Euclid-size volume of 63 $(\Gpch)^3$.
 By performing a direct comparison to standard inference, they find that the off-diagonal elements of the covariance matrix are important for constraining $\sig$ accurately, while allowing for a non-Gaussian likelihood is less important.
 Using the same forward model, \cite{nguyen_how_2024-1} show that full-field inference yields over a factor of five improvement on the constraint on $\sig$ compared to the power spectrum and bispectrum at the same scale cut of $\kmax=0.12$.
-Recent work has also explored forward models based on more complicated and physical models of galaxy formation, albeit at the expense of much smaller volumes.
-\cite{santi_robust_2023} employ the 1000-simulation Latin hypercubes of the CAMELS suite \citep{villaescusa-navarro_camels_2021}, which are hydrodynamical simulations with $(25 \Mpch)^3$ volumes, to perform SBI using graph neural networks; they find that their inference on $\om$ is robust to galaxy formation physics.
+Recent work has also explored forward models based on more physically motivated models of galaxy formation, albeit at the expense of much smaller volumes.
+\cite{santi_robust_2023} employ the 1000-simulation Latin hypercubes of the CAMELS suite \citep{villaescusa-navarro_camels_2021}, which are hydrodynamical simulations with $(25 \,\Mpch)^3$ volumes, to perform SBI using graph neural networks; they find that their inference on $\om$ is robust to galaxy formation physics.
 
-Given the high computational cost of cosmological simulations are, work has turned to developing emulators that learn the mapping from cosmological parameters to the results of the $N$-body simulation.
-Much work has been done on emulators of statistics of the density field, largely for the power spectrum.
-Recently, full-field emulators have been developed that output the particle displacement field.
+Analyses that rely on $N$-body simulations, as some of these SBI approaches do, are limited by the high computational cost of these simulations.
+Significant effort has been spent developing \emph{emulators} that learn the mapping from cosmological parameters to statistics of the density field, trained on a relatively small set of cosmologies and then able to effectively interpolate between them.
+Recently, full-field emulators have been developed that go beyond summary statistics, instead learning the full particle displacement field.
 The emulator \mtm \citep{jamieson_field_2023} uses a convolutional neural network-based architecture to map from Zel'dovich approximation displacements to $N$-body displacements, trained on the Quijote simulation suite \citep{villaescusa-navarro_quijote_2020}.
-It has been used in a range of applications, such as producing large-volume emulated simulations \citep{scoggins_learning_2025}; variants of \mtm have been designed to emulate modified gravity \citep{saadeh_field-level_2025} and to learn the mapping from non-linear structures to the initial conditions of the universe \citep{doeser_bayesian_2024}.
+It has been used in a range of applications, such as producing large-volume emulated simulations \citep{scoggins_learning_2025}; variants of \mtm have been designed to emulate modified gravity \citep{saadeh_field-level_2025} and to learn the mapping from nonlinear structures to the initial conditions of the universe \citep{doeser_bayesian_2024}.
 There has been continued work on developing full-field emulators, with a range of training data and neural architectures \citep{kang_tunes_2026,ullmo_predicting_2026, jacobus_emulating_2026}.
 
 Robustly modeling the galaxy--dark matter connection is a key challenge \citep{wechsler_connection_2018}.
-Halo-based models such as the halo occupation distribution (e.g. \citep{peacock_halo_2000-1,Seljak2000,Zheng2005}) populate dark matter halos with galaxies based on halo mass and properties, but their flexibility degrades their robustness, particularly for higher-order statistics (e.g. \citealt{contreras_validating_2024, wang2026}).
-More physically motivated models like subhalo-abundance matching (e.g. \citealt{vale_linking_2004,shankar_new_2006, conroy_modeling_2006-1}) are more robust, but require merger trees which are more computationally expensive; even more complicated models like semi-analytic models (e.g. \citealt{somerville_semi-analytic_2008,henriques_galaxy_2015-1,stevens_building_2016, somerville_physical_2015}) and hydrodynamical simulations (e.g. \citep{springel_modeling_2005, vogelsberger_introducing_2014, schaye_eagle_2015}) are both expensive and make specific choices regarding galaxy formation, which makes robustness a challenge.
+Halo-based models such as the halo occupation distribution (e.g. \citealt{peacock_halo_2000-1,Seljak2000,Zheng2005}) populate dark matter halos with galaxies based on halo mass and properties, but their flexibility degrades their robustness, particularly for higher-order statistics (e.g. \citealt{contreras_validating_2024, wang2026}).
+More physically motivated models like subhalo-abundance matching (e.g. \citealt{vale_linking_2004,shankar_new_2006, conroy_modeling_2006-1}) are more robust, but require merger trees which are more computationally expensive; even more complicated models like semi-analytic models (e.g. \citealt{somerville_semi-analytic_2008,henriques_galaxy_2015-1,stevens_building_2016, somerville_physical_2015}) and hydrodynamical simulations (e.g. \citealt{springel_modeling_2005, vogelsberger_introducing_2014, schaye_eagle_2015}) are both expensive and make specific choices regarding galaxy formation, which limits their generalizability.
 EFTofLSS offers a perturbative approach that is robust on large scales, but breaks down on small scales \citep{bernardeau_large-scale_2002-1,desjacques_large-scale_2017}.
 
 The hybrid Lagrangian bias expansion (or hybrid effective field theory) offers an approach that is accurate into the small-scale regime while remaining computationally relatively low-cost \citep{modi_simulations_2020, kokron_cosmology_2021,zennaro_bacco_2023}.
 It combines the Lagrangian bias expansion, which models the galaxy field as a summation of operators of the dark matter field, with particle displacement and velocity fields from $N$-body simulations to advect them to Eulerian space.
 This approach has been shown to be effective down to $k\sim0.6$, and has been used to construct accurate emulators of the power spectrum \citep{pellejero-ibanez_modelling_2022,pellejero-ibanez_bacco_2023}.
 \cite{pellejero_ibanez_hybrid-bias_2023} showed that emulated $N$-body displacements with \mtm can be used as inputs to the hybrid bias expansion to provide an accurate model of galaxy abundance.
-They found 1-2\% precision on the power spectrum $k\sim0.6$; while there were some biases at intermediate scales, these were absorbed by  nuisance parameters describing stochasticity.
+They found 1-2\% precision on the power spectrum down to $k$$\sim$0.6; while there were some biases at intermediate scales, these were absorbed by  nuisance parameters describing stochasticity.
 Notably, they found that the robustness held with variations in the cosmological parameters, demonstrating promise for using this approach for cosmological inference.
 
-In this paper, we construct a suite of 3-dimensional mock galaxy fields using our forward model based on the hybrid Lagrangian bias expansion with emulated displacements from the full-field \mtm emulator.
+In this paper, we construct a suite of three-dimensional mock galaxy fields using our forward model based on the hybrid Lagrangian bias expansion with emulated displacements from the full-field \mtm emulator.
 The suite, called \mmocks, consists of both real- and redshift-space mocks at $z=0$ and spans galaxy bias and cosmological parameter space.
 This suite opens the door to simulation-based inference for cosmology with a hybrid bias expansion-based galaxy field, as well as with a very large number of simulations given the speed of the emulator.
 We demonstrate this approach by training a neural posterior inference model on summary statistics computed on \mmocks in real space; in this work we focus on the galaxy--galaxy power spectrum, the galaxy--matter cross power spectrum, and the galaxy bispectrum.
@@ -212,29 +212,29 @@ An overview of the model is given in the upper panel of Figure~\ref{fig:schemati
 \label{sec:mtm}
 
 The nonlinear matter distribution can be simulated to high accuracy with $N$-body simulations.
-However, simulations with the resolution and volume required to analyze current galaxy surveys are very expensive, and training simulation-based inference models requires a very large  of simulations.
+However, simulations with the resolution and volume required to analyze current galaxy surveys are very expensive, and training simulation-based inference models requires a very large number of simulations.
 We thus turn to a field-level emulator of the matter distribution, \mtm \citep{jamieson_field_2023}.
 
 The density field can be approximated at linear order by the Zel'dovich approximation (ZA, also known as first-order Lagrangian perturbation theory, 1LPT), based on a realization of an initial conditions field.
-The \mtm emulator learns a mapping from the ZA field at $z=0$ to the non-linear $N$-body displacement field at that redshift, effectively learning the correction from linear to non-linear displacements. 
-The emulator is trained on 2000 simulations of the Quijote simulation suite that span a Latin hypercube (LH) of five cosmological parameters: $\Omega_\mathrm{c}$, $\sig$, $\h$, $\ob$, and $n_\mathrm{s}$  \citep{villaescusa-navarro_quijote_2020}.
-Each has a volume of (1 $\hinv$Gpc)$^3$ with $512^3$ particles, giving particle mass resolutions in the range $2 \times 10^{11} - 1 \times 10^{12} \hinv M_\odot$.
+The \mtm emulator learns a mapping from the ZA field at $z=0$ to the nonlinear $N$-body displacement field at that redshift, effectively learning the correction from linear to nonlinear displacements. 
+The emulator is trained on the 2000 simulations of the Quijote simulation suite that span a Latin hypercube (LH) of five cosmological parameters: $\Omega_\mathrm{c}$, $\sig$, $\h$, $\ob$, and $n_\mathrm{s}$  \citep{villaescusa-navarro_quijote_2020}.
+Each has a volume of (1 $\hinv$Gpc)$^3$ with $512^3$ particles, giving particle mass resolutions in the range $2 \times 10^{11}$ to $1 \times 10^{12} \hinv M_\odot$.
 \mtm also trains a separate network to predict the nonlinear velocity field from the ZA velocities.
-For this work, we use a modified version of this velocity prediction: following the $\bacco$ model, we assign Lagrangian particles that end up in halos as all having the same velocity, that of the center-of-mass velocity of the parent halo (see \cite{pellejero_ibanez_hybrid-bias_2023} for details). \ksf{please check this sentence!}
+For this work, we use a modified version of this velocity prediction: following the $\bacco$ model, we assign Lagrangian particles that end up in halos as all having the same velocity, that of the center-of-mass velocity of the parent halo (see \citealt{pellejero_ibanez_hybrid-bias_2023} for details). \ksf{please check this sentence!}
 Once trained, \mtm can generate the displacement and velocity fields for any input ZA field, taking a few minutes on a GPU for a (1 $\hinv$Gpc)$^3$ volume.
 While we do not utilize the velocity fields in this work, as we limit to real-space analysis, these will be important for future analyses including redshift-space distortions as well as other applications involving the velocity distribution; we release them as part of the \mmocks suite.
 
 In more detail, \mtm consists of two convolutional neural networks (CNNs), one to predict the matter density field and the other to predict the velocity field.
 The particle displacements are structured on a 3D grid as they are functions of their initial Lagrangian space position, so the CNN processes the inputs and outputs as 3-channel images.
 As most of the cosmological parameters only affect the input power spectrum that is used to create the ZA field, these are not needed as additional inputs to the model.
-However, the matter density $\om$ affects the N-body evolution, so is included as an input ``style'' parameter; this is incorporated via the approach of the StyleGAN2 \citep{karras_analyzing_2020}, in which the style parameters modulate the convolution kernels.
+However, the matter density $\om$ affects the $N$-body evolution, so is included as an input ``style'' parameter; this is incorporated via the approach of the StyleGAN2 \citep{karras_analyzing_2020}, in which the style parameters modulate the convolution kernels.
 The model uses a V-net-like architecture, with 3 layers of downsampling and upsampling, and leaky ReLU activations.
 For its loss function, it combines the log mean squared error of the Lagrangian particle displacements and Eulerian density field.
 We note that there is a newer version of \mtm that includes redshift dependence, and predicts the velocity field as a derivative of the position field \citep{jamieson_field-level_2024}; however, as we focus on $z=0$ and also require a modification of the velocity field as described above, we use the original \mtm implementation.
 
 For our mock suite, we define a Latin hypercube of 10,000 sets of cosmological parameters: $\Omega_\mathrm{c}$, $\sig$, $\h$, $\ob$, and $n_\mathrm{s}$.
-We use uniform priors for each parameter that span $\sim$10 around the \cite{collaboration_planck_2014} values of the cosmological parameters, following \cite{Angulo2021} (with a range for $\sig$ extended to slightly lower values); these are shown in Table~\ref{tab:priors}.
-For each of these, we generate a ZA field based on a different random seed, and pass that field through map2map to obtain the nonlinear particle displacements.
+We use uniform priors for each parameter that span $\sim$10$\sigma$ around the \cite{collaboration_planck_2014} values of the cosmological parameters, following \cite{Angulo2021} (with the range for $\sig$ extended to slightly lower values); these are shown in Table~\ref{tab:priors}.
+For each of these cosmologies, we generate a ZA field based on a different random seed, and pass that field through \mtm to obtain the nonlinear particle displacements.
 The \mtm-emulated particle displacements are a key ingredient in modeling the galaxy bias fields, as discussed in the next section.
 
 
@@ -243,8 +243,8 @@ The \mtm-emulated particle displacements are a key ingredient in modeling the ga
 
 To model biased tracers of the matter field, we use the hybrid Lagrangian bias expansion, also known as hybrid effective field theory (HEFT, \citealt{modi_simulations_2020, kokron_cosmology_2021, zennaro_bacco_2023}).
 We first define a mapping from initial (Lagrangian) space coordinates $\qq$ to Eulerian space coordinates $\bm{x}$ as $\bm{x} = \qq + \Psi(\qq)$, where $\Psi(\qq)$ is the Lagrangian space displacement field.
-This advection from Lagrangian to Eulerian space effectively expresses the overdensity field as weighted contributions fom the initial density field that end up in a given Eulerian location.
-The displacement term $\Psi(\qq)$ can be computed with Lagrangian perturbation theory, but this is only accurate down to mildly non-linear scales; here we take the ``hybrid'' approach which uses $N$-body displacements to compute $\Psi(\qq)$, significantly improving the accuracy down to non-linear scales.
+This advection from Lagrangian to Eulerian space effectively expresses the overdensity field as weighted contributions of the initial density field that end up in a given Eulerian location.
+The displacement term $\Psi(\qq)$ can be computed with Lagrangian perturbation theory, but this is only accurate down to mildly nonlinear scales; here we take the ``hybrid'' approach which uses $N$-body displacements to compute $\Psi(\qq)$, significantly improving the accuracy down to small scales.
 
 The galaxy overdensity field in Lagrangian space can be described to second order as 
 \begin{equation}
@@ -254,15 +254,15 @@ The galaxy overdensity field in Lagrangian space can be described to second orde
 \end{split}
 \label{eq:hbe}
 \end{equation}
-where $\delta_L(\qq)$ is the linear matter density in Lagrangian space, and $s^2(\qq)$ is the shear field, defined by the traceless part of the tidal field, given by $s^2(\qq) = s_{ij}(\qq) s^{ij}(\qq) = \delta_i \delta_j \phi(\qq) - \frac{1}{3}\delta^K_{ij} \delta_L(\qq)$, where $\phi(\qq)$ is the linear gravitational potential in Lagrangian space $\nabla^2 \phi(\qq)=4 \pi G \bar{\rho} \delta_L(\qq)$, and $\delta^K$ is the Kronecker delta.
-The coefficients $\bo$, $\bt$, $\bs$, and $\bl$ are the Lagrangian bias parameters.
-The prior ranges of the bias parameters used in our SBI analysis are shown in Table~\ref{tab:priors}, though we note that a tracer field could be constructed for any choice of bias parameters with our saved bias fields.
+where $\delta_L(\qq)$ is the linear matter density in Lagrangian space; $s^2(\qq)$ is the shear field, defined by the traceless part of the tidal field, given by $s^2(\qq) = s_{ij}(\qq) s^{ij}(\qq) = \delta_i \delta_j \phi(\qq) - \frac{1}{3}\delta^K_{ij} \delta_L(\qq)$, where $\phi(\qq)$ is the linear gravitational potential in Lagrangian space $\nabla^2 \phi(\qq)=4 \pi G \bar{\rho} \delta_L(\qq)$, and $\delta^K$ is the Kronecker delta.
+The coefficients $\bo$, $\bt$, $\bs$, and $\bl$ are the Lagrangian bias parameters, which can be thought of as weights corresponding to each of the operators of the density field and are specific to the tracer sample being modeled.
 
-We build this field starting from a random realization of the initial Gaussian field on a $N_\mathrm{grid} = 512^3$ grid in a $L = (1 \Gpch)^3$ box, matching the resolution and size of the Quijote simulations that \mtm was trained on, and use the ZA to compute approximate displacements.
+We construct our tracer density fields based on this model as follows.
+We start from a random realization of the initial Gaussian field on a $N_\mathrm{grid} = 512^3$ grid in a $L = (1 \Gpch)^3$ box, matching the resolution and size of the Quijote simulations that \mtm was trained on, and use the ZA to compute approximate displacements.
 We pass the ZA displacement and velocity fields as input to \mtm (\S\ref{sec:mtm}), which outputs emulated $N$-body displacement and velocity fields.
 We compute the Lagrangian operators based on the linear density field, smoothing these with a damping scale of $k=0.75 \hMpc$.
 We then perform the advection to Eulerian space: The tracers are deposited onto a grid in Eulerian space with a cloud-in-cell (CIC) assignment, with positions given by the simulation displacement field and weights given by Lagrangian operator.
-This gives five bias fields in Eulerian space, $\mathcal{O}_i$: weighting the Lagrangian density field by the constant 1 gives the homogeneous field; by $\delta_L(\qq)$, the linear density field; by $\delta_L^2 (\qq) - \langle \delta^2 \rangle$, the quadratic density field; by $s^2(\qq) - \langle s^2 \rangle$, the tidal field; and by $\Delta^2 \delta(\qq)$, the Laplacian.
+This gives five bias fields in Eulerian space, $\{\mathcal{O}\}$: weighting the Lagrangian density field by the constant $\mathbb{1}$ gives the homogeneous field; by $\delta_L(\qq)$, the linear density field; by $\delta_L^2 (\qq) - \langle \delta^2 \rangle$, the quadratic density field; by $s^2(\qq) - \langle s^2 \rangle$, the tidal field; and by $\Delta^2 \delta(\qq)$, the Laplacian.
 These fields can be weighted by the bias coefficients and summed to produce an overall tracer field $\delta_g$.
 
 We perform two postprocessing steps on these fields.
@@ -272,9 +272,9 @@ At scales higher than this our hybrid bias model loses accuracy anyway and we do
 We perform the same reduction on the velocity fields, cutting each component of the velocity vectors in $k$-space.
 We finally perform a deconvolution of the bias fields, using a linear interpolation kernel at the original grid size $N_\mathrm{grid}$ to correct for the smoothing by the CIC kernel.
 (Technically the deconvolution should be performed before the $k$-cut, but we confirm the results are effectively equivalent and this ordering is much faster.)
-This deconvolution could be done at the summary statistics level, but we choose to deconvolve the fields for ease of use.
+This deconvolution could be done at the summary statistics level, but we choose to deconvolve at the field level for ease of use.
 
-The final main suite, designed as a training set, contains 10,000 sets of tracer position fields (5 Lagrangian bias fields advected to Eulerian space) and velocity fields, each at a different cosmology; each is of size $(1 \Gpch)^3$ and resolution $128^3$.
+The final main suite, designed as a training set for cosmological inference, contains 10,000 sets of tracer fields (5 Lagrangian bias fields advected to Eulerian space) and velocity fields, each at a different cosmology; each has volume $(1 \Gpch)^3$ and grid size $128^3$.
 We also generate multiple smaller suites for testing, detailed in \S\ref{sec:testsets}.
 We call these suites \mmocks (a portmanteau of the words ``much\'isimos'', Spanish for ``many'', and ``mocks'').
 
@@ -290,21 +290,21 @@ Further, as we are considering higher-order statistics, we need to include non-G
 We thus turn to the noise model of \cite{rubira_non-gaussian_2025}, an EFT approach described by nonlinear couplings of a single Gaussian field to the bias fields. 
 In this model the galaxy density field can be written as
 \begin{equation}
-    \delta_g(\mathbf{x}) = \sum_{m=0}^{\infty} \sum_{1,\mathcal{O}} b_\mathcal{O}^{\{m\}} \left[ \epsilon_G(\mathbf{x}) \right]^m \mathcal{O}(\mathbf{x})
+    \delta_g(\mathbf{x}) = \sum_{m=0}^{\infty} \sum_{\mathbb{1},\mathcal{O}} b_\mathcal{O}^{\{m\}} \left[ \epsilon_G(\mathbf{x}) \right]^m \mathcal{O}(\mathbf{x})
 \label{eq:noise}
 \end{equation}
 where $m$ is the order of the expansion in the noise field, $\epsilon_G(\mathbf{x}) = \mathcal{N}(O,1)$ is a unit Gaussian field, $\mathcal{O}$ are operators of the galaxy density field, and $\{b_\mathbb{1}^{\{m\}}, b_\mathcal{O}^{\{m\}}\}$ are free coefficients.
-In our case we limit to second order in the bias expansion, as described in \S\ref{sec:hbe}; limiting to zeroth order in $m$ reduces to the noiseless case, as in Equation~\ref{eq:hbe}.
-For our SBI analysis, we include terms through first order in the noise expansion, $m=0,1$.
+In our case we limit to second order in the bias expansion, as described in \S\ref{sec:hbe}.
+Limiting to zeroth order in $m$ reduces to the noiseless case, as in Equation~\ref{eq:hbe}.
+For our SBI analysis, we include terms through first order in the noise expansion, $m=1$.
 That gives us bias coefficients \{$b_\mathcal{O}^{\{0\}}\} =$ $\bo$, $\bt$, $\bs$, $\bl$, as in Equation~\ref{eq:hbe} (we fix $b_\mathbb{1}^{\{0\}}=1$), and noise coefficients \{$b_\mathcal{O}^{\{1\}}\} =$ $\Ah$, $\Ao$, $\At$, $\As$, $\Al$. 
 
 We note that limiting the noise model to $m=1$ means that we exclude noise contributions to $\pgm$, as at $m=1$ the noise field $\epsilon_G$ has zero mean (whereas $\pk$ and $\bispec$ get factors of $\epsilon_G^2$ which don't vanish).
-This means that the bias parameters may have to absorb partial noise contributions, though we show that we still achieve largely unbiased bias parameters; future work could extend this noise model to $m=2$ or choose a well-motivated subset of noise parameters tailed to the statistics analyzed.
+This means that the bias parameters may have to absorb partial noise contributions, biasing the inference of the bias parameters themselves; future work could extend this noise model to $m=2$ or choose a well-motivated subset of noise parameters tailored to the statistics analyzed.
 
 Operationally, we generate one unit Gaussian noise field $\epsilon_G$ per cosmology in our suite.
 We store these and use them to construct the noisy tracer field on-the-fly just before computing the summary statistics of the field.
-This means that we use the same noise realization when we select different bias and noise parameter sets for the same cosmology (detailed in \S\ref{sec:trainingsets} and \S\ref{sec:testsets}), which introduces some undesirable non-independence; however, we expect the effects of this to be minimal, and the storage cost of one noise field per bias model is prohibitive.
-The prior ranges of the noise parameters used in our SBI analysis are shown in Table~\ref{tab:priors}.
+This means that we use the same noise realization when we select different bias and noise parameter sets for the same cosmology (as detailed in \S\ref{sec:trainingsets} and \S\ref{sec:testsets}), which introduces some undesirable non-independence; however, this allows for easy reproducibility, and we expect the effect to be minimal, while the storage cost of one noise field per bias model is prohibitive.
 
 
 \section{Simulation-based inference methodology}
@@ -365,7 +365,8 @@ To train our simulation-based inference model, we use the main \mmocks suite of 
 Our prior on the cosmological parameters is set by the range of the suite, as described in \ref{sec:mtm}. 
 We need to define the range of the bias coefficients $\{b\}$ we use to sum the fields; for this, we use the results of \cite{zennaro_priors_2022}, which define priors that capture a range of realistic galaxy populations modeled with the extended subhalo abundance matching technique \cite{contreras_flexible_2021}.
 We choose to use uniform priors with slightly wider ranges than the relations found by \cite{zennaro_priors_2022}, a more conservative choice; these prior ranges are shown in Table~\ref{tab:priors}.
-For the noise coefficients $\{A^\mathrm{noise}\}$ we choose wide uniform priors loosely based off of the corresponding (noiseless) bias coefficients.
+For the noise coefficients $\{A^\mathrm{noise}\}$ we choose wide uniform priors loosely based off of the corresponding (noiseless) bias coefficients, with empirical checks ensuring that these produce statistics with a reasonable range of amplitudes.
+The prior ranges of the bias and noise parameters used in our SBI analysis are shown in Table~\ref{tab:priors}.
 
 \begin{table}
 \centering

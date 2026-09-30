@@ -26,6 +26,13 @@ Adame A.~G.,  et~al., 2025, \mn@doi [Journal of Cosmology and Astroparticle
 Alam S.,  et~al., 2017, \mn@doi [Monthly Notices of the Royal Astronomical
   Society] {10.1093/mnras/stx721}, 470, 2617
 
+\bibitem[\protect\citeauthoryear{Alvey, Contaldi  \& Pieroni}{Alvey
+  et~al.}{2026}]{alvey_simulation-based_2026}
+Alvey J.,  Contaldi C.~R.,   Pieroni M.,  2026, Simulation-Based Inference with
+  Deep Ensembles: {{Evaluating}} Calibration Uncertainty and Detecting Model
+  Misspecification (\mn@eprint {arXiv} {2507.13495}),
+  \mn@doi{10.48550/arXiv.2507.13495}
+
 \bibitem[\protect\citeauthoryear{Angulo, Zennaro, Contreras, Aric{\`o},
   {Pellejero-Iba{\~n}ez}  \& St{\"u}cker}{Angulo et~al.}{2021}]{Angulo2021}
 Angulo R.~E.,  Zennaro M.,  Contreras S.,  Aric{\`o} G.,
@@ -41,16 +48,6 @@ Bairagi A.,  Wandelt B.,   {Villaescusa-Navarro} F.,  2025, \mn@doi [Astronomy
   Scoccimarro}{Bernardeau et~al.}{2002}]{bernardeau_large-scale_2002-1}
 Bernardeau F.,  Colombi S.,  Gaztanaga E.,   Scoccimarro R.,  2002, \mn@doi
   [Physics Reports] {10.1016/S0370-1573(02)00135-7}, 367, 1
-
-\bibitem[\protect\citeauthoryear{Collaboration et~al.,}{Collaboration
-  et~al.}{2014}]{collaboration_planck_2014}
-Collaboration P.,  et~al., 2014, \mn@doi [Astronomy \& Astrophysics]
-  {10.1051/0004-6361/201321591}, 571, A16
-
-\bibitem[\protect\citeauthoryear{Collaboration et~al.,}{Collaboration
-  et~al.}{2025}]{collaboration_euclid_2025}
-Collaboration E.,  et~al., 2025, \mn@doi [Astronomy \& Astrophysics]
-  {10.1051/0004-6361/202450810}, 697, A1
 
 \bibitem[\protect\citeauthoryear{Conroy, Wechsler  \& Kravtsov}{Conroy
   et~al.}{2006}]{conroy_modeling_2006-1}
@@ -100,6 +97,11 @@ Durkan C.,  Bekasov A.,  Murray I.,   Papamakarios G.,  2019, Neural {{Spline
   et~al.}{2020}]{durkan_contrastive_2020}
 Durkan C.,  Murray I.,   Papamakarios G.,  2020, in Proceedings of the 37th
   {{International Conference}} on {{Machine Learning}}. PMLR, pp 2771--2781
+
+\bibitem[\protect\citeauthoryear{{Euclid Collaboration} et~al.,}{{Euclid
+  Collaboration} et~al.}{2025}]{collaboration_euclid_2025}
+{Euclid Collaboration} et~al., 2025, \mn@doi [Astronomy \& Astrophysics]
+  {10.1051/0004-6361/202450810}, 697, A1
 
 \bibitem[\protect\citeauthoryear{Greenberg, Nonnenmacher  \& Macke}{Greenberg
   et~al.}{2019}]{greenberg_automatic_2019}
@@ -152,12 +154,6 @@ Hahn C.,  et~al., 2023c, \mn@doi [Journal of Cosmology and Astroparticle
 Henriques B. M.~B.,  White S. D.~M.,  Thomas P.~A.,  Angulo R.,  Guo Q.,
   Lemson G.,  Springel V.,   Overzier R.,  2015, \mn@doi [Monthly Notices of
   the Royal Astronomical Society] {10.1093/mnras/stv705}, 451, 2663
-
-\bibitem[\protect\citeauthoryear{Ib{\'a}{\~n}ez et~al.,}{Ib{\'a}{\~n}ez
-  et~al.}{2026}]{ibanez_validation_2026}
-Ib{\'a}{\~n}ez M.~P.,  et~al., 2026, Validation of the {{Hybrid Bias
-  Expansion}} Model for the Galaxy Bispectrum (\mn@eprint {arXiv}
-  {2606.19452}), \mn@doi{10.48550/arXiv.2606.19452}
 
 \bibitem[\protect\citeauthoryear{Jacobus, Tucci  \& Philcox}{Jacobus
   et~al.}{2026}]{jacobus_emulating_2026}
@@ -238,6 +234,12 @@ Papamakarios G.,  Murray I.,  2016, in Advances in {{Neural Information
 Peacock J.~A.,  Smith R.~E.,  2000, \mn@doi [Monthly Notices of the Royal
   Astronomical Society] {10.1046/j.1365-8711.2000.03779.x}, 318, 1144
 
+\bibitem[\protect\citeauthoryear{{Pellejero-Ib{\'a}{\~n}ez}
+  et~al.,}{{Pellejero-Ib{\'a}{\~n}ez} et~al.}{2026}]{ibanez_validation_2026}
+{Pellejero-Ib{\'a}{\~n}ez} M.,  et~al., 2026, Validation of the {{Hybrid Bias
+  Expansion}} Model for the Galaxy Bispectrum (\mn@eprint {arXiv}
+  {2606.19452}), \mn@doi{10.48550/arXiv.2606.19452}
+
 \bibitem[\protect\citeauthoryear{{Pellejero-Ibanez}, Stuecker, Angulo, Zennaro,
   Contreras  \& Arico}{{Pellejero-Ibanez}
   et~al.}{2022}]{pellejero-ibanez_modelling_2022}
@@ -268,6 +270,11 @@ Philcox O. H.~E.,  Fl{\"o}ss T.,  2024, {{PolyBin3D}}: {{A Suite}} of
   Ivanov}{2022}]{philcox_boss_2022}
 Philcox O. H.~E.,  Ivanov M.~M.,  2022, \mn@doi [Physical Review D]
   {10.1103/PhysRevD.105.043517}, 105, 043517
+
+\bibitem[\protect\citeauthoryear{{Planck Collaboration} et~al.,}{{Planck
+  Collaboration} et~al.}{2014}]{collaboration_planck_2014}
+{Planck Collaboration} et~al., 2014, \mn@doi [Astronomy \& Astrophysics]
+  {10.1051/0004-6361/201321591}, 571, A16
 
 \bibitem[\protect\citeauthoryear{Qian}{Qian}{2009}]{qian_nested_2009}
 Qian P. Z.~G.,  2009, \mn@doi [Biometrika] {10.1093/biomet/asp045}, 96, 957

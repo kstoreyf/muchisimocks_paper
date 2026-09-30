@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2019)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
+The style file: mnras.bst
+Database file #1: references.bib
+Reallocated str_pool (elt_size=1) to 130000 items from 65000.
+Database file #2: references_extra.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty institution in desjacques_large-scale_2017
+You've used 74 entries,
+            2881 wiz_defined-function locations,
+            1219 strings with 68149 characters,
+and the built_in function-call counts, 34019 in all, are:
+= -- 2566
+> -- 2664
+< -- 126
++ -- 1162
+- -- 416
+* -- 4213
+:= -- 5422
+add.period$ -- 0
+call.type$ -- 74
+change.case$ -- 149
+chr.to.int$ -- 70
+cite$ -- 75
+duplicate$ -- 1713
+empty$ -- 1735
+format.name$ -- 646
+if$ -- 5796
+int.to.chr$ -- 5
+int.to.str$ -- 0
+missing$ -- 51
+newline$ -- 236
+num.names$ -- 496
+pop$ -- 396
+preamble$ -- 1
+purify$ -- 296
+quote$ -- 0
+skip$ -- 972
+stack$ -- 0
+substring$ -- 1688
+swap$ -- 812
+text.length$ -- 298
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 666
+warning$ -- 1
+while$ -- 502
+width$ -- 0
+write$ -- 772
+(There was 1 warning)
