@@ -113,16 +113,17 @@ $^{5}$Max-Planck-Institut f\"ur Astrophysik, Karl-Schwarzschild-Stra{\ss}e 1, 85
 \begin{abstract}
 \ksf{NOTE TO COAUTHORS: please define a macro with your initials and favorite color and comment in tex, do not use overleaf comment feature!}
 
-Galaxy clustering contains rich cosmological information down to non-linear scales; however, methods to extract this information are currently limited by the high cost of cosmological $N$-body simulations, as well as by the fidelity of galaxy bias modeling.
-We use a new approach to generating approximate but robust galaxy mocks: we employ the \mtm full-field emulator to generate particle displacement and velocity fields, and apply the hybrid Lagrangian bias expansion approach to flexibly model biased tracers.
-With this forward model, we create a suite of mock 3D galaxy density fields each of size (1 $\Gpch$)$^3$ at $z=0$ spanning 10,000 different cosmologies, called \mmocks; we construct tracer fields with up to 32 bias parameters for cosmology, resulting in a 320,000-mock training set. 
-We train a simulation-based inference (SBI) model on summary statistics of the density fields---the galaxy--galaxy power spectrum, the galaxy--matter power spectrum, and the galaxy bispectrum---and infer the cosmological parameters, marginalizing over the bias and noise coefficients.
-We validate the pipeline on in-distribution test mocks and find our inferred posteriors to be well-calibrated across the prior range.
-With this large suite, we are able to test convergence with the number of simulations: we find that while 20,000 training points are sufficient for the power spectrum, when including the additional statistics precision continues to improve beyond 320,000, and that increasing the number of bias parameter sets per cosmology yields similar constraints as increasing the number of cosmologies.
-We also show that we recover unbiased cosmological constraints from an out-of-distribution model, an independent high-resolution $N$-body simulation populated with LRG-like galaxies using extended SubHalo Abundance Matching, demonstrating the generalizability of the approach.
-We find that the galaxy--matter power spectrum is critical for breaking parameter degeneracies, and additionally including the bispectrum improves precision, for our LRG-like mock on $\om$ by $\PrecPctShameOodFidPkPgmBVsPkPgmOmegaC\%$, $\sig$ by $\PrecPctShameOodFidPkPgmBVsPkPgmSigmaEight\%$ and $\bo$ by $\PrecPctShameOodFidPkPgmBVsPkPgmBo\%$. \ksf{note: if we use only top model instead of ensemble, it jumps to 39\% for sigma8, which is significantly different. let's discuss using the top-3 ensemble vs just top model}
-These results are useful for guiding the design of future SBI approaches for galaxy clustering, and demonstrate a promising approach for full-field inference as well as a range of other potential applications.
-The \mmocks suite and the code used in this paper are available at \url{this url}.
+Galaxy clustering contains rich cosmological information down to non-linear scales; however, methods to extract this information are currently limited the high cost of cosmological $N$-body simulations and by the fidelity of galaxy bias modeling.
+We develop a new approach to generating approximate yet robust galaxy mocks: we employ the \mtm full-field emulator to generate particle displacement fields, and the hybrid Lagrangian bias expansion approach to flexibly model biased tracers.
+We create a suite of (1 $\Gpch$)$^3$ second-order bias fields at $z=0$ spanning 10,000 different cosmologies, and weight these with multiple bias and noise parameter sets, resulting in 320,000 mock 3D density fields.
+We train a simulation-based inference (SBI) model on the galaxy--galaxy power spectrum $\pk$, the galaxy--matter power spectrum $\pgm$, and the galaxy bispectrum $\bispec$.
+To test generalizability, we apply it to an independent $N$-body simulation populated with LRG-like galaxies using extended SubHalo Abundance Matching, and achieve unbiased cosmological constraints.
+Our results show that $\pgm$ is critical for breaking parameter degeneracies, and that including $\bispec$ improves precision, on $\om$ by $\PrecPctShameOodFidPkPgmBVsPkPgmOmegaC\%$, $\sig$ by $\PrecPctShameOodFidPkPgmBVsPkPgmSigmaEight\%$ and $\bo$ by $\PrecPctShameOodFidPkPgmBVsPkPgmBo\%$. 
+\ksf{note: if we use only top model instead of ensemble, it jumps to 39\% for sigma8, which is significantly different. let's discuss using the top-3 ensemble vs just top model}
+In convergence tests, we find that 20,000 mocks are sufficient for $\pgg$, beyond 320,000 are necessary for $\stats$, and that additional bias parameter sets provide similar gain as additional cosmologies. 
+These findings are useful for guiding future SBI approaches for galaxy clustering, and demonstrate a promising path towards optimal inference and many other potential applications.
+The \mmocks suite is available at \url{this url}.
+\ksf{right around 250-word limit}
 \end{abstract}
 
 \begin{keywords}
