@@ -630,6 +630,7 @@ These results show that our inference pipeline can accurately recover the cosmol
 
 
 \subsection{Out-of-distribution recovery test: SHAMe mock}
+\label{sec:res_shame}
 
 \begin{figure}
 \centering
@@ -679,64 +680,15 @@ These tests demonstrate the generalizability of our forward model to realistic g
 \begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{figures/fig8_scale_dependence_fob3_nbars.pdf}
-\caption{Scale dependence of the figure of bias (FoB) for the three key parameters combined for the SHAMe out-of-distribution mock, with varying number density. The top panel shows the FoB as a function of the $\kmax$ used for the bispectrum, fixing to our fiducial $\kmax=0.25$ for $\pgm$; the bottom panel shows the FoB as a function of the $\kmax$ used for $\pgm$, fixing to our fiducial $\kmax=0.25$ for the bispectrum. In both cases, the FoB for the full statistics combination remains around or below $1\sigma$ until $\kmax=0.25$, after which the inference shows a bias; we thus use $\kmax^{\pgmsh}=\kmax^{\bispecsh}=0.25$ for our fiducial inference.}
+\caption{Scale dependence of the figure of bias (FoB) for the three key parameters combined for the SHAMe out-of-distribution mock, with varying number density. The top panel shows the FoB as a function of the $\kmax$ used for the bispectrum, fixing to our fiducial $\kmax=0.25$ for $\pgm$; the bottom panel shows the FoB as a function of the $\kmax$ used for $\pgm$, fixing to our fiducial $\kmax=0.25$ for the bispectrum. In both cases, the FoB for the full statistics combination remains around or below $1\sigma$ until $\kmax=0.25$, after which the inference shows a bias; we thus use $\kmax^{\pgmsh}=\kmax^{\bispecsh}=0.25$ for our fiducial inference. \ksf{increase legend size}}
 % \ksf{slight bias for pgg+b coming from projection effects? could make this plot for cosmic variance set... maybe just mention that these are vol effects. or look at the params individually. incl b1 times sig8. could add a param orthogonal to that product; sigma8/b1.} \ksf{lowest 2 pink points on top plot confusing that they go above green points. look at contour plots} \ksf{maybe because noise model not affecting pgm!} \ksf{marcos: at low kmax end, looks like noise when still dominated by priors. noise parameters are close to edges?} \ksf{consistent with marcos's paper - with just pgg+bgg, no clear break. only when include matter.}
 \label{fig:scale_dependence_fob3_nbars}
 \end{figure}
 
 We investigate the dependence of our results on the maximum $k$ scale included in our inference, for each of the statistics.
-We keep the maximum scale for $\pk$ fixed to $\kmax=0.37\,\hMpc$, a bit below the Nyquist frequency of the box.
+We keep the maximum scale for $\pk$ fixed to $\kmax=0.37\,\hMpc$, slightly below the Nyquist frequency of the box.
 We expect the galaxy-galaxy power spectrum to be accurate down to this scale: there the \mtm emulator of $N$-body displacements is shown to achieve significantly sub-percent accuracy ($\sim$0.2\%) \citep{jamieson_field_2023}, and \cite{pellejero_ibanez_hybrid-bias_2023} showed that \mtm combined with the hybrid Lagrangian bias expansion to second order achieves 1-2\% precision to $\kmax=0.6\,\hMpc$.
 (Previous works using the hybrid bias expansion with a power spectrum emulator also find sufficient accuracy down to $\kmax=0.6\,\hMpc$ \citep{hadzhiyska_hefty_2021,zennaro_bacco_2023}.)
-For the bispectrum, \cite{ibanez_validation_2026} recently validated the hybrid bias expansion down to $\kmax=0.25\,\hMpc$.
-\ksf{anything to cite/mention for the cross-power-spectrum?}
-
-In Figure~\ref{fig:scale_dependence_fob3_nbars}, we show the figure of bias for the SHAMe out-of-distribution mock for the three key parameters $\om$, $\sig$, and $\bo$ combined, as a function of the $\kmax$ of $\bispec$ and $\pgm$; when varying $\kmax^\mathrm{\bispecsh}$, we fix $\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$, and when varying $\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$ we fix $\kmax^\mathrm{\bispecsh}=0.25\,\hMpc$.
-We see that using only $\pk+\bispec$ results in a bias moderately above $1\sigma$ for all number density samples, regardless of $\kmax$; this is likely largely a result of projection effects.
-When including the cross spectrum, $\stats$, the inference is accurate to $1\sigma$ up until $\kmax^\mathrm{\bispecsh}=0.25\,\hMpc$, aligning with the result validating the hybrid bias expansion on the bispectrum and indicating that the limiting factor is the expansion rather than the emulated displacements.
-The statistics combination $\pk+\pgm$ results in accurate inference for all number densities through $\kmax^\mathrm{\pgmsh}=0.37\,\hMpc$.
-However, when additionally adding $\bispec$, the inference becomes biased pushing below $\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$.
-We also check the full grid of combinations, and find $\kmax^\mathrm{\bispecsh}=0.25\,\hMpc$, $\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$ to be the optimal combination of limiting scales; pushing either or both to smaller scales results in further bias.
-It is initially odd that pushing $\pgm$ to smaller scales results in a bias only when including the $\bispec$; we speculate that this could be because our noise model does not account for noise in $\pgm$, though further investigation is merited.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\columnwidth]{figures/fig9_scale_dependence_fom_nbars.pdf}
-    \caption{Scale dependence of the figure of merit (FoM) for the three key parameters for the SHAMe out-of-distribution mock, with varying number density. The $\kmax$ displayed is defined as follows: for $\kmax<0.25$, $\kmax=\kmax^\mathrm{\pggsh}=\kmax^\mathrm{\pgmsh}=\kmax^\mathrm{\bispecsh}$; for $\kmax>0.25$, we fix $\kmax^\mathrm{\pgmsh}=\kmax^\mathrm{\bispecsh}=0.25$ and only vary $\kmax=\kmax^\mathrm{\pggsh}$. Precision generally increases with scale, with the steepest gains for $\sig$ between $\kmax=0.15$ and $\kmax=0.25$. \ksf{make legends, axis labels bigger}}
-    \label{fig:scale_dependence_fom_nbars}
-    \end{figure}
-
-We explore the dependence of the figure of merit on the maximum scale included in the inference in Figure~\ref{fig:scale_dependence_fom_nbars}.
-We show the FoM for the three key parameters for the SHAMe mocks at each of the three number densities tested, for all statistics combinations.
-For $k<0.25$, we apply the same $\kmax$ for all three statistics; for $k>0.25$, we fix $\kmax^\mathrm{\pgmsh} = \kmax^\mathrm{\bispecsh}=0.25$ (the fiducial values chosen based on the FoB analysis above) and only include higher $k$ for $\pgg$.
-We find that for nearly all the statistics combinations, parameters, and number densities, there is a significant increase in precision from $k=0.1$ to $k=0.25$.
-The exception is $\pk$ alone for $\sig$; the information content is already saturated at larger scales.
-Interestingly, there is not signficant information gain for most statistics combinations or parameters beyond $\kmax=0.25$, nor is there a clear trend with number density.
-We find that the strongest increases in the FoM from $\kmax^\mathrm{all}=0.2$ to $\kmax^\mathrm{\pggsh}=0.37$ is for $\sig$ with $\pk+\pgm$ and $\stats$, increasing by $\FoMIncrPctShameOodFidPkPgmSigmaEightKmaxMaxVsKmaxEFT\%$ and $\FoMIncrPctShameOodFidPkPgmBSigmaEightKmaxMaxVsKmaxEFT\%$ for $\nbarfid$.
-These are quite significant gains; this demonstrates the value of using the hybrid bias expansion approach in comparison to EFT approaches, which are limited to $k=\sim$$0.1-0.2$.
-
-
-\subsection{Dependence on number of cosmologies and bias parameter sets}
-
-We explore the convergence of our inference with the number of training data points.
-We vary the number of cosmologies by selecting only a subset of cosmologies to train the network with, choosing $N_\mathrm{cosmo}=500,1,000,2000,4000,6000,8000,1,0000$; the subsets are nested to minimize random variance.
-To vary the number of bias parameters, we train on each layer of the nested Latin hypercube of bias and noise parameters, resulting in a range of bias parameters per cosmology: $N_\mathrm{bias}=1,2,4,8,16,32$. 
-For each of these combinations of the number of cosmology and bias parameters, we train a new model using the fiducial hyperparameters for the given statistics combination, and perform inference on the 1,000 mocks of the coverage set.
-
-\begin{figure}
-\centering
-\includegraphics[width=\columnwidth]{figures/fig10_convergence_pgg_b_pgm.png}
-\caption{Convergence of the inference with training set size, for $\pk+\bispec+\pgm$ on the coverage test set for the three key parameters $\om$, $\sig$, and $\bo$ combined. The top panel shows the figure of merit (FoM), and the bottom panel shows the figure of bias (FoB), normalized by the 68th percentile of the $\chi^2$ distribution for three dimensions (corresponding to the three parameters); the median values over the coverage set are shown. The opacity indicates the number of training cosmologies. Increasing the number of training points increases the precision signficantly until $N_\text{train}=\,\sim$20,000 and then more marginally, with the number of cosmologies and bias parameter sets contributing similar precision; the bias also plateaus around $N_\text{train}=\,\sim$20,000, with the number of cosmologies mattering more than the number of bias parameters for smaller $N_\text{train}$. \ksf{make legends, axis labels bigger} \ksf{note: this plot is with an older base model, with kmax=0.4 and no ensembling; running the new version right now}}
-\label{fig:convergence_pgg_b_pgm}
-\end{figure}
-
-\begin{figure*}
-\centering
-\includegraphics[width=\textwidth]{figures/fig11_convergence_all_combos.png}
-\caption{Convergence of the inference with training set size, for all the statistics combinations on the coverage test set for the three key parameters $\om$, $\sig$, and $\bo$ individually. The top row shows the figure of merit (FoM) and the bottom row shows the figure of bias (FoB); the median values over the coverage set are shown. The opacity indicates the number of training cosmologies, and the dashed line indicates the expectation for an unbiased Gaussian distribution. The FoM increases with training set size for most statistics and parameters, with the exception of $\sig$ with $\pk$ and $\pk+\bispec$ which do not show improvement; all have an FoB around or below $1\sigma$. \ksf{note: this plot is with an older base model, with kmax=0.4 and no ensembling; running the new version right now}}
-%  \ksf{not reaching 0.8 because network not good enough? non-gaussian?} \ksf{try with cosmic variance set?} \ksf{reach theory floor bc have addl source of noise; network + data vector, projection effects} \ksf{om probs comes mostly for geometric aspects of power spec (??)} \ksf{takeaway is that many are still not  converged. ref how many sims paper - but diff research question, number for emulator vs sbi?}
-\label{fig:convergence_all_combos}
-\end{figure*}
 
 To assess the accuracy of our results, we use the figure of bias, defined as
 \begin{equation}
@@ -751,25 +703,80 @@ To assess the precision, we use the figure of merit (FoM), defined as
 \begin{equation}
     \mathrm{FoM} = \frac{1}{\sqrt{\mathrm{det}\mathcal{C}}} ~,
 \end{equation}
-which is the inverse of the volume of the allowed region, meaning that a higher FoM indicates tighter constraints. 
+which is the inverse of the volume of the allowed region, such that a higher FoM indicates tighter constraints. 
 Again we compute $\mathcal{C}$ only across the subspace considered; in one dimension, this reduces to $\mathrm{FoM}_\mathrm{1D} = 1/\sigma_\theta$.
 
-Figure~\ref{fig:convergence_pgg_b_pgm} shows the figure of merit and figure of bias for the three key parameters combined, averaged over the coverage set, for the full statistics combination as a function of the total number of training points $N_\mathrm{cosmo} \times N_\mathrm{bias}$, shown as separate lines for each choice of $N_\mathrm{cosmo}$.
-We see that the FoM increases with increasing number of training points, steeply until $N_\mathrm{train}=10,000$ and then more moderately. 
-The FoM does not plateau even at $320,000$ training points, indicating that the inference is still not converged and the precision would continue to improve with additional training data.
-The FoB similarly reduces sharply until $N_\mathrm{train}=10,000$ where it crosses $FoB=1\sigma$, but then more-or-less plateaus, indicating that above a few tens of thousands of training points, the training data is sufficient for unbiased inference.
+In Figure~\ref{fig:scale_dependence_fob3_nbars}, we show the figure of bias for the SHAMe out-of-distribution mock for the three key parameters $\om$, $\sig$, and $\bo$ combined, as a function of the $\kmax$ of $\bispec$ and $\pgm$; when varying $\kmax^\mathrm{\bispecsh}$, we fix $\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$, and when varying $\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$ we fix $\kmax^\mathrm{\bispecsh}=0.25\,\hMpc$.
+We see that using only $\pk+\bispec$ results in a bias moderately above $1\sigma$ for all number density samples, regardless of $\kmax$; this is likely largely a result of projection effects, as we have found in earlier tests.
+When including the galaxy-matter power spectrum, $\stats$, the inference is accurate for all number densities to $1\sigma$ up until $\kmax^\mathrm{\bispecsh}=0.25\,\hMpc$, where the lower number density samples begin to exhibit a slight bias.
+This aligns with the findings of \cite{ibanez_validation_2026} that validated the hybrid bias expansion down to $\kmax=0.25\,\hMpc$.
 
-We also find that there is not a strong trend with the number of training cosmologies, as shown by the lines for the different cosmologies largely overlapping.
+The statistics combination $\pk+\pgm$ results in accurate inference for all number densities through $\kmax^\mathrm{\pgmsh}=0.37\,\hMpc$.
+However, when additionally adding $\bispec$, the inference becomes biased pushing below $\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$.
+\ksf{anything to cite/mention for the cross-power-spectrum accuracy?}
+It is initially odd that pushing $\pgm$ to smaller scales results in a bias only when including the $\bispec$; we speculate that this could be because our noise model does not account for noise in $\pgm$, though further investigation is merited.
+While here we have shown the dependence varying the $\kmax$ of only one statistic at a time, we also check the grid of combinations for $\kmax^\mathrm{\bispecsh}$ and $\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$, and find $\kmax^\mathrm{\bispecsh}=\kmax^\mathrm{\pgmsh}=0.25\,\hMpc$ to be the optimal combination of limiting scales; pushing either or both to smaller scales results in further bias.
+We also note that there is no clear trend with number density across the range tested.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\columnwidth]{figures/fig9_scale_dependence_fom_nbars.pdf}
+    \caption{Scale dependence of the figure of merit (FoM) for the three key parameters for the SHAMe out-of-distribution mock, with varying number density. The $\kmax$ displayed is defined as follows: for $\kmax<0.25$, $\kmax=\kmax^\mathrm{\pggsh}=\kmax^\mathrm{\pgmsh}=\kmax^\mathrm{\bispecsh}$; for $\kmax>0.25$, we fix $\kmax^\mathrm{\pgmsh}=\kmax^\mathrm{\bispecsh}=0.25$ and only vary $\kmax=\kmax^\mathrm{\pggsh}$. Precision generally increases with scale, especially from  $\kmax=0.1$ to $\kmax=0.25$, with additional gains for $\sig$ when extending to $\kmax^{\pggsh}=0.37$. \ksf{make legends, axis labels bigger}}
+    \label{fig:scale_dependence_fom_nbars}
+    \end{figure}
+
+We explore the dependence of the figure of merit on the maximum scale included in the inference in Figure~\ref{fig:scale_dependence_fom_nbars}.
+We show the FoM for the three key parameters for the SHAMe mocks at each of the three number densities tested, for all statistics combinations.
+For $k<0.25$, we apply the same $\kmax$ for all three statistics; for $k>0.25$, we fix $\kmax^\mathrm{\pgmsh} = \kmax^\mathrm{\bispecsh}=0.25$ (the fiducial values chosen based on the FoB analysis above) and only include higher $k$ for $\pgg$.
+We first see that higher number density samples consistently result in higher precision constraints, with the increases strongest for $\bo$, as we saw for $\stats$ in \S\ref{sec:res_shame}, though the difference in information gain as a function of maximum scale does not display a clear trend.
+
+We find that for nearly all of the statistics combinations, parameters, and number densities, there is a significant increase in precision from $k=0.1$ to $k=0.25$.
+The exception is $\pk$ alone for $\sig$; the information content is already saturated at larger scales.
+Interestingly, there is not signficant information gain for most statistics combinations and parameters beyond $\kmax=0.25$.
+We find that the strongest increases in the FoM from $\kmax^\mathrm{all}=0.2$ to $\kmax^\mathrm{\pggsh}=0.37$ is for $\sig$; for the fiducial number density $\nbarfid$, we find that constraints with $\pk+\pgm$ increase by $\FoMIncrPctShameOodFidPkPgmSigmaEightKmaxMaxVsKmaxEFT\%$ and with $\stats$ by $\FoMIncrPctShameOodFidPkPgmBSigmaEightKmaxMaxVsKmaxEFT\%$.
+These are quite significant gains; this demonstrates the value of using the hybrid bias expansion approach in comparison to EFT approaches, which are limited to $k=\sim$0.1--0.2.
+
+
+\subsection{Dependence on number of cosmologies and bias parameter sets}
+
+We explore the convergence of our inference with the number of training data points.
+We vary the number of cosmologies by selecting only a subset of cosmologies to train the network with, choosing $N_\mathrm{cosmo}=500,1000,2000,4000,6000,8000,10000$; the subsets are nested to minimize random variance.
+To vary the number of bias parameters, we train on each layer of the nested Latin hypercube of bias and noise parameters, resulting in a range of bias parameters per cosmology: $N_\mathrm{bias}=1,2,4,8,16,32$. 
+For each of these combinations of the number of cosmology and bias parameters, we train a new model using the fiducial hyperparameters for the given statistics combination, and perform inference on the 1,000 mocks of the coverage set.
+
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{figures/fig10_convergence_pgg_b_pgm.png}
+\caption{Convergence of the inference with training set size, for $\pk+\bispec+\pgm$ on the coverage test set for the three key parameters $\om$, $\sig$, and $\bo$ combined. The top panel shows the figure of merit (FoM), and the bottom panel shows the figure of bias (FoB), normalized by the 68th percentile of the $\chi^2$ distribution for three dimensions (corresponding to the three parameters); the median values over the coverage set are shown. The opacity indicates the number of training cosmologies. Increasing the number of training points continues to increases the precision, with the number of cosmologies and bias parameter sets contributing similar precision. \ksf{make legends, axis labels bigger} \ksf{note: this plot is with an older base model, with kmax=0.4 and no ensembling; new version is running. also: should we make this with only the inner 500, as in the coverage tests?}}
+\label{fig:convergence_pgg_b_pgm}
+\end{figure}
+
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth]{figures/fig11_convergence_all_combos.png}
+\caption{Convergence of the inference with training set size, for all the statistics combinations on the coverage test set for the three key parameters $\om$, $\sig$, and $\bo$ individually. The top row shows the figure of merit (FoM) and the bottom row shows the figure of bias (FoB); the median values over the coverage set are shown. The opacity indicates the number of training cosmologies, and the dashed line indicates the expectation for an unbiased Gaussian distribution. The FoM increases with training set size for most statistics and parameters, and most reach an FoB around or below $1\sigma$. \ksf{note: this plot is with an older base model, with kmax=0.4 and no ensembling; new version is running. also: should we make this with only the inner 500, as in the coverage tests?}}
+%  \ksf{not reaching 0.8 because network not good enough? non-gaussian?} \ksf{try with cosmic variance set?} \ksf{reach theory floor bc have addl source of noise; network + data vector, projection effects} \ksf{om probs comes mostly for geometric aspects of power spec (??)} \ksf{takeaway is that many are still not  converged. ref how many sims paper - but diff research question, number for emulator vs sbi?}
+\label{fig:convergence_all_combos}
+\end{figure*}
+
+We compute the figure of merit and figure of bias for the three key parameters combined, taking the median over the coverage set for the full statistics combination $\stats$.
+Figure~\ref{fig:convergence_pgg_b_pgm} shows this as a function of the total number of training points $N_\mathrm{cosmo} \times N_\mathrm{bias}$, displayed as separate lines for each choice of $N_\mathrm{cosmo}$.
+We see that the FoM increases with increasing number of training points, steeply until $N_\mathrm{train}=10,000$ and then more moderately. 
+The FoM does not plateau even at $320,000$ training points, indicating that the inference is still not converged and the precision would likely continue to improve with additional training data.
+The FoB similarly reduces sharply until $N_\mathrm{train}=10,000$ where it crosses $FoB=1\sigma$ but then more-or-less plateaus, indicating that above a few tens of thousands of training points the training data is sufficient for unbiased inference.
+
+We also find that there is not a strong trend with the number of training cosmologies, as evidenced by the lines for the different cosmologies largely overlapping; the trend is instead explained by the total number of training points.
 With a smaller number of training data points (below $N_\mathrm{train}=20,000$), it is more important to have more cosmologies rather than more bias parameter sets, shown by the spread in the FoB around that value; however, beyond $N_\mathrm{cosmo}=2000$, it is sufficient to add more bias parameter sets per cosmology.
-This somewhat surprising finding is encouraging given that generating training data at varying cosmologies is more expensive than populating each cosmology with varying bias parameter sets.
+This somewhat surprising finding is encouraging given that generating training data at many cosmologies is more expensive than populating each cosmology with many bias parameter sets.
 Previous SBI analyses already use around this number of training cosmologies with full $N$-body codes (without the need for emulators, e.g. the Quijote Latin hypercube); our result shows that this may be sufficient in terms of cosmologies, but that additional constraining power and robustness could be gained by populating these with many more galaxy formation parameter sets per cosmology.
 
-In Figure~\ref{fig:convergence_all_combos}, we show the FoM and FoB for all the statistics combinations, for each key parameter individually.
-Note that for a Gaussian sample, we would expect $FoB\approx0.8$; our FoB stays slightly higher than this for all the parameters, bottoming out at 0.85-1.0, possibly as a result of non-Gaussian behavior.
-We see that for $\sig$, a small number of training cosmologies already saturates the precision for $\pk$ and $\pk+\bispec$, though around $N_\mathrm{train}=20,000$ are needed to reach a plateau in the FoB below $1\sigma$.
-Similarly for $\bo$ for those statistics combinations, the precision begins to plateau around the same number of training points, and seems to saturate around $N_\mathrm{train}=100,000$.
+In Figure~\ref{fig:convergence_all_combos}, we show the FoM and FoB as a function of the training set size for all the statistics combinations, for each key parameter individually.
+Note that for a Gaussian sample, we would expect $\mathrm{FoB}\approx0.8$; our FoB stays slightly higher than this for all the parameters, bottoming out at 0.85-1.0, possibly as a result of non-Gaussian behavior.
+For $\pk$ and $\pk+\bispec$, we see that a small number of training cosmologies already saturates the precision for $\sig$, though around $N_\mathrm{train}=20,000$ are needed to reach a plateau in the FoB below $1\sigma$.
+For $\bo$ and $\om$, we see moderate improvement in precision as we increase the training set size across the range explored, with $\bo$ beginning to plateau around $N_\mathrm{train}=100,000$.
 The statistics combinations $\pk+\pgm$ and $\stats$ show steep improvements in both precision and accuracy until $N_\mathrm{train}=10,000$ for all parameters, and then improve more moderately.
-Notably, by our maximum number of training points $N_\mathrm{train}=320,000$, the FoM has not yet plateaued, indicating that additional training data may continue to improve the inference and we have not yet extracted the full information content the statistics.
+Notably, by our maximum number of training points $N_\mathrm{train}=320,000$, the FoM continues to rise, indicating that additional training data will likely continue to improve the inference and we have not yet extracted the full information content the statistics.
 We also again find that for all parameters, increasing the number of bias parameter sets per cosmology results in similar FoM and FoB values as increasing the number of cosmologies, beyond a few thousand cosmologies.
 
 
@@ -846,7 +853,7 @@ The authors would like to thank Beatriz Tucci, Ivana Nikolac, Matt Ho, and Jed H
 
 \section*{Software and LLM Usage}
 
-The following software were used in this work: \ksf{fill in software}
+The following software were used in this work: \ksf{TODO fill in software}
 In this work, large language models (LLMs) were used to make code modifications, write basic code such as plotting functions, support background research, and provide basic \LaTeX support.
 Core code and all writing did not involve the use of LLMs.
 
