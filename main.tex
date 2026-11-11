@@ -115,7 +115,7 @@ $^{5}$Max-Planck-Institut f\"ur Astrophysik, Karl-Schwarzschild-Stra{\ss}e 1, 85
 \maketitle
 
 \begin{abstract}
-\ksf{NOTE TO COAUTHORS: please define a macro with your initials and favorite color and comment in tex, do not use overleaf comment feature! thanks :)}
+\ksf{NOTE TO COAUTHORS (hi!): please define a macro with your initials and favorite color and comment in tex, do not use overleaf comment feature! thanks :)}
 
 Galaxy clustering contains rich cosmological information down to nonlinear scales; however, methods to extract this information are currently limited \dsj{by} the high cost of cosmological $N$-body simulations and by the fidelity of galaxy bias modeling.
 We develop a new approach to generating approximate yet robust galaxy mocks: we employ the \mtm full-field emulator to generate particle displacement fields, and the hybrid Lagrangian bias expansion approach to flexibly model biased tracers.
@@ -429,7 +429,7 @@ It constructs a standard LH on the coarse cells, and then fills in the finer gri
 It then performs random permutations of rows and cells that still preserve the LH structure but remove any deterministic structure from the filling procedure, resulting in a random realization of two nested LHs. 
 This is then repeated for subsequent layers by adding finer and finer grids.
 A python implementation of this algorithm along with validation tests are available in the \texttt{gethypercube}\footnote{\url{http://github.com/kstoreyf/gethypercube}} package.
-\ksf{i may include an appendix detailing my nested-LH package! thoughts?}\mpi{anything is fine with me} \djs{Me too, go for it!}
+\ksf{i may include an appendix detailing my nested-LH package! thoughts?}\mpi{anything is fine with me} \dsj{Me too, go for it!}
 Though the LHs at all levels are exact (the samples live in disjoint intervals across all the dimensions), they are not guaranteed to have optimal space-filling properties compared to an optimized single-level LH.
 Optimizations are possible but very time-consuming, so we use the standard nested hypercube (with the randomization described above); this still achieves LHs that have significantly better space-filling properties across all levels than either taking random subsets of a top-level LH, or stacking bottom-level LHs.
 The use of LH-distributed parameters has been shown to be important for accurate and robust training, so we expect that this nested strategy leads to robustness in our convergence tests, which are a key result of this work \mpi{it is unclear to me if we achieved this in the end because of the later issues with convergence, maybe we can soften these claims? Otherwise we didn't achieve a key result of this paper}. \dsj{I would think scrambled Sobol sequence would be more optimal and naturally extensible, so the nesting thing isn't an issue for adding bias/noise samples on top of cosmology. If provides uniform coverage not just for the whole parameter set, but also for projected subspaces for parameters, which LHC doesn't.}
@@ -657,7 +657,8 @@ For the SHAMe data, we obtain a $\PrecPctShameOodFidPkPgmVsPkOmegaC\%$ improveme
 
 We do see moderate biases in the values of $\bt$ and $\bs$ when using the full statistics combination, at the \FoBSigmaShameOodFidPkPgmBBt$\sigma$ and \FoBSigmaShameOodFidPkPgmBBs$\sigma$ levels, while these were on average accurately constrainted in the cosmic variance test set.
 \new{However, the probabilistic bias approach we used for measuring these has large errors when it comes to these higher-order bias parameters, so results within a few $\sigma$ are not particularly concerning.
-That said, some care should be taken with analyses that rely on highly accurate bias parameter inference.}
+That said, some care should be taken with
+ analyses that rely on highly accurate bias parameter inference.}
 \ksf{TODO include errors from prob. bias approach; update this section when done!}
 
 \begin{figure}
@@ -674,8 +675,8 @@ We note that the noise parameters themselves are poorly constrained in all cases
 However, we check that the noise model is necessary for properly inferring the parameters; assuming noiseless training data results in strong biases in the inference.
 
 We also show the results for inference on the mean data vectors of the cosmic variance sample, which was generated with bias and noise parameters matched to the $\nbarfid$ SHAMe sample.
-\new{The posteriors for these matched in-distribution and out-of-distribution tests is quite similar, with comparable precision on $\om$ and $\sig$; the in-distribution mock shows moderately higher precision on $\b1$.
-This demonstrates that our cosmic variance sample matched to the SHAMe mock is a good representation of the information content of a sample with those properties \djs{what properties?}.
+\new{The posteriors for these matched in-distribution and out-of-distribution tests is quite similar, with comparable precision on $\om$ and $\sig$; the in-distribution mock shows moderately higher precision on $\bo$.
+This demonstrates that our cosmic variance sample matched to the SHAMe mock is a good representation of the information content of a sample with those properties \dsj{what properties?}.
 The matched in-distribution mock does show an unbiased constraint on $\sig$, while the SHAMe mock displays a 1$\sigma$ bias.
 This is likely because the inference on the mean data vector approach used for the in-distribution case averages out cosmic variance, whereas for the SHAMe mock we have a single realizaton; though it uses the fixed-and-paired technique, we do not expect it to be immune to cosmic variance effects.}
 \ksf{TODO test with matched phases, update this section when done!}
@@ -694,7 +695,8 @@ These tests demonstrate the generalizability of our forward model to realistic g
 \begin{figure}
 \centering
 \includegraphics[width=\columnwidth]{figures/fig8_scale_dependence_fob3_nbars.pdf}
-\caption{Scale dependence of the figure of bias (FoB) for the three key parameters combined for the SHAMe out-of-distribution mock, with varying number density. The top panel shows the FoB as a function of the $\kmax$ used for the bispectrum, fixing to our fiducial $\kmax=0.25$ for $\pgm$; the bottom panel shows the FoB as a function of the $\kmax$ used for $\pgm$, fixing to our fiducial $\kmax=0.25$ for the bispectrum. In both cases, the FoB for the full statistics combination remains around or below $1\sigma$ until $\kmax=0.25$, after which the inference shows a bias; we thus use $\kmax^{\pgmsh}=\kmax^{\bispecsh}=0.25$ for our fiducial inference. \ksf{increase legend size} \dsj{units for horizontal axes and $\bar{n}$ values.}}
+\caption{Scale dependence of the figure of bias (FoB) for the three key parameters combined for the SHAMe out-of-distribution mock, with varying number density. The top panel shows the FoB as a function of the $\kmax$ used for the bispectrum, fixing to our fiducial $\kmax=0.25$ for $\pgm$; the bottom panel shows the FoB as a function of the $\kmax$ used for $\pgm$, fixing to our fiducial $\kmax=0.25$ for the bispectrum. In both cases, the FoB for the full statistics combination remains around or below $1\sigma$ until $\kmax=0.25$, after which the inference shows a bias; we thus use $\kmax^{\pgmsh}=\kmax^{\bispecsh}=0.25$ for our fiducial inference. \ksf{increase legend size} \dsj{units for horizontal axes and $\bar{n}$ values.}
+\ksf{add panel for joint kmax, it's clearer there!}}
 % \ksf{slight bias for pgg+b coming from projection effects? could make this plot for cosmic variance set... maybe just mention that these are vol effects. or look at the params individually. incl b1 times sig8. could add a param orthogonal to that product; sigma8/b1.} \ksf{lowest 2 pink points on top plot confusing that they go above green points. look at contour plots} \ksf{maybe because noise model not affecting pgm!} \ksf{marcos: at low kmax end, looks like noise when still dominated by priors. noise parameters are close to edges?} \ksf{consistent with marcos's paper - with just pgg+bgg, no clear break. only when include matter.}
 \label{fig:scale_dependence_fob3_nbars}
 \end{figure}
