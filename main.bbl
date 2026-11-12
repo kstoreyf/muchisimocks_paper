@@ -55,9 +55,21 @@ Conroy C.,  Wechsler R.~H.,   Kravtsov A.~V.,  2006, \mn@doi [The Astrophysical
   Journal] {10.1086/503602}, 647, 201
 
 \bibitem[\protect\citeauthoryear{Contreras, Angulo  \& Zennaro}{Contreras
-  et~al.}{2021}]{contreras_flexible_2021}
-Contreras S.,  Angulo R.,   Zennaro M.,  2021, \mn@doi [Monthly Notices of the
+  et~al.}{2021a}]{contreras_flexible_2021-2}
+Contreras S.,  Angulo R.,   Zennaro M.,  2021a, \mn@doi [Monthly Notices of the
+  Royal Astronomical Society] {10.1093/mnras/stab1170}, 504, 5205
+
+\bibitem[\protect\citeauthoryear{Contreras, Angulo  \& Zennaro}{Contreras
+  et~al.}{2021b}]{contreras_flexible_2021}
+Contreras S.,  Angulo R.,   Zennaro M.,  2021b, \mn@doi [Monthly Notices of the
   Royal Astronomical Society] {10.1093/mnras/stab2560}, 508, 175
+
+\bibitem[\protect\citeauthoryear{Contreras, {Chaves-Montero}  \&
+  Angulo}{Contreras et~al.}{2023}]{contreras_consistent_2023-1}
+Contreras S.,  {Chaves-Montero} J.,   Angulo R.~E.,  2023, Consistent
+  Clustering and Lensing of {{SDSS-III BOSS}} Galaxies with an Extended
+  Abundance Matching Formalism (\mn@eprint {arXiv} {2305.09637}),
+  \mn@doi{10.48550/arXiv.2305.09637}
 
 \bibitem[\protect\citeauthoryear{Contreras, Angulo, {Chaves-Montero}, Kugel,
   Schaller  \& Schaye}{Contreras et~al.}{2024}]{contreras_validating_2024}
@@ -193,11 +205,23 @@ Kokron N.,  DeRose J.,  Chen S.-F.,  White M.,   Wechsler R.~H.,  2021, \mn@doi
   [Monthly Notices of the Royal Astronomical Society] {10.1093/mnras/stab1358},
   505, 1422
 
+\bibitem[\protect\citeauthoryear{Lehman, Krippendorf, Weller  \& Dolag}{Lehman
+  et~al.}{2024}]{lehman_learning_2024}
+Lehman K.,  Krippendorf S.,  Weller J.,   Dolag K.,  2024, Learning {{Optimal}}
+  and {{Interpretable Summary Statistics}} of {{Galaxy Catalogs}} with {{SBI}}
+  (\mn@eprint {arXiv} {2411.08957}), \mn@doi{10.48550/arXiv.2411.08957}
+
 \bibitem[\protect\citeauthoryear{Lemos et~al.,}{Lemos
   et~al.}{2023}]{lemos_simbig_2023-1}
 Lemos P.,  et~al., 2023, {{SimBIG}}: {{Field}}-Level {{Simulation-Based
   Inference}} of {{Galaxy Clustering}} (\mn@eprint {arXiv} {2310.15256}),
   \mn@doi{10.48550/arXiv.2310.15256}
+
+\bibitem[\protect\citeauthoryear{Makinen, Charnock, Lemos, Porqueres, Heavens
+  \& Wandelt}{Makinen et~al.}{2022}]{makinen_cosmic_2022-1}
+Makinen T.~L.,  Charnock T.,  Lemos P.,  Porqueres N.,  Heavens A.,   Wandelt
+  B.~D.,  2022, \mn@doi [The Open Journal of Astrophysics]
+  {10.21105/astro.2207.05202}, 5, 10.21105/astro.2207.05202
 
 \bibitem[\protect\citeauthoryear{Massara et~al.,}{Massara
   et~al.}{2024}]{massara_sc_2024}
@@ -235,7 +259,8 @@ Peacock J.~A.,  Smith R.~E.,  2000, \mn@doi [Monthly Notices of the Royal
   Astronomical Society] {10.1046/j.1365-8711.2000.03779.x}, 318, 1144
 
 \bibitem[\protect\citeauthoryear{{Pellejero-Ib{\'a}{\~n}ez}
-  et~al.,}{{Pellejero-Ib{\'a}{\~n}ez} et~al.}{2026}]{ibanez_validation_2026}
+  et~al.,}{{Pellejero-Ib{\'a}{\~n}ez}
+  et~al.}{2026}]{pellejero_ibanez_validation_2026}
 {Pellejero-Ib{\'a}{\~n}ez} M.,  et~al., 2026, Validation of the {{Hybrid Bias
   Expansion}} Model for the Galaxy Bispectrum (\mn@eprint {arXiv}
   {2606.19452}), \mn@doi{10.48550/arXiv.2606.19452}
@@ -247,18 +272,19 @@ Peacock J.~A.,  Smith R.~E.,  2000, \mn@doi [Monthly Notices of the Royal
     Arico G.,  2022, \mn@doi [Monthly Notices of the Royal Astronomical
   Society] {10.1093/mnras/stac1602}, 514, 3993
 
-\bibitem[\protect\citeauthoryear{Pellejero~Ibanez, Angulo, Jamieson  \&
-  Li}{Pellejero~Ibanez et~al.}{2023a}]{pellejero_ibanez_hybrid-bias_2023}
-Pellejero~Ibanez M.,  Angulo R.~E.,  Jamieson D.,   Li Y.,  2023a, Hybrid-Bias
-  and Displacement Emulators for Field-Level Modelling of Galaxy Clustering in
-  Real and Redshift Space (\mn@eprint {arXiv} {2307.09134})
-
 \bibitem[\protect\citeauthoryear{{Pellejero-Ibanez}, Angulo, Zennaro, Stuecker,
   Contreras, Arico  \& Maion}{{Pellejero-Ibanez}
-  et~al.}{2023b}]{pellejero-ibanez_bacco_2023}
+  et~al.}{2023}]{pellejero-ibanez_bacco_2023}
 {Pellejero-Ibanez} M.,  Angulo R.~E.,  Zennaro M.,  Stuecker J.,  Contreras S.,
-   Arico G.,   Maion F.,  2023b, \mn@doi [Monthly Notices of the Royal
+   Arico G.,   Maion F.,  2023, \mn@doi [Monthly Notices of the Royal
   Astronomical Society] {10.1093/mnras/stad368}, 520, 3725
+
+\bibitem[\protect\citeauthoryear{{Pellejero-Ibanez}, Angulo, Jamieson  \&
+  Li}{{Pellejero-Ibanez} et~al.}{2024}]{pellejero_ibanez_hybrid-bias_2024}
+{Pellejero-Ibanez} M.,  Angulo R.~E.,  Jamieson D.,   Li Y.,  2024, Hybrid-Bias
+  and Displacement Emulators for Field-Level Modelling of Galaxy Clustering in
+  Real and Redshift Space (\mn@eprint {arXiv} {2307.09134}),
+  \mn@doi{10.48550/arXiv.2307.09134}
 
 \bibitem[\protect\citeauthoryear{Philcox \& Fl{\"o}ss}{Philcox \&
   Fl{\"o}ss}{2024}]{philcox_polybin3d_2024}
